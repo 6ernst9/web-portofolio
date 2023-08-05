@@ -61,9 +61,8 @@ export const Banner = () => {
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                 <span className="tagline">Welcome to my Portfolio</span>
-                <h1>{`I'm Ernst Robert,`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Android Developer", "FrontEnd Developer", "Computer Science Student" ]'><span className="wrap">{text}</span></span></h1>
-                  <p>Developed 100+ Screens by writing code based on Android Development using Java/Kotlin, SQLite, Firebase,
-                    Frontend languages like HTML & CSS, JavaScript, React, Angular, as well as Backend technologies utilising Spring Boot with PostgreSQL. </p>
+                <h1>{`I'm Ernst Robert,`} <span className="txt-rotate" dataPeriod="1000"><span className="wrap">{text}</span></span></h1>
+                  <p>Hands-on Frontend Developer and Computer Science Student, working on developing and optimising enterprise-level application features. I utilize complex solutions to build intuitive user interfaces, delivering high-standard results that enhances the final product.</p>
                   <button onClick={handleDownload}>See my Resume<ArrowRightCircle size={25} /></button>
               </div>}
             </TrackVisibility>

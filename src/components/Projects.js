@@ -24,7 +24,7 @@ export const Projects = () => {
     },
     {
       title: "Online Chess",
-      description: "Made with Kotlin, SQLite,  MaterialUI & Google Firebase",
+      description: "Made with Kotlin, MaterialUI, Spring Boot & PostgreSQL",
       imgUrl: projImg2,
     },
     {
@@ -79,7 +79,7 @@ export const Projects = () => {
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn": ""}>
                 <h2>Projects</h2>
-                <p>Check below some of my Fullstack Apps utilizing Java/Kotlin with Spring Boot for the Backend, and React/Android for the Frontend.<br></br>All the projects are chosen because of their challenging problem-solving skills required.</p>
+                <p>Check below some of my Web Apps utilizing Java/Kotlin with Spring Boot for the Backend, and React/Android for the Frontend.<br></br>All the projects are chosen because of their challenging problem-solving skills required.</p>
                 <Tab.Container id="projects-tabs" defaultActiveKey="first">
                   <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
                     <Nav.Item>

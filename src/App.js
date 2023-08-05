@@ -1,16 +1,21 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HomePage from "./components/HomePage";
-import {Route, Routes} from "react-router-dom";
-import ProjectCaseStudy from "./components/ProjectCaseStudy";
+import {NavBar} from "./components/NavBar";
+import {Banner} from "./components/Banner";
+import {Skills} from "./components/Skills";
+import {Projects} from "./components/Projects";
+import {Contact} from "./components/Contact";
+import {Footer} from "./components/Footer";
 
 function App() {
   return (
-    <div className="App">
-        <Routes>
-            <Route path="/" element = {<HomePage/>}/>
-            <Route path="/project" element = {<ProjectCaseStudy/>}/>
-        </Routes>
+        <div className="App">
+            <NavBar />
+            <Banner />
+            <Skills />
+            <Projects />
+            <Contact />
+            <Footer />
     </div>
   );
 }

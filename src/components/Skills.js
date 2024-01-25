@@ -46,12 +46,12 @@ export const Skills = () => {
                                 <h5>React</h5>
                             </div>
                             <div className="item">
-                                <img src={meter4} alt="Image" />
+                                <img src={meter6} alt="Image" />
                                 <h5>Redux</h5>
                             </div>
                             <div className="item">
                                 <img src={meter3} alt="Image" />
-                                <h5>RxJs7</h5>
+                                <h5>RxJs 7</h5>
                             </div>
                             <div className="item">
                                 <img src={meter4} alt="Image" />
@@ -90,16 +90,8 @@ export const Skills = () => {
                                 <h5>OAuth2</h5>
                             </div>
                             <div className="item">
-                                <img src={meter9} alt="Image" />
+                                <img src={meter7} alt="Image" />
                                 <h5>Java</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter5} alt="Image" />
-                                <h5>Kotlin</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter3} alt="Image" />
-                                <h5>PL/SQL</h5>
                             </div>
                             <div className="item">
                                 <img src={meter4} alt="Image" />

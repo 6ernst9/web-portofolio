@@ -13,7 +13,7 @@ export const Banner = () => {
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const [index, setIndex] = useState(1);
-  const toRotate = [ "Frontend Developer ↑↓", "Computer Science Student"];
+  const toRotate = [ "Software Engineer ↑↓", "Computer Science Student"];
   const period = 2000;
 
   useEffect(() => {
@@ -62,7 +62,7 @@ export const Banner = () => {
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                 <span className="tagline">Welcome to my Portfolio</span>
                 <h1>{`I'm Ernst Robert,`} <span className="txt-rotate" dataPeriod="1000"><span className="wrap">{text}</span></span></h1>
-                  <p>Hands-on Frontend Developer and Computer Science Student, working on developing and optimising enterprise-level application features. I utilize complex solutions to build intuitive user interfaces, delivering high-standard results that enhances the final product.</p>
+                  <p>Hands-on Software Engineer and Computer Science Student, working on developing and optimising enterprise-level application features. I utilize complex solutions to build robust services, delivering high-standard results that enhances the final product.</p>
                   <button onClick={handleDownload}>See my Resume<ArrowRightCircle size={25} /></button>
               </div>}
             </TrackVisibility>

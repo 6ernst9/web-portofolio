@@ -38,8 +38,8 @@ export const Skills = () => {
                 <div className="col-12">
                     <div className="skill-bx wow zoomIn">
                         <h2>Skills</h2>
-                        <p>Determined Software Development solutions for app creation, including complex architecture, processing data & specialized scripts.
-                            Developed 100+ Screens by writing code based on Android using Java & Kotlin, SQLite, Frontend Web Development using React / Angular and Backend Development using Spring Boot with PostgreSQL.</p>
+                        <p>Determined development solutions for app creation, including complex architecture, processing data & specialized scripts.
+                            Developed 100+ screens by writing code based on Android using Java & Kotlin with SQLite, Frontend Web Development using React / Angular and Backend Development using Spring Boot with PostgreSQL & MongoDB.</p>
                         <Carousel responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider">
                             <div className="item">
                                 <img src={meter7} alt="Image" />
@@ -51,19 +51,15 @@ export const Skills = () => {
                             </div>
                             <div className="item">
                                 <img src={meter3} alt="Image" />
-                                <h5>RxJs 7</h5>
+                                <h5>RxJs7</h5>
                             </div>
                             <div className="item">
                                 <img src={meter4} alt="Image" />
                                 <h5>Angular</h5>
                             </div>
                             <div className="item">
-                                <img src={meter3} alt="Image" />
-                                <h5>NgRx</h5>
-                            </div>
-                            <div className="item">
                                 <img src={meter7} alt="Image" />
-                                <h5>HTML/CSS</h5>
+                                <h5>HTML&CSS</h5>
                             </div>
                             <div className="item">
                                 <img src={meter7} alt="Image" />
@@ -83,14 +79,22 @@ export const Skills = () => {
                             </div>
                             <div className="item">
                                 <img src={meter6} alt="Image" />
-                                <h5>Maven</h5>
+                                <h5>Spring Webflux</h5>
+                            </div>
+                            <div className="item">
+                                <img src={meter4} alt="Image" />
+                                <h5>AOP</h5>
+                            </div>
+                            <div className="item">
+                                <img src={meter3} alt="Image" />
+                                <h5>OAuth2</h5>
                             </div>
                             <div className="item">
                                 <img src={meter9} alt="Image" />
                                 <h5>Java</h5>
                             </div>
                             <div className="item">
-                                <img src={meter4} alt="Image" />
+                                <img src={meter5} alt="Image" />
                                 <h5>Kotlin</h5>
                             </div>
                             <div className="item">
@@ -110,20 +114,8 @@ export const Skills = () => {
                                 <h5>Redis</h5>
                             </div>
                             <div className="item">
-                                <img src={meter5} alt="Image" />
-                                <h5>Jenkins</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter4} alt="Image" />
-                                <h5>Linux</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter3} alt="Image" />
-                                <h5>Docker</h5>
-                            </div>
-                            <div className="item">
                                 <img src={meter2} alt="Image" />
-                                <h5>AWS</h5>
+                                <h5>Docker</h5>
                             </div>
                         </Carousel>
                     

@@ -8,7 +8,7 @@ import projImg5 from "../assets/img/resellproject.jpg";
 import projImg6 from "../assets/img/admin.jpg";
 import projImg7 from "../assets/img/movieapp.jpg";
 import projImg8 from "../assets/img/hotelapp.jpg";
-import projImg9 from "../assets/img/gymapp.jpg";
+import projImg9 from "../assets/img/socialmedia.jpg";
 
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import 'animate.css';
@@ -18,9 +18,9 @@ export const Projects = () => {
 
   const projects1 = [
     {
-      title: "Custom Admin App",
-      description: "Made with Kotlin, MaterialUI & SQLite",
-      imgUrl: projImg1,
+      title: "Social Media",
+      description: "Made with Spring Boot, React, PostgreSQL & MongoDB",
+      imgUrl: projImg9,
     },
     {
       title: "Online Chess",
@@ -46,10 +46,10 @@ export const Projects = () => {
       imgUrl: projImg5,
     },
     {
-      title: "Admin Page",
-      description: "Made with React & Syncfusion",
-      imgUrl: projImg6,
-    },
+      title: "Custom Admin App",
+      description: "Made with Kotlin, MaterialUI & SQLite",
+      imgUrl: projImg1,
+    }
   ];
 
   const projects3 = [
@@ -64,10 +64,10 @@ export const Projects = () => {
       imgUrl: projImg8,
     },
     {
-      title: "Gym Program",
-      description: "Made with React & Bootstrap",
-      imgUrl: projImg9,
-    },
+      title: "Admin Page",
+      description: "Made with React & Syncfusion",
+      imgUrl: projImg6,
+    }
   ];
 
   return (
@@ -79,7 +79,7 @@ export const Projects = () => {
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn": ""}>
                 <h2>Projects</h2>
-                <p>Check below some of my web apps utilizing Java/Kotlin with Spring Boot for the Backend, and React/Android for the Frontend.<br></br>All the projects are chosen because of their challenging problem-solving skills required.</p>
+                <p>Check below some of my web apps utilizing Spring Boot with Java for the Backend, and React/Android for the Frontend.<br></br>All the projects are chosen because of their challenging problem-solving skills required.</p>
                 <Tab.Container id="projects-tabs" defaultActiveKey="first">
                   <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
                     <Nav.Item>

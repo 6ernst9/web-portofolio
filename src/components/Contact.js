@@ -1,75 +1,197 @@
-import { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import contactImg from "../assets/img/contact-img.svg";
-import 'animate.css';
-import TrackVisibility from 'react-on-screen';
+import {HashLink} from "react-router-hash-link";
+import {useEffect, useState} from "react";
 
 export const Contact = () => {
-  const formInitialDetails = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    message: ''
-  }
-  const [formDetails, setFormDetails] = useState(formInitialDetails);
-  const [buttonText, setButtonText] = useState('Send');
-  const [status, setStatus] = useState({});
+    const [scrollPosition, setScrollPosition] = useState(0);
 
-  const onFormUpdate = (category, value) => {
-      setFormDetails({
-        ...formDetails,
-        [category]: value
-      })
-  }
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollPosition(window.scrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    const calculateOffset = (direction = 'right') => {
+        const speedMultiplier = 0.75;
+        const offset = scrollPosition * speedMultiplier;
+        return direction === 'right' ? offset : -offset;
+    };
 
   return (
-    <section className="contact" id="connect">
-      <Container>
-        <Row className="align-items-center">
-          <Col size={12} md={6}>
-            <TrackVisibility>
-              {({ isVisible }) =>
-                <img className={isVisible ? "animate__animated animate__zoomIn" : ""} src={contactImg} alt="Contact Us"/>
-              }
-            </TrackVisibility>
-          </Col>
-          <Col size={12} md={6}>
-            <TrackVisibility>
-              {({ isVisible }) =>
-                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <h2>Let's Talk</h2>
-                <form>
-                  <Row>
-                    <Col size={12} sm={6} className="px-1">
-                      <input type="text" value={formDetails.firstName} placeholder="First Name" onChange={(e) => onFormUpdate('firstName', e.target.value)} />
-                    </Col>
-                    <Col size={12} sm={6} className="px-1">
-                      <input type="text" value={formDetails.lasttName} placeholder="Last Name" onChange={(e) => onFormUpdate('lastName', e.target.value)}/>
-                    </Col>
-                    <Col size={12} sm={6} className="px-1">
-                      <input type="email" value={formDetails.email} placeholder="Email Address" onChange={(e) => onFormUpdate('email', e.target.value)} />
-                    </Col>
-                    <Col size={12} sm={6} className="px-1">
-                      <input type="tel" value={formDetails.phone} placeholder="Phone No." onChange={(e) => onFormUpdate('phone', e.target.value)}/>
-                    </Col>
-                    <Col size={12} className="px-1">
-                      <textarea rows="6" value={formDetails.message} placeholder="Message" onChange={(e) => onFormUpdate('message', e.target.value)}></textarea>
-                      <button type="submit"><span>{buttonText}</span></button>
-                    </Col>
-                    {
-                      status.message &&
-                      <Col>
-                        <p className={status.success === false ? "danger" : "success"}>{status.message}</p>
-                      </Col>
-                    }
-                  </Row>
-                </form>
-              </div>}
-            </TrackVisibility>
-          </Col>
-        </Row>
-      </Container>
+    <section className="contact" id="contact">
+        <div className="contact-container">
+            <h1>Let's talk</h1>
+            <p>Do you have a project you would like me to work on?<br/>Or perhaps a few questions?<br/>Contact me and I will be more than happy to assist you!</p>
+            <HashLink to="mailto:rernst2002@gmail.com">
+                <button className="vvd"><span>Send me a message</span></button>
+            </HashLink>
+            <div className="contact-links">
+                <a href="https://github.com/6ernst9">Github</a>
+                <a href="https://www.linkedin.com/in/robert-ernst-75b167240/">Linkedin</a>
+                <a href="https://www.instagram.com/6ernst9/">Instagram</a>
+                <a href="mailto:rernst2002@gmail.com">Email</a>
+            </div>
+        </div>
+        <div className="resume-sliding-text">
+            <h1
+                className="contact-sliding-text"
+                style={{ transform: `translateX(${calculateOffset('right')}px)` }}>
+                Contact Me Contact Me Contact Me Contact Me Contact Me</h1>
+        </div>
+        <div className="grid-points contact-points">
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+            <div className="grid-point contact-point"></div>
+
+        </div>
     </section>
   )
 }

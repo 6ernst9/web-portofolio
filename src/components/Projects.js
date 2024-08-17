@@ -1,148 +1,300 @@
-import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
-import { ProjectCard } from "./ProjectCard";
-import projImg1 from "../assets/img/adminproject.jpg";
-import projImg2 from "../assets/img/chessproject.jpg";
-import projImg3 from "../assets/img/bankingproject.jpg";
-import projImg4 from "../assets/img/casinoproject.jpg";
-import projImg5 from "../assets/img/resellproject.jpg";
-import projImg6 from "../assets/img/admin.jpg";
-import projImg7 from "../assets/img/movieapp.jpg";
-import projImg8 from "../assets/img/hotelapp.jpg";
-import projImg9 from "../assets/img/socialmedia.jpg";
+import admin1 from "../assets/img/adminproject1.jpg";
+import admin2 from "../assets/img/adminproject2.jpg";
+import admin3 from "../assets/img/adminproject3.jpg";
+import chess1 from "../assets/img/chessproject1.jpg";
+import chess2 from "../assets/img/chessproject2.jpg";
+import chess3 from "../assets/img/chessproject3.jpg";
+import casino1 from "../assets/img/casinoproject1.jpg";
+import casino2 from "../assets/img/casinoproject2.jpg";
+import casino3 from "../assets/img/casinoproject3.jpg";
+import resell1 from "../assets/img/resellproject1.jpg";
+import resell2 from "../assets/img/resellproject2.jpg";
+import resell3 from "../assets/img/resellproject3.jpg";
+import admin from "../assets/img/admin.jpg";
+import banking1 from '../assets/img/bankingproject1.jpg'
+import banking2 from '../assets/img/bankingproject2.jpg'
+import banking3 from '../assets/img/bankingproject3.jpg'
+import hotel from "../assets/img/hotelapp.jpg";
+import socialmedia from "../assets/img/socialmedia.jpg";
+import gymapp from "../assets/img/gymapp.jpg";
 
-import colorSharp2 from "../assets/img/color-sharp2.png";
 import 'animate.css';
-import TrackVisibility from 'react-on-screen';
+import {useEffect, useRef} from "react";
+import {HashLink} from "react-router-hash-link";
 
 export const Projects = () => {
+  const imageWrapperRef = useRef(null);
 
-  const projects1 = [
-    {
-      title: "Social Media",
-      description: "Made with Spring Boot, React, PostgreSQL & MongoDB",
-      imgUrl: projImg9,
-    },
-    {
-      title: "Online Chess",
-      description: "Made with Kotlin, MaterialUI, Spring Boot & PostgreSQL",
-      imgUrl: projImg2,
-    },
-    {
-      title: "Banking App",
-      description: "Made with Java/Kotlin, MaterialUI, Spring Boot & PostgreSQL",
-      imgUrl: projImg3,
-    },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const speedMultiplier = 0.75;
+      const offset = scrollPosition * speedMultiplier;
 
-  const projects2 = [
-    {
-      title: "Casino App",
-      description: "Made with Kotlin, MaterialUI & Google Firebase",
-      imgUrl: projImg4,
-    },
-    {
-      title: "Resell Store",
-      description: "Made with Java, MaterialUI & Google Firebase",
-      imgUrl: projImg5,
-    },
-    {
-      title: "Custom Admin App",
-      description: "Made with Kotlin, MaterialUI & SQLite",
-      imgUrl: projImg1,
-    }
-  ];
+      if (imageWrapperRef.current) {
+        imageWrapperRef.current.style.transform = `translateX(${-offset}px)`;
+      }
+    };
 
-  const projects3 = [
-    {
-      title: "Netflix Clone",
-      description: "Made with React, Tailwind & REST API",
-      imgUrl: projImg7,
-    },
-    {
-      title: "Hotel Presentation",
-      description: "Made with HTML, CSS & JavaScript",
-      imgUrl: projImg8,
-    },
-    {
-      title: "Admin Page",
-      description: "Made with React & Syncfusion",
-      imgUrl: projImg6,
-    }
-  ];
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <section className="project" id="project">
-      <Container>
-        <Row>
-          <Col size={12}>
-            <TrackVisibility>
-              {({ isVisible }) =>
-              <div className={isVisible ? "animate__animated animate__fadeIn": ""}>
-                <h2>Projects</h2>
-                <p>Check below some of my web apps utilizing Spring Boot with Java for the Backend, and React/Android for the Frontend.<br></br>All the projects are chosen because of their challenging problem-solving skills required.</p>
-                <Tab.Container id="projects-tabs" defaultActiveKey="first">
-                  <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
-                    <Nav.Item>
-                      <Nav.Link eventKey="first">Tab 1</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="second">Tab 2</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="third">Tab 3</Nav.Link>
-                    </Nav.Item>
-                  </Nav>
-                    <Tab.Content id="slideInUp" className={isVisible ? "animate__animated animate__slideInUp" : ""}>
-                      <Tab.Pane eventKey="first">
-                        <Row>
-                          {
-                            projects1.map((project, index) => {
-                              return (
-                                <ProjectCard
-                                  key={index}
-                                  {...project}
-                                  />
-                              )
-                            })
-                          }
-                        </Row>
-                      </Tab.Pane>
-                      <Tab.Pane eventKey="second">
-                      <Row>
-                          {
-                            projects2.map((project, index) => {
-                              return (
-                                <ProjectCard
-                                  key={index}
-                                  {...project}
-                                  />
-                              )
-                            })
-                          }
-                        </Row>
-                      </Tab.Pane>
-                      <Tab.Pane eventKey="third">
-                      <Row>
-                          {
-                            projects3.map((project, index) => {
-                              return (
-                                <ProjectCard
-                                  key={index}
-                                  {...project}
-                                  />
-                              )
-                            })
-                          }
-                        </Row>
-                      </Tab.Pane>
-                    </Tab.Content>
-                </Tab.Container>
-              </div>}
-            </TrackVisibility>
-          </Col>
-        </Row>
-      </Container>
-      <img className="background-image-right" src={colorSharp2}></img>
+    <section className="project" id="projects">
+      <div className="project-container">
+        <div className="text-container">
+          <h1>Projects</h1>
+          <p>Check below my other personal projects that I worked on.<br/>All the projects are chosen because of their challenging problem-solving skills required.</p>
+        </div>
+        <div className="image-container">
+          <div className="image-wrapper" ref={imageWrapperRef}>
+            <img src={admin1} alt="Image 1" />
+            <img src={chess1} alt="Image 1" />
+            <img src={socialmedia} alt="Image 1" />
+            <img src={banking1} alt="Image 1" />
+            <img src={casino1} alt="Image 1" />
+            <img src={gymapp} alt="Image 1" />
+            <img src={admin2} alt="Image 1" />
+            <img src={chess2} alt="Image 1" />
+            <img src={admin} alt="Image 1" />
+            <img src={casino3} alt="Image 1" />
+            <img src={resell1} alt="Image 1" />
+            <img src={hotel} alt="Image 1" />
+            <img src={casino2} alt="Image 1" />
+            <img src={admin3} alt="Image 1" />
+            <img src={gymapp} alt="Image 1" />
+            <img src={chess3} alt="Image 1" />
+            <img src={resell2} alt="Image 1" />
+            <img src={socialmedia} alt="Image 1" />
+            <img src={banking3} alt="Image 1" />
+            <img src={resell3} alt="Image 1" />
+          </div>
+      </div>
+        <HashLink to="https://github.com/6ernst9?tab=repositories">
+          <button className="vvd"><span>View Github projects</span></button>
+        </HashLink>
+      </div>
+       <div className="grid-points projects-points">
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+         <div className="grid-point"></div>
+
+       </div>
+      <div className="grid-container">
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+      </div>
+
     </section>
   )
 }

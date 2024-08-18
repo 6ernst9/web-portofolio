@@ -151,10 +151,6 @@ button.navbar-toggler:focus{
 }
 
 @media (max-width: 768px) {
-  nav.navbar {
-    height: 78px;
-  }
-
   .navbar-logo{
     height: 35px;
   }
@@ -1071,16 +1067,12 @@ button.navbar-toggler:focus{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 8px solid black;
-  border-radius: 35px;
   background-color: white;
 }
 
 .mobile-header{
   width: 40%;
-  height: 18px;
   background-color: black;
-  border-radius: 0 0 8px 8px;
 }
 
 .mobile-photo img{
@@ -1111,15 +1103,6 @@ button.navbar-toggler:focus{
 
   .second-photo img{
     max-width: 38vw;
-  }
-
-  .mobile-photo{
-    border: 6px solid black;
-    border-radius: 30px;
-  }
-
-  .mobile-header{
-    height: 15px;
   }
 }
 

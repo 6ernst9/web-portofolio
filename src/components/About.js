@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import logo from '../assets/img/logo.png';
+import logo from '../assets/img/logo.svg';
 import arrow from "../assets/img/arrow-left.svg";
-import profile from '../assets/img/profile.jpg';
+import profile from '../assets/img/profile.png';
 
 export const About = () => {
     const [scrollPosition, setScrollPosition] = useState(0);

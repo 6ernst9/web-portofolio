@@ -79,7 +79,7 @@ nav.navbar {
   width: 100%;
   top: 0;
   z-index: 9999;
-  transition:  0.32s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 nav.navbar.scrolled {
@@ -121,10 +121,13 @@ nav.navbar a.navbar-brand{
   height: 40px;
 }
 
+.navbar-collapse.collapsing{
+  transition: none;
+}
+
 .navbar-collapse {
   width: 100vw;
   height: 100vh;
-  transition: all 0.3s ease-in-out;
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -437,7 +440,7 @@ button.navbar-toggler:focus{
 
 .resume-sliding-text{
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   text-align: center;
   white-space: nowrap;
   display: flex;
@@ -626,17 +629,17 @@ button.navbar-toggler:focus{
 }
 
 .about-me-container{
-  z-index: 4;
   position: absolute;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  width: 80vw;
+  justify-content: space-around;
+  width: 90vw;
   height: 100vh;
 }
 
 .about-me-container p{
+  z-index: 4;
   max-width: 30vw;
   overflow-wrap: break-word;
   word-break: break-word;
@@ -646,19 +649,31 @@ button.navbar-toggler:focus{
   color: white;
 }
 
+.about-description{
+  display: none;
+}
+
 .highlight{
   z-index: 5;
   color: rgb(91 34 255);
   text-decoration: underline;
 }
 
+.about-images{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .about-flag{
   background-color: rgb(91 34 255);
   padding: 50px;
-  height: 90vh;
+  height: calc(100vh - 110px);
   width: auto;
   aspect-ratio: 3/4;
   display: flex;
+  z-index: 1;
   justify-content: center;
   align-items: center;
 }
@@ -670,10 +685,11 @@ button.navbar-toggler:focus{
 }
 
 .about-profile{
+  position: absolute;
   z-index: 4;
   height: 80vh;
+  margin-right: 15vw;
   width: auto;
-  margin-left: 40vh;
   filter: grayscale(100%) brightness(25%);
 }
 
@@ -692,6 +708,16 @@ button.navbar-toggler:focus{
   top: calc(300vh - 38px);
 }
 
+@media (max-width: 481px) {
+  .about-long-description {
+    display: none;
+  }
+
+  .about-description {
+    display: block;
+  }
+}
+
 @media (max-width: 768px)  {
   .about{
     height: 130vh;
@@ -703,43 +729,49 @@ button.navbar-toggler:focus{
 
   .about-me-container{
     width: calc(100vw - 40px);
+    flex-direction: column-reverse;
   }
 
   .about-profile{
-    height: 40vw;
+    height: 30vh;
+  }
+
+  .about-flag{
+    height: 25vh;
   }
 }
 
 @media (min-width: 768px) and (max-width: 961px){
   .about-me-container{
     width: calc(100vw - 110px);
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
   }
 
   .about-profile{
     height: 40vh;
+    margin-right: 0;
+  }
+
+  .about-flag{
+    width: 40vw;
+    aspect-ratio: 1;
+    height: auto;
   }
 }
 
 @media (max-width: 961px){
-  .about-me-container{
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    justify-content: space-evenly;
-  }
-
   .about-me-container p{
     max-width: 100vw;
   }
 
   .about-flag{
-    width: 30vw;
     aspect-ratio: 1;
-    height: auto;
+    margin-right: 20vw;
   }
 
   .about-profile{
-    margin-left: 0;
-    margin-bottom: 55vh;
+    margin-right: 0;
   }
 }
 
@@ -752,15 +784,16 @@ button.navbar-toggler:focus{
     height: 65vh;
   }
 
-  .about-me-container{
-     width: 85vw;
-  }
-
   .about-me-container p{
     max-width: 40vw;
   }
 }
 
+@media (min-width: 961px) and (max-width: 1025px){
+  .about-profile{
+    height: 50vh;
+  }
+}
 
 /************ Socially Css ************/
 .socially{
@@ -1378,7 +1411,7 @@ button.navbar-toggler:focus{
 }
 
 .contact-container{
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;

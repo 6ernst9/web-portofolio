@@ -98,7 +98,7 @@ export const ChessRoyal = () => {
                     </HashLink>
                 </div>
                 <div className="socially-description-container">
-                    <p className="chess-royal-description">Socially is a social media application, focusing on ephemeral messaging and multimedia sharing. Built with <span className="highlight">Spring microservices</span> architecture, this project showcases scalable, distributed system capabilities, facilitating real-time interactions and robust backend services. The application enables users to share photos and videos that disappear after viewing, maintaining a dynamic and secure user experience.</p>
+                    <p className="chess-royal-description">Chess Royale is a feature-rich chess app designed to elevate your playing experience, whether you're competing online or engaging in a local 2-player match. With a variety of game modes, including Blitz, Classic, Rapid 10, and more, Chess Royale caters to both fast-paced and traditional gameplay styles. Beyond just playing, Chess Royale offers detailed analytics on your matches, helping you to track your progress, analyze your strategies, and improve over time.</p>
                 </div>
             </div>
 

@@ -92,7 +92,7 @@ export const About = () => {
                 <div className="grid-item"></div>
                 <div className="grid-item"></div>
             </div>
-            <div className="resume-sliding-text">
+            <div className="resume-sliding-text about-sliding-text">
                 <h1
                     className="sliding-text-white"
                     style={{ transform: `translateX(${calculateOffset('right')}px)` }}>

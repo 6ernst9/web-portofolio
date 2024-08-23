@@ -690,7 +690,7 @@ button.navbar-toggler:focus{
   height: 80vh;
   margin-right: 15vw;
   width: auto;
-  filter: grayscale(100%) brightness(25%);
+  filter: grayscale(100%) brightness(40%);
 }
 
 .about-projects-container {
@@ -721,6 +721,10 @@ button.navbar-toggler:focus{
 @media (max-width: 768px)  {
   .about{
     height: 130vh;
+  }
+
+  .about-sliding-text{
+    top: 260vh;
   }
 
   .about-projects-container{
@@ -758,12 +762,21 @@ button.navbar-toggler:focus{
     aspect-ratio: 1;
     height: auto;
   }
+
+  .about-sliding-text {
+    top: 200vh;
+  }
 }
 
 @media (max-width: 961px){
+  .sliding-text-white{
+    margin-top: -10vh;
+  }
+
   .about-me-container p{
     max-width: 100vw;
   }
+
 
   .about-flag{
     aspect-ratio: 1;

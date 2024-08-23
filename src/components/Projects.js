@@ -24,7 +24,7 @@ import {HashLink} from "react-router-hash-link";
 
 export const Projects = () => {
   const imageWrapperRef = useRef(null);
-  const speedMultiplier = 0.75;
+  const speedMultiplier = 1;
 
   useEffect(() => {
     let offset = 0;

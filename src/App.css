@@ -82,6 +82,11 @@ nav.navbar {
   transition: all 0.3s ease-in-out;
 }
 
+nav.navbar.toggled {
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+}
+
 nav.navbar.scrolled {
   padding: 16px 24px;
   background-color: rgba(0, 0, 0, 0.8);
@@ -90,11 +95,11 @@ nav.navbar.scrolled {
 
 nav.navbar .navbar-nav .nav-link.navbar-link {
   font-weight: 700;
-  font-size: 45px;
+  font-size: 40px;
   color: #fff !important;
   letter-spacing: 0.8px;
   padding: 0 25px;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
 nav.navbar .navbar-nav a.nav-link.navbar-link:hover,
@@ -981,6 +986,16 @@ button.navbar-toggler:focus{
 @media (max-width: 481px){
   .socially-points{
     top: calc(390vh + 17px);
+  }
+
+  .mac-header{
+    gap: 3px;
+    padding: 8px 10px;
+  }
+
+  .mac-button {
+    width: 6px;
+    height: 6px;
   }
 }
 

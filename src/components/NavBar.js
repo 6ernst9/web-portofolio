@@ -7,6 +7,7 @@ import weblogo from '../assets/img/weblogo.png'
 export const NavBar = () => {
   const [activeLink, setActiveLink] = useState('home');
   const [scrolled, setScrolled] = useState(false);
+  const [toggled, setToggled] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -26,13 +27,17 @@ export const NavBar = () => {
     setActiveLink(value);
   }
 
+  const onUpdateToggle = () => {
+      setToggled(!toggled);
+  }
+
   return (
-      <Navbar expand={false} className={scrolled ? "scrolled" : ""}>
+      <Navbar expand={false} className={scrolled ? "scrolled" : toggled ? "toggled" : ""}>
           <Navbar.Brand href="/">
             <img src={logo} alt="Logo" />
           </Navbar.Brand>
           <img className="navbar-logo" src={weblogo}/>
-          <Navbar.Toggle aria-controls="basic-navbar-nav">
+          <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={onUpdateToggle}>
               <img src={menu}/>
           </Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav">

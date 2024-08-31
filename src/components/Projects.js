@@ -24,25 +24,22 @@ import {HashLink} from "react-router-hash-link";
 
 export const Projects = () => {
   const imageWrapperRef = useRef(null);
-  const speedMultiplier = 1;
 
   useEffect(() => {
-    let offset = 0;
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const speedMultiplier = 0.75;
+      const offset = scrollPosition * speedMultiplier;
 
-    const slideImages = () => {
-      offset -= speedMultiplier;
       if (imageWrapperRef.current) {
-        imageWrapperRef.current.style.transform = `translateX(${offset}px)`;
-
-        if (Math.abs(offset) >= imageWrapperRef.current.scrollWidth) {
-          offset = window.innerWidth;
-        }
+        imageWrapperRef.current.style.transform = `translateX(${-offset}px)`;
       }
     };
 
-    const intervalId = setInterval(slideImages, 20);
-
-    return () => clearInterval(intervalId);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (

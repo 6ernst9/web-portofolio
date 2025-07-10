@@ -127,14 +127,16 @@ nav.navbar a.navbar-brand{
 }
 
 .navbar-collapse.collapsing{
-  transition: none;
+  transition: all 0.3s ease-out;
 }
 
 .navbar-collapse {
-  width: 100vw;
-  height: 100vh;
-  z-index: 100;
-  display: flex;
+  transition: height 0.3s ease-out;
+  overflow: hidden;
+}
+
+.navbar-collapse.show {
+  display: flex !important;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -147,6 +149,7 @@ nav.navbar a.navbar-brand{
   justify-content: center;
   align-items: center;
   gap: 20px;
+  padding: 20px 0;
   text-align: center;
 }
 

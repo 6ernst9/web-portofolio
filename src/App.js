@@ -8,7 +8,7 @@ import {Contact} from "./components/Contact";
 import {Resume} from "./components/Resume";
 import {About} from "./components/About";
 import {Socially} from "./components/Socially";
-import {ChessRoyal} from "./components/ChessRoyal";
+import {Thesis} from "./components/Thesis";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
             <About/>
             <Socially/>
             <Letify />
-            <ChessRoyal/>
+            <Thesis/>
             <Projects />
             <Contact />
     </div>

@@ -53,7 +53,7 @@ export const Socially = () => {
                     </HashLink>
                 </div>
             </div>
-            <p className="socially-projects-number">1/5</p>
+            <p className="socially-projects-number">1/3</p>
             <div className="socially-projects-container">
                 <img className="about-arrow" src={arrow}/>
                 <p>Projects</p>

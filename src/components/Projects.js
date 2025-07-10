@@ -12,11 +12,11 @@ import resell2 from "../assets/img/resellproject2.jpg";
 import resell3 from "../assets/img/resellproject3.jpg";
 import admin from "../assets/img/admin.jpg";
 import banking1 from '../assets/img/bankingproject1.jpg'
-import banking2 from '../assets/img/bankingproject2.jpg'
 import banking3 from '../assets/img/bankingproject3.jpg'
 import hotel from "../assets/img/hotelapp.jpg";
 import socialmedia from "../assets/img/socialmedia.jpg";
-import gymapp from "../assets/img/gymapp.jpg";
+import thesis from "../assets/img/thesis.png";
+import thesis2 from "../assets/img/thesis2.png";
 
 import 'animate.css';
 import {useEffect, useRef} from "react";
@@ -56,7 +56,7 @@ export const Projects = () => {
             <img src={socialmedia} alt="Image 1" />
             <img src={banking1} alt="Image 1" />
             <img src={casino1} alt="Image 1" />
-            <img src={gymapp} alt="Image 1" />
+            <img src={thesis} alt="Image 1" />
             <img src={admin2} alt="Image 1" />
             <img src={chess2} alt="Image 1" />
             <img src={admin} alt="Image 1" />
@@ -65,7 +65,7 @@ export const Projects = () => {
             <img src={hotel} alt="Image 1" />
             <img src={casino2} alt="Image 1" />
             <img src={admin3} alt="Image 1" />
-            <img src={gymapp} alt="Image 1" />
+            <img src={thesis2} alt="Image 1" />
             <img src={chess3} alt="Image 1" />
             <img src={resell2} alt="Image 1" />
             <img src={socialmedia} alt="Image 1" />

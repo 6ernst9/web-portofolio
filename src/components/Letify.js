@@ -102,7 +102,7 @@ export const Letify = () => {
           </div>
       </div>
 
-        <p className="socially-projects-number">2/5</p>
+        <p className="socially-projects-number">2/3</p>
         <div className="letify-projects-container">
             <img className="about-arrow" src={arrow}/>
             <p>Projects</p>

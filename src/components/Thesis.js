@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import thesis1 from '../assets/img/thesis.png';
+import vendify1 from '../assets/img/vendify1.png';
 import {HashLink} from "react-router-hash-link";
 import arrow from "../assets/img/arrow-left2.svg";
 
@@ -39,7 +39,7 @@ export const Thesis = () => {
                             <div className="mac-button yellow-button"/>
                             <div className="mac-button green-button"/>
                         </div>
-                        <img src={thesis1}/>
+                        <img src={vendify1}/>
                     </div>
                 </div>
                 <div className="socially-description-container">

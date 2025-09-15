@@ -4,7 +4,7 @@ import cesar from '../assets/img/iulius-cesar.png';
 import arrow from "../assets/img/arrow-left.svg";
 import file from '../assets/img/file (1).svg';
 import fileFill from '../assets/img/file.svg';
-import portofolioPdf from "../assets/portofolio.pdf"
+import portofolioPdf from "../assets/Resume.pdf"
 import { saveAs } from 'file-saver';
 
 
@@ -28,7 +28,7 @@ export const Resume = () => {
     }, []);
 
     const handleDownload = () => {
-        saveAs(portofolioPdf, 'ernst-resume.pdf');
+        saveAs(portofolioPdf, 'ernst-robert-resume.pdf');
     }
 
     const calculateOffset = (direction = 'right') => {

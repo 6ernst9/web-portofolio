@@ -470,7 +470,6 @@ button.navbar-toggler:focus{
   font-weight: 700;
   font-size: 45vh;
   color: rgb(11,11,11);
-  transition: transform 0.1s ease-out;
   white-space: nowrap;
   display: inline-block;
 }
@@ -640,7 +639,6 @@ button.navbar-toggler:focus{
   font-size: 45vh;
   margin-top: -30vh;
   color: white;
-  transition: transform 0.1s ease-out;
   white-space: nowrap;
   display: inline-block;
 }
@@ -851,7 +849,6 @@ button.navbar-toggler:focus{
   font-size: 45vh;
   color: rgb(196, 196, 196);
   margin-top: 30vh;
-  transition: transform 0.1s ease-out;
   white-space: nowrap;
   display: inline-block;
 }
@@ -1064,7 +1061,6 @@ button.navbar-toggler:focus{
   font-size: 45vh;
   color: rgb(100, 49, 244);
   margin-top: 30vh;
-  transition: transform 0.1s ease-out;
   white-space: nowrap;
   display: inline-block;
 }
@@ -1233,7 +1229,6 @@ button.navbar-toggler:focus{
   font-size: 45vh;
   color: #00C67D;
   margin-top: 30vh;
-  transition: transform 0.1s ease-out;
   white-space: nowrap;
   display: inline-block;
 }
@@ -1334,7 +1329,6 @@ button.navbar-toggler:focus{
   font-size: 45vh;
   color: #E56800;
   margin-top: 30vh;
-  transition: transform 0.1s ease-out;
   white-space: nowrap;
   display: inline-block;
 }
@@ -1517,7 +1511,6 @@ button.navbar-toggler:focus{
   border-radius: 20px;
   height: 50vh;
   margin: 0 10px;
-  transition: transform 0.1s ease-out;
 }
 
 .projects-points{
@@ -1639,7 +1632,6 @@ button.navbar-toggler:focus{
   font-size: 45vh;
   color: rgb(236, 236, 236);
   margin-bottom: 30vh;
-  transition: transform 0.1s ease-out;
   white-space: nowrap;
   display: inline-block;
 }

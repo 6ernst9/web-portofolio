@@ -1,97 +1,15 @@
-import {useEffect, useState} from "react";
 import logo from '../assets/img/logo.svg';
 import arrow from "../assets/img/arrow-left.svg";
 import profile from '../assets/img/profile.png';
+import {GridItems} from "./GridItems";
+import {useParallaxScroll} from "../hooks/useParallaxScroll";
 
 export const About = () => {
-    const [scrollPosition, setScrollPosition] = useState(0);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrollPosition(window.scrollY);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-
-    const calculateOffset = (direction = 'right') => {
-        const speedMultiplier = 0.75;
-        const offset = scrollPosition * speedMultiplier;
-        return direction === 'right' ? offset : -offset;
-    };
+    const {calculateOffset} = useParallaxScroll();
 
     return (
         <section className="about" id="about">
-            <div className="grid-container">
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-            </div>
+            <GridItems />
             <div className="resume-sliding-text about-sliding-text">
                 <h1
                     className="sliding-text-white"

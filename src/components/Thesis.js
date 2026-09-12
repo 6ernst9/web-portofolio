@@ -1,27 +1,11 @@
-import {useEffect, useState} from "react";
 import vendify1 from '../assets/img/vendify1.png';
 import {HashLink} from "react-router-hash-link";
 import arrow from "../assets/img/arrow-left2.svg";
+import {useParallaxScroll} from "../hooks/useParallaxScroll";
+import {GridPoints} from "./GridPoints";
 
 export const Thesis = () => {
-    const [scrollPosition, setScrollPosition] = useState(0);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrollPosition(window.scrollY);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-
-    const calculateOffset = (direction = 'right') => {
-        const speedMultiplier = 0.75;
-        const offset = scrollPosition * speedMultiplier;
-        return direction === 'right' ? offset : -offset;
-    };
+    const {calculateOffset} = useParallaxScroll();
 
     return(
         <section className="vendify" id="vendify">
@@ -47,7 +31,7 @@ export const Thesis = () => {
                 </div>
                 <div className="vendify-container-button">
                     <p>#thesis</p>
-                    <HashLink to="https://github.com/6ernst9/vendify">
+                    <HashLink to="https://github.com/6ernst9/vendify" target="_blank" rel="noreferrer">
                         <button className="vvd"><span>View Source code</span></button>
                     </HashLink>
                 </div>
@@ -58,156 +42,7 @@ export const Thesis = () => {
                 <img className="about-arrow" src={arrow} alt="arrow-icon"/>
                 <p>Projects</p>
             </div>
-            <div className="grid-points vendify-points">
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-            </div>
+            <GridPoints wrapperClassName="vendify-points" />
         </section>
     )
 }

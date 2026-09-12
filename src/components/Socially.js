@@ -1,27 +1,11 @@
-import {useEffect, useState} from "react";
 import socially from '../assets/img/socialmedia.jpg';
 import {HashLink} from "react-router-hash-link";
 import arrow from "../assets/img/arrow-left2.svg";
+import {useParallaxScroll} from "../hooks/useParallaxScroll";
+import {GridPoints} from "./GridPoints";
 
 export const Socially = () => {
-    const [scrollPosition, setScrollPosition] = useState(0);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrollPosition(window.scrollY);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-
-    const calculateOffset = (direction = 'right') => {
-        const speedMultiplier = 0.75;
-        const offset = scrollPosition * speedMultiplier;
-        return direction === 'right' ? offset : -offset;
-    };
+    const {calculateOffset} = useParallaxScroll();
 
     return(
         <section className="socially" id="socially">
@@ -29,7 +13,7 @@ export const Socially = () => {
                 <h1
                     className="socially-sliding-text"
                     style={{ transform: `translateX(${calculateOffset('right')}px)` }}>
-                    Social Media/Social Media/Social Media/Social Media/Social Media/Social Media</h1>
+                    Socially/Socially/Socially/Socially/Socially/Socially</h1>
             </div>
             <div className="socially-container">
                 <div className="socially-photo">
@@ -47,8 +31,8 @@ export const Socially = () => {
                     <p className="socially-description">Socially is a social media application, focusing on ephemeral messaging and multimedia sharing. Built with <span className="highlight">Spring microservices</span> architecture, this project showcases scalable, distributed system capabilities, facilitating real-time interactions and robust backend services. The application enables users to share photos and videos that disappear after viewing, maintaining a dynamic and secure user experience.</p>
                 </div>
                 <div className="socially-container-button">
-                    <p>#microservices</p>
-                    <HashLink to="https://github.com/6ernst9/social-media-microservices">
+                    <p>#socialmedia</p>
+                    <HashLink to="https://github.com/6ernst9/social-media-microservices" target="_blank" rel="noreferrer">
                         <button className="vvd"><span>View Source code</span></button>
                     </HashLink>
                 </div>
@@ -58,156 +42,7 @@ export const Socially = () => {
                 <img className="about-arrow" src={arrow}/>
                 <p>Projects</p>
             </div>
-            <div className="grid-points socially-points">
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-                <div className="grid-point"></div>
-
-            </div>
+            <GridPoints wrapperClassName="socially-points" />
         </section>
     )
 }

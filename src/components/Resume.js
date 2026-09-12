@@ -6,24 +6,29 @@ import file from '../assets/img/file (1).svg';
 import fileFill from '../assets/img/file.svg';
 import portofolioPdf from "../assets/Resume.pdf"
 import { saveAs } from 'file-saver';
-
+import {GridItems} from "./GridItems";
+import {useParallaxScroll} from "../hooks/useParallaxScroll";
 
 export const Resume = () => {
-    const [scrollPosition, setScrollPosition] = useState(0);
+    const {calculateOffset} = useParallaxScroll();
     const [fileSrc, setFileSrc] = useState(file);
-    const radius = 370 > 0.9 * window.innerWidth ? window.innerWidth/2 * 0.9 : 185;
+    // Track viewport width in state (updated on resize) instead of reading
+    // window.innerWidth directly during render — reading it inline meant
+    // this literally couldn't respond to orientation changes without a
+    // full remount, and touched window on every re-render.
+    const [viewportWidth, setViewportWidth] = useState(
+        typeof window !== 'undefined' ? window.innerWidth : 0
+    );
+    const radius = 370 > 0.9 * viewportWidth ? viewportWidth / 2 * 0.9 : 185;
     const diameter = radius * 2;
     const characters = 'check my resume.check my resume.check my resume.'.split('');
     const angleIncrement = 360 / characters.length;
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrollPosition(window.scrollY);
-        };
-
-        window.addEventListener('scroll', handleScroll);
+        const handleResize = () => setViewportWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleResize);
         };
     }, []);
 
@@ -31,81 +36,9 @@ export const Resume = () => {
         saveAs(portofolioPdf, 'ernst-robert-resume.pdf');
     }
 
-    const calculateOffset = (direction = 'right') => {
-        const speedMultiplier = 0.75;
-        const offset = scrollPosition * speedMultiplier;
-        return direction === 'right' ? offset : -offset;
-    };
-
     return (
         <section className="resume">
-            <div className="grid-container">
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-                <div className="grid-item"></div>
-            </div>
+            <GridItems />
             <div className="resume-sliding-text">
                 <h1
                     className="sliding-text"
@@ -114,7 +47,7 @@ export const Resume = () => {
                 <h1
                     className="sliding-text second-text"
                     style={{ transform: `translateX(${calculateOffset('left')}px)` }}>
-                >ERNST ROBERT ERNST ROBERT ERNST ROBERT ERNST ROBERT</h1>
+                ERNST ROBERT ERNST ROBERT ERNST ROBERT ERNST ROBERT</h1>
                 <h1
                     className="sliding-text mobile-text second-text"
                     style={{ transform: `translateX(${calculateOffset('right')}px)` }}>
@@ -122,7 +55,7 @@ export const Resume = () => {
                 <h1
                     className="sliding-text second-text mobile-text"
                     style={{ transform: `translateX(${calculateOffset('left')}px)` }}>
-                    >ERNST ROBERT ERNST ROBERT ERNST ROBERT ERNST ROBERT</h1>
+                    ERNST ROBERT ERNST ROBERT ERNST ROBERT ERNST ROBERT</h1>
             </div>
             <div
                 className="resume-circle-container"

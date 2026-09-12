@@ -449,6 +449,15 @@ button.navbar-toggler:focus{
 .resume-sliding-text{
   position: absolute;
   z-index: 2;
+  /* Explicit full-width + centering, instead of relying on the browser's
+     "static position" fallback for an absolutely-positioned flex child
+     (no top/left set). That fallback is inconsistently implemented
+     across browsers when combined with flexbox, and is sensitive to
+     this element's order among its siblings — it's what caused the
+     Contact section's sliding text to sit off-center before its DOM
+     order was aligned with every other section. */
+  left: 0;
+  right: 0;
   text-align: center;
   white-space: nowrap;
   display: flex;
@@ -1309,6 +1318,148 @@ button.navbar-toggler:focus{
   }
 }
 
+/************ Warlords Css ************/
+.warlords {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #FF7A00;
+  width: 100vw;
+  height: 100vh;
+}
+
+.warlords-sliding-text {
+  font-weight: 700;
+  font-size: 45vh;
+  color: #E56800;
+  margin-top: 30vh;
+  transition: transform 0.1s ease-out;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.warlords-description-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+}
+
+.warlords-description {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: black;
+}
+
+.warlords-photo {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.warlords-photo .mac-photo {
+  max-width: 100%;
+}
+
+.warlords-photo .mac-photo img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0 0 15px 15px;
+}
+
+.warlords-container-button {
+  grid-row: 2 / 3;
+  grid-column: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.warlords-container-button p {
+    font-weight: 700;
+    color: black;
+    font-size: 40px;
+}
+
+.warlords-container-button button {
+    font-weight: 400;
+    color: black;
+    border: 1px solid black;
+    padding: 20px 34px;
+    font-size: 20px;
+    position: relative;
+    background-color: white;
+    transition: .3s ease-in-out;
+}
+
+.warlords-container-button button span {
+  z-index: 1;
+}
+
+.warlords-container-button button:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, .9)
+}
+
+.warlords-projects-container {
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  left: 10px;
+  position: absolute;
+  height: 35px;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: top left;
+  top: calc(700vh - 38px);
+}
+
+.warlords-projects-container p {
+  font-weight: 700;
+  font-size: 26px;
+  color: black;
+  margin: 0;
+}
+
+.warlords-points {
+  top: calc(600vh + 17px);
+  right: 17px;
+}
+
+@media (max-width: 481px) {
+  .warlords-points {
+    top: calc(690vh + 17px);
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .warlords-points {
+    top: calc(630vh + 17px);
+  }
+}
+
+@media (max-width: 768px) {
+  .warlords-projects-container {
+    display: none;
+  }
+}
+
+@media (max-width: 1025px) {
+  .warlords-description-container {
+    display: none;
+  }
+}
+
 /************ Projects Css ************/
 .project {
   display: flex;
@@ -1371,7 +1522,7 @@ button.navbar-toggler:focus{
 
 .projects-points{
   z-index: 2;
-  top: calc(700vh - 342px);
+  top: calc(800vh - 342px);
   right: 17px;
 }
 
@@ -1397,13 +1548,13 @@ button.navbar-toggler:focus{
 
 @media (max-width: 481px){
   .projects-points{
-    top: calc(820vh - 342px);
+    top: calc(920vh - 342px);
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
   .projects-points{
-    top: calc(760vh - 342px);
+    top: calc(860vh - 342px);
   }
 }
 
@@ -1479,7 +1630,7 @@ button.navbar-toggler:focus{
 }
 
 .contact-points{
-  top: calc(800vh - 342px);
+  top: calc(900vh - 342px);
   right: 17px;
 }
 
@@ -1522,13 +1673,13 @@ button.navbar-toggler:focus{
 
 @media (max-width: 481px){
   .contact-points{
-    top: calc(920vh - 342px);
+    top: calc(1020vh - 342px);
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
   .contact-points{
-    top: calc(860vh - 342px);
+    top: calc(960vh - 342px);
   }
 }
 
@@ -1541,5 +1692,3 @@ button.navbar-toggler:focus{
     display: none;
   }
 }
-
-

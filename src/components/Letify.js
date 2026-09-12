@@ -3,9 +3,11 @@ import banking from "../assets/img/banking.jpg";
 import banking2 from "../assets/img/banking2.jpg";
 import {HashLink} from "react-router-hash-link";
 import arrow from "../assets/img/arrow-left2.svg";
+import {useParallaxScroll} from "../hooks/useParallaxScroll";
+import {GridPoints} from "./GridPoints";
 
 export const Letify = () => {
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const {calculateOffset} = useParallaxScroll();
 
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   const [secondImageDimensions, setSecondImageDimensions] = useState({ width: 0, height: 0 });
@@ -13,30 +15,24 @@ export const Letify = () => {
   const imageRef = useRef(null);
   const secondImageRef = useRef(null);
 
+  const updateDimensions = () => {
+      if (imageRef.current) {
+          const { width, height } = imageRef.current.getBoundingClientRect();
+          setImageDimensions({ width, height });
+      }
+
+      if(secondImageRef.current) {
+          const { width, height } = secondImageRef.current.getBoundingClientRect();
+          setSecondImageDimensions({ width, height });
+      }
+  };
+
   useEffect(() => {
-      const updateDimensions = () => {
-          if (imageRef.current) {
-              const { width, height } = imageRef.current.getBoundingClientRect();
-              setImageDimensions({ width, height });
-          }
-
-          if(secondImageRef.current) {
-              const { width, height } = secondImageRef.current.getBoundingClientRect();
-              setSecondImageDimensions({ width, height });
-          }
-      };
-
       updateDimensions();
 
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-
     window.addEventListener('resize', updateDimensions);
-    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', updateDimensions);
     };
   }, []);
@@ -47,19 +43,13 @@ export const Letify = () => {
   const secondBorderRadius = Math.min(secondImageDimensions.width, secondImageDimensions.height) * 0.2;
   const secondHeaderHeight = secondImageDimensions.height * 0.04;
 
-  const calculateOffset = (direction = 'right') => {
-    const speedMultiplier = 0.75;
-    const offset = scrollPosition * speedMultiplier;
-    return direction === 'right' ? offset : -offset;
-  };
-
   return (
     <section className="letify" id="letify">
       <div className="resume-sliding-text">
         <h1
             className="letify-sliding-text"
             style={{ transform: `translateX(${calculateOffset('left')}px)` }}>
-          Banking/Banking/Banking/Banking/Banking/Banking/Banking/Banking</h1>
+          Letify/Letify/Letify/Letify/Letify/Letify/Letify/Letify</h1>
       </div>
       <div className="socially-container">
           <div className="letify-photo">
@@ -74,7 +64,7 @@ export const Letify = () => {
                                height: `${headerHeight}px`,
                                borderRadius: `0 0 ${borderRadius * 0.25}px ${borderRadius * 0.25}px`,
                            }}/>
-                      <img ref={imageRef} src={banking}/>
+                      <img ref={imageRef} src={banking} onLoad={updateDimensions}/>
                   </div>
                   <div className="second-photo mobile-photo"
                        style={{
@@ -87,7 +77,7 @@ export const Letify = () => {
                                height: `${secondHeaderHeight}px`,
                                borderRadius: `0 0 ${secondBorderRadius * 0.25}px ${secondBorderRadius * 0.25}px`,
                            }}/>
-                      <img ref={secondImageRef} src={banking2}/>
+                      <img ref={secondImageRef} src={banking2} onLoad={updateDimensions}/>
                   </div>
               </div>
           </div>
@@ -95,168 +85,19 @@ export const Letify = () => {
               <p className="letify-description">Letify is a comprehensive mobile banking application designed to simplify and secure your financial transactions. With Letify, users can seamlessly manage their finances, including making transfers, withdrawals, and applying for credits, all within a user-friendly interface. Built with robust security features and real-time processing, Letify ensures that your banking needs are met quickly and safely, whether you're managing personal accounts or handling business finances.</p>
           </div>
           <div className="socially-container-button">
-              <p>#ui/ux</p>
-              <HashLink to="https://github.com/6ernst9/banking-frontend-mobile">
+              <p>#banking</p>
+              <HashLink to="https://github.com/6ernst9/banking-frontend-mobile" target="_blank" rel="noreferrer">
                   <button className="vvd"><span>View Source code</span></button>
               </HashLink>
           </div>
       </div>
 
-        <p className="socially-projects-number">2/3</p>
+        <p className="socially-projects-number">2/4</p>
         <div className="letify-projects-container">
             <img className="about-arrow" src={arrow}/>
             <p>Projects</p>
         </div>
-        <div className="grid-points letify-points">
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-            <div className="grid-point"></div>
-
-        </div>
+        <GridPoints wrapperClassName="letify-points" />
     </section>
   )
 }

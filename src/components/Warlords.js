@@ -1,4 +1,4 @@
-import romaniawarlords1 from '../assets/img/romaniawarlords1.png';
+import romaniawarlords from '../assets/img/romaniawarlords1.png';
 import arrow from "../assets/img/arrow-left2.svg";
 import {HashLink} from "react-router-hash-link";
 import {useParallaxScroll} from "../hooks/useParallaxScroll";
@@ -12,14 +12,25 @@ export const Warlords = () => {
             <div className="resume-sliding-text">
                 <h1
                     className="warlords-sliding-text"
-                    style={{ transform: `translateX(${calculateOffset('right')}px)` }}>
+                    style={{ transform: `translateX(${calculateOffset('left')}px)` }}>
                     Romania Warlords/Romania Warlords/Romania Warlords/Romania Warlords/Romania Warlords
                 </h1>
             </div>
 
             <div className="socially-container">
+                <div className="warlords-photo">
+                    <div className="mac-photo">
+                        <div className="mac-header">
+                            <div className="mac-button"/>
+                            <div className="mac-button yellow-button"/>
+                            <div className="mac-button green-button"/>
+                        </div>
+                        <img src={romaniawarlords} alt="Romania Warlords website"/>
+                    </div>
+                </div>
+
                 <div className="warlords-description-container">
-                    <p className="warlords-description">
+                    <p className="warlords-description description-full">
                         Romania Warlords is a hub for the biggest Clash Royale clan family in Romania, built to
                         keep members connected to live, real clan data instead of static info. Built
                         with <span className="highlight">React, Tailwind and Supabase</span>, the site
@@ -28,17 +39,12 @@ export const Warlords = () => {
                         full Romanian/English support, every member can see exactly where their clan
                         stands.
                     </p>
-                </div>
-
-                <div className="warlords-photo">
-                    <div className="mac-photo">
-                        <div className="mac-header">
-                            <div className="mac-button"/>
-                            <div className="mac-button yellow-button"/>
-                            <div className="mac-button green-button"/>
-                        </div>
-                        <img src={romaniawarlords1} alt="Romania Warlords website"/>
-                    </div>
+                    <p className="warlords-description description-mobile">
+                        Romania Warlords is a hub for the biggest Clash Royale clan family in Romania, built to
+                        keep members connected to live, real clan data instead of static info. With per-clan
+                        detail pages and full Romanian/English support, every member can see exactly where
+                        their clan stands.
+                    </p>
                 </div>
 
                 <div className="warlords-container-button">

@@ -1,3 +1,7 @@
+:root {
+  --brand-purple: rgb(91 34 255);
+}
+
 /************ Custom Font ************/
 @font-face {
 	font-family: Centra;
@@ -13,6 +17,10 @@
 	font-family: Centra;
 	src: url('./assets/font/CentraNo2-Book.ttf');
 	font-weight: 400;
+}
+@font-face {
+	font-family: 'Vermin Vibes';
+	src: url('./assets/font/Vermin Vibes.ttf');
 }
 
 /************ Default Css ************/
@@ -71,6 +79,21 @@ input:focus, textarea:focus, select:focus {
   outline: none;
 }
 
+/* Shared base for every call-to-action button across the site
+   (each one already carries className="vvd"). Section-specific
+   rules below only need their theme colors - not these repeated
+   layout/timing properties. */
+.vvd {
+  font-weight: 400;
+  padding: 20px 34px;
+  font-size: 20px;
+  transition: 0.3s ease-in-out;
+}
+
+.vvd span {
+  z-index: 1;
+}
+
 /************ Navbar Css ************/
 nav.navbar {
   padding: 24px 24px;
@@ -122,8 +145,11 @@ nav.navbar a.navbar-brand{
 }
 
 .navbar-logo{
-  width: auto;
-  height: 40px;
+  font-family: 'Vermin Vibes', cursive;
+  font-size: 40px;
+  color: #fff;
+  line-height: 1;
+  margin: 0;
 }
 
 .navbar-collapse.collapsing{
@@ -163,7 +189,7 @@ button.navbar-toggler:focus{
 
 @media (max-width: 768px) {
   .navbar-logo{
-    height: 35px;
+    font-size: 35px;
   }
 
   nav.navbar button.navbar-toggler{
@@ -186,7 +212,7 @@ button.navbar-toggler:focus{
   position: absolute;
   width: 5px;
   height: 7vh;
-  background-color: rgb(91 34 255);
+  background-color: var(--brand-purple);
 }
 
 .banner-plus::after {
@@ -194,7 +220,7 @@ button.navbar-toggler:focus{
   position: absolute;
   width: 7vh;
   height: 5px;
-  background-color: rgb(91 34 255);
+  background-color: var(--brand-purple);
 }
 
 .top-left {
@@ -277,17 +303,10 @@ button.navbar-toggler:focus{
 }
 
 .banner button {
-  font-weight: 400;
   color: #fff;
   border: 1px solid #fff;
-  padding: 20px 34px;
-  font-size: 20px;
   position: relative;
   background-color: black;
-  transition: 0.3s ease-in-out;
-}
-.banner button span {
-  z-index: 1;
 }
 
 .banner button:hover {
@@ -342,9 +361,9 @@ button.navbar-toggler:focus{
 }
 
 .namespace-title{
-  color: rgb(91 34 255);
+  color: var(--brand-purple);
   text-decoration: underline;
-  text-underline-color: rgb(91 34 255);
+  text-underline-color: var(--brand-purple);
 }
 
 .highlight-title{
@@ -670,7 +689,7 @@ button.navbar-toggler:focus{
 
 .highlight{
   z-index: 5;
-  color: rgb(91 34 255);
+  color: var(--brand-purple);
   text-decoration: underline;
 }
 
@@ -682,7 +701,7 @@ button.navbar-toggler:focus{
 }
 
 .about-flag{
-  background-color: rgb(91 34 255);
+  background-color: var(--brand-purple);
   padding: 50px;
   height: calc(100vh - 110px);
   width: auto;
@@ -823,6 +842,25 @@ button.navbar-toggler:focus{
   }
 }
 
+/************ Shared project-description mobile/desktop toggle ************/
+/* Each project section renders two <p> tags with the same base
+   description class plus one of these: the full text (desktop) and a
+   shorter version with one sentence trimmed (mobile, where the 130vh
+   section height doesn't have room for the full copy). */
+.description-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .description-full {
+    display: none;
+  }
+
+  .description-mobile {
+    display: block;
+  }
+}
+
 /************ Socially Css ************/
 .socially{
   display: flex;
@@ -947,17 +985,9 @@ button.navbar-toggler:focus{
 }
 
 .socially-container-button button {
-  font-weight: 400;
   color: black;
   border: 1px solid black;
-  padding: 20px 34px;
-  font-size: 20px;
   background-color: white;
-  transition: 0.3s ease-in-out;
-}
-
-.socially-container-button button span {
-  z-index: 1;
 }
 
 .socially-container-button button:hover {
@@ -1035,6 +1065,16 @@ button.navbar-toggler:focus{
 
   .socially-description-container{
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .socially {
+    height: 130vh;
+  }
+
+  .socially-description-container {
+    display: flex;
   }
 }
 
@@ -1162,7 +1202,7 @@ button.navbar-toggler:focus{
 
 @media (max-width: 481px){
   .letify-points{
-    top: calc(490vh + 17px);
+    top: calc(520vh + 17px);
   }
 
   .mac-photos img{
@@ -1177,7 +1217,7 @@ button.navbar-toggler:focus{
 
 @media (min-width: 481px) and (max-width: 768px) {
   .letify-points{
-    top: calc(430vh + 17px);
+    top: calc(460vh + 17px);
   }
 }
 
@@ -1201,6 +1241,16 @@ button.navbar-toggler:focus{
 @media (max-width: 1025px){
   .letify-description-container{
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .letify {
+    height: 130vh;
+  }
+
+  .letify-description-container {
+    display: flex;
   }
 }
 
@@ -1264,18 +1314,10 @@ button.navbar-toggler:focus{
 }
 
 .vendify-container-button button {
-  font-weight: 400;
   color: black;
   border: 1px solid black;
-  padding: 20px 34px;
-  font-size: 20px;
   position: relative;
   background-color: white;
-  transition: 0.3s ease-in-out;
-}
-
-.vendify-container-button button span {
-  z-index: 1;
 }
 
 .vendify-container-button button:hover {
@@ -1297,19 +1339,25 @@ button.navbar-toggler:focus{
 
 @media (max-width: 481px){
   .vendify-points{
-    top: calc(590vh + 17px);
+    top: calc(650vh + 17px);
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
   .vendify-points{
-    top: calc(530vh + 17px);
+    top: calc(590vh + 17px);
   }
 }
 
 @media (max-width: 768px) {
   .vendify-projects-container{
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .vendify {
+    height: 130vh;
   }
 }
 
@@ -1384,18 +1432,10 @@ button.navbar-toggler:focus{
 }
 
 .warlords-container-button button {
-    font-weight: 400;
     color: black;
     border: 1px solid black;
-    padding: 20px 34px;
-    font-size: 20px;
     position: relative;
     background-color: white;
-    transition: .3s ease-in-out;
-}
-
-.warlords-container-button button span {
-  z-index: 1;
 }
 
 .warlords-container-button button:hover {
@@ -1432,13 +1472,13 @@ button.navbar-toggler:focus{
 
 @media (max-width: 481px) {
   .warlords-points {
-    top: calc(690vh + 17px);
+    top: calc(780vh + 17px);
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
   .warlords-points {
-    top: calc(630vh + 17px);
+    top: calc(720vh + 17px);
   }
 }
 
@@ -1451,6 +1491,16 @@ button.navbar-toggler:focus{
 @media (max-width: 1025px) {
   .warlords-description-container {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .warlords {
+    height: 130vh;
+  }
+
+  .warlords-description-container {
+    display: flex;
   }
 }
 
@@ -1520,18 +1570,10 @@ button.navbar-toggler:focus{
 }
 
 .project-container button {
-  font-weight: 400;
   color: white;
   border: 1px solid #fff;
-  padding: 20px 34px;
-  font-size: 20px;
   position: relative;
   background-color: black;
-  transition: 0.3s ease-in-out;
-}
-
-.project-container button span {
-  z-index: 1;
 }
 
 .project-container button:hover {
@@ -1541,13 +1583,13 @@ button.navbar-toggler:focus{
 
 @media (max-width: 481px){
   .projects-points{
-    top: calc(920vh - 342px);
+    top: calc(1040vh - 342px);
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
   .projects-points{
-    top: calc(860vh - 342px);
+    top: calc(980vh - 342px);
   }
 }
 
@@ -1585,7 +1627,7 @@ button.navbar-toggler:focus{
   line-height: 1;
   margin-bottom: 20px;
   display: block;
-  color: rgb(91 34 255);
+  color: var(--brand-purple);
 }
 
 .contact-container p{
@@ -1599,18 +1641,10 @@ button.navbar-toggler:focus{
 
 .contact-container button {
   flex: 3;
-  font-weight: 400;
-  color: rgb(91 34 255);
+  color: var(--brand-purple);
   border: 2px solid black;
-  padding: 20px 34px;
-  font-size: 20px;
   position: relative;
   background-color: white;
-  transition: 0.3s ease-in-out;
-}
-
-.contact-container button span {
-  z-index: 1;
 }
 
 .contact-container button:hover {
@@ -1619,7 +1653,7 @@ button.navbar-toggler:focus{
 }
 
 .contact-point{
-  background-color: rgb(91 34 255);;
+  background-color: var(--brand-purple);
 }
 
 .contact-points{
@@ -1665,13 +1699,13 @@ button.navbar-toggler:focus{
 
 @media (max-width: 481px){
   .contact-points{
-    top: calc(1020vh - 342px);
+    top: calc(1140vh - 342px);
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
   .contact-points{
-    top: calc(960vh - 342px);
+    top: calc(1080vh - 342px);
   }
 }
 

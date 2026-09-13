@@ -82,7 +82,8 @@ export const Letify = () => {
               </div>
           </div>
           <div className="letify-description-container">
-              <p className="letify-description">Letify is a comprehensive mobile banking application designed to simplify and secure your financial transactions. With Letify, users can seamlessly manage their finances, including making transfers, withdrawals, and applying for credits, all within a user-friendly interface. Built with robust security features and real-time processing, Letify ensures that your banking needs are met quickly and safely, whether you're managing personal accounts or handling business finances.</p>
+              <p className="letify-description description-full">Letify is a comprehensive mobile banking application designed to simplify and secure your financial transactions. With Letify, users can seamlessly manage their finances, including making transfers, withdrawals, and applying for credits, all within a user-friendly interface. Built with robust security features and real-time processing, Letify ensures that your banking needs are met quickly and safely, whether you're managing personal accounts or handling business finances.</p>
+              <p className="letify-description description-mobile">Letify is a comprehensive mobile banking application designed to simplify and secure your financial transactions. Built with robust security features and real-time processing, Letify ensures that your banking needs are met quickly and safely, whether you're managing personal accounts or handling business finances.</p>
           </div>
           <div className="socially-container-button">
               <p>#banking</p>

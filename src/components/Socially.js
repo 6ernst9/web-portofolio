@@ -28,7 +28,8 @@ export const Socially = () => {
                 </div>
 
                 <div className="socially-description-container">
-                    <p className="socially-description">Socially is a social media application, focusing on ephemeral messaging and multimedia sharing. Built with <span className="highlight">Spring microservices</span> architecture, this project showcases scalable, distributed system capabilities, facilitating real-time interactions and robust backend services. The application enables users to share photos and videos that disappear after viewing, maintaining a dynamic and secure user experience.</p>
+                    <p className="socially-description description-full">Socially is a social media application, focusing on ephemeral messaging and multimedia sharing. Built with <span className="highlight">Spring microservices</span> architecture, this project showcases scalable, distributed system capabilities, facilitating real-time interactions and robust backend services. The application enables users to share photos and videos that disappear after viewing, maintaining a dynamic and secure user experience.</p>
+                    <p className="socially-description description-mobile">Socially is a social media application, focusing on ephemeral messaging and multimedia sharing. The application enables users to share photos and videos that disappear after viewing, maintaining a dynamic and secure user experience.</p>
                 </div>
                 <div className="socially-container-button">
                     <p>#socialmedia</p>
@@ -37,7 +38,7 @@ export const Socially = () => {
                     </HashLink>
                 </div>
             </div>
-            <p className="socially-projects-number">1/3</p>
+            <p className="socially-projects-number">1/4</p>
             <div className="socially-projects-container">
                 <img className="about-arrow" src={arrow}/>
                 <p>Projects</p>

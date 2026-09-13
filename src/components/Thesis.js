@@ -27,7 +27,8 @@ export const Thesis = () => {
                     </div>
                 </div>
                 <div className="socially-description-container">
-                    <p className="vendify-description">Vendify is a modern eCommerce platform built to simplify the creation and management of online stores for entrepreneurs and small businesses. Whether you're launching a boutique brand or managing multiple shops, Vendify offers a streamlined dashboard, customizable themes, and intuitive product management tools. With built-in analytics, session tracking, and promotional features like discounts and highlights, Vendify empowers users to grow their presence and make data-informed decisions—without needing technical expertise.</p>
+                    <p className="vendify-description description-full">Vendify is a modern eCommerce platform designed to make building and running an online store simple, even without technical expertise. It gives entrepreneurs and small businesses a streamlined dashboard, customizable themes, and intuitive tools for managing products across a single shop or several at once. Built-in analytics, session tracking, and promotional features like discounts and highlights help store owners understand their customers and grow with confidence.</p>
+                    <p className="vendify-description description-mobile">Vendify is a modern eCommerce platform designed to make building and running an online store simple, even without technical expertise. Built-in analytics, session tracking, and promotional features help store owners understand their customers and grow with confidence.</p>
                 </div>
                 <div className="vendify-container-button">
                     <p>#thesis</p>
@@ -37,7 +38,7 @@ export const Thesis = () => {
                 </div>
             </div>
 
-            <p className="socially-projects-number">3/3</p>
+            <p className="socially-projects-number">3/4</p>
             <div className="vendify-projects-container">
                 <img className="about-arrow" src={arrow} alt="arrow-icon"/>
                 <p>Projects</p>

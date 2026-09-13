@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import logo from '../assets/img/weblogo.svg';
 import menu from '../assets/img/menu.svg';
-import weblogo from '../assets/img/weblogo.png'
 
 export const NavBar = () => {
   const [activeLink, setActiveLink] = useState('home');
@@ -36,7 +35,7 @@ export const NavBar = () => {
           <Navbar.Brand href="/">
             <img src={logo} alt="Logo" />
           </Navbar.Brand>
-          <img className="navbar-logo" src={weblogo}/>
+          <h3 className="navbar-logo">ERNST</h3>
           <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={onUpdateToggle}>
               <img src={menu}/>
           </Navbar.Toggle>

@@ -20,7 +20,6 @@ import thesis2 from "../assets/img/vendify2.png";
 import romaniawarlords1 from "../assets/img/romaniawarlords1.png";
 import romaniawarlords2 from "../assets/img/romaniawarlords2.png";
 
-import 'animate.css';
 import {useEffect, useRef} from "react";
 import {HashLink} from "react-router-hash-link";
 import {GridItems} from "./GridItems";

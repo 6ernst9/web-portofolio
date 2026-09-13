@@ -1,4 +1,3 @@
-import 'animate.css';
 import {HashLink} from "react-router-hash-link";
 import arrow from '../assets/img/arrow-left.svg';
 import {GridItems} from "./GridItems";

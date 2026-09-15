@@ -107,13 +107,15 @@ nav.navbar {
 
 nav.navbar.toggled {
   background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
 }
 
 nav.navbar.scrolled {
   padding: 16px 24px;
   background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
 }
 
 nav.navbar .navbar-nav .nav-link.navbar-link {

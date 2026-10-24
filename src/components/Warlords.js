@@ -57,7 +57,7 @@ export const Warlords = () => {
                 </div>
             </div>
 
-            <p className="socially-projects-number">4/4</p>
+            <p className="socially-projects-number">2/4</p>
 
             <div className="warlords-projects-container">
                 <img className="about-arrow" src={arrow} alt="arrow-icon"/>

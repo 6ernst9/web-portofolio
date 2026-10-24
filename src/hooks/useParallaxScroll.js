@@ -1,6 +1,11 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 const ScrollContext = createContext(0);
+
+// Imperative side-channel for things that must move in the same frame as the
+// scroll WITHOUT re-rendering React (e.g. the infinite carousels, which write
+// straight to an element's scrollLeft). Same single listener, same single rAF.
+const ScrollSubscribeContext = createContext(() => () => {});
 
 /**
  * Wrap the app once (see App.js) with this provider. It owns the ONE
@@ -22,6 +27,12 @@ const ScrollContext = createContext(0);
 export const ScrollProvider = ({ children }) => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const ticking = useRef(false);
+    const listeners = useRef(new Set());
+
+    const subscribe = useCallback((fn) => {
+        listeners.current.add(fn);
+        return () => listeners.current.delete(fn);
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -32,7 +43,9 @@ export const ScrollProvider = ({ children }) => {
                 // Clamp to 0 so iOS rubber-band/bounce overscroll (which can
                 // briefly report a negative scrollY) doesn't snap the
                 // sliding text to a jarring offset.
-                setScrollPosition(Math.max(0, window.scrollY));
+                const y = Math.max(0, window.scrollY);
+                setScrollPosition(y);
+                listeners.current.forEach((fn) => fn(y));
                 ticking.current = false;
             });
         };
@@ -44,9 +57,11 @@ export const ScrollProvider = ({ children }) => {
     }, []);
 
     return (
-        <ScrollContext.Provider value={scrollPosition}>
-            {children}
-        </ScrollContext.Provider>
+        <ScrollSubscribeContext.Provider value={subscribe}>
+            <ScrollContext.Provider value={scrollPosition}>
+                {children}
+            </ScrollContext.Provider>
+        </ScrollSubscribeContext.Provider>
     );
 };
 
@@ -66,4 +81,16 @@ export const useParallaxScroll = (speedMultiplier = 0.75) => {
     };
 
     return { scrollPosition, calculateOffset };
+};
+
+/**
+ * Calls `callback(scrollY)` once per animation frame while the page scrolls,
+ * from the provider's single shared listener. Does not trigger re-renders.
+ */
+export const useScrollSubscription = (callback) => {
+    const subscribe = useContext(ScrollSubscribeContext);
+    const latest = useRef(callback);
+    latest.current = callback;
+
+    useEffect(() => subscribe((y) => latest.current(y)), [subscribe]);
 };

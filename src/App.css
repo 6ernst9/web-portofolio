@@ -154,7 +154,8 @@
 }
 @font-face {
 	font-family: 'Vermin Vibes';
-	src: url('./assets/font/Vermin Vibes.ttf');
+	src: url('./assets/font/VerminVibes.woff2') format('woff2');
+	font-display: swap;
 }
 
 /************ Default Css ************/
@@ -765,12 +766,9 @@ button.navbar-toggler:focus{
   grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   place-items: center;
   pointer-events: none;
-}
-
-/* Sized by height only (width follows the image's proportions). --fit shrinks both on narrow screens:
-   1 from 650px wide up, 0.8 (20% shorter) at 500px and below, and a smooth slide in between.
-   tan(atan2(a, b)) turns the length ratio a / b into a plain number, which a calc() can then scale. */
-.resume-stage {
+  /* Sized by height only (width follows the image's proportions). --fit shrinks both on narrow screens:
+     1 from 650px wide up, 0.8 (20% shorter) at 500px and below, and a smooth slide in between.
+     tan(atan2(a, b)) turns the length ratio a / b into a plain number, which a calc() can then scale. */
   --fit: calc(0.8 + 0.2 * clamp(0, tan(atan2(100vw - 500px, 150px)), 1));
 }
 
@@ -1205,12 +1203,18 @@ button.navbar-toggler:focus{
   min-height: 0;
   display: grid;
   grid-template-columns: var(--logo) clamp(215px, 17vw, 300px) minmax(0, 1fr);
-  grid-template-areas: "logo years details";
+  /* The logo and date sit in the middle row, centred in the role's slot. The details hang from
+     the top of that row, so the job title lines up with the logo's centre and the bullets run below. */
+  grid-template-rows: 1fr var(--logo) 1fr;
+  grid-template-areas:
+    ".    .     ."
+    "logo years details"
+    ".    .     details";
   align-items: center;
   column-gap: 2.5vw;
 }
 
-/* Dates: month + year range, current role in the site's purple. */
+/* Dates: month + year range, current role in the site's purple and bold. */
 .experience-years {
   grid-area: years;
   margin: 0;
@@ -1253,6 +1257,9 @@ button.navbar-toggler:focus{
 
 .experience-details {
   grid-area: details;
+  align-self: start;
+  /* Half of (logo height - one heading line of 26px x 1.2) centres the title on the logo */
+  margin-top: calc((var(--logo) - 31.2px) / 2);
   text-align: left;
 }
 
@@ -1271,6 +1278,11 @@ button.navbar-toggler:focus{
   color: white;
 }
 
+/* The company stands out next to the bold title in the site's purple. */
+.experience-company {
+  color: var(--brand-purple);
+}
+
 .experience-description,
 .experience-description-phone {
   max-width: 70ch;
@@ -1280,6 +1292,7 @@ button.navbar-toggler:focus{
   color: var(--grey);
 }
 
+/* The phone text only shows in the phone layout (the group rule above styles both) */
 .experience-description-phone {
   display: none;
 }
@@ -1374,10 +1387,22 @@ button.navbar-toggler:focus{
   margin: 0;
 }
 
-/* Point grid, bottom right of the section */
+/* Point grid, bottom right of the section. It sits under the last roles' text, so the dots
+   fade out towards the left (where the text is) and stay full only in the free corner. */
 .experience-points {
   top: calc(100% - 342px);
   right: 17px;
+  -webkit-mask-image: linear-gradient(to right, transparent 25%, black 75%);
+  mask-image: linear-gradient(to right, transparent 25%, black 75%);
+}
+
+/* On phones the text spans the whole width, so the fade runs top to bottom instead:
+   the dots are full at the bottom of the section and fade out towards the top, behind the text. */
+@media (max-width: 768px) {
+  .experience-points {
+    -webkit-mask-image: linear-gradient(to top, black 10%, transparent 70%);
+    mask-image: linear-gradient(to top, black 10%, transparent 70%);
+  }
 }
 
 /* Phones: logo and dates share the first line, the text sits under the dates. */
@@ -1425,7 +1450,14 @@ button.navbar-toggler:focus{
     grid-template-rows: var(--logo) 1fr;
     align-items: start;
     column-gap: 16px;
-    row-gap: 1.5vh;
+    row-gap: 0;
+    /* Air goes after each role, not between its date and its text, so the text reads as
+       belonging to the date above it. */
+    padding-bottom: 3.5vh;
+  }
+
+  .experience-details {
+    margin-top: -4px;
   }
 
   .experience-logo {
@@ -1463,14 +1495,13 @@ button.navbar-toggler:focus{
 
   .experience-years {
     opacity: 0;
-    transform: translateX(14px);
   }
 
   .experience.is-visible .experience-item {
     --reveal: calc(0.1s + var(--i) / (var(--roles) - 1) * 1.2s);
   }
 
-  /* Each date fades in and slides a few px, starting as the line reaches its logo */
+  /* Each date fades in, starting as the line reaches its logo */
   .experience.is-visible .experience-years {
     animation: showDates 0.6s ease-out var(--reveal) both;
   }
@@ -1494,7 +1525,6 @@ button.navbar-toggler:focus{
 @keyframes showDates {
   to {
     opacity: 1;
-    transform: translateX(0);
   }
 }
 
@@ -2271,8 +2301,6 @@ button.navbar-toggler:focus{
 .contact-point{
   background-color: var(--brand-purple);
 }
-
-.contact-points {}
 
 .contact-sliding-text {
   font-weight: 700;

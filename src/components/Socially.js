@@ -1,4 +1,4 @@
-import socially from '../assets/img/socialmedia.jpg';
+import socially from '../assets/img/socialmedia.webp';
 import {HashLink} from "react-router-hash-link";
 import arrow from "../assets/img/arrow-left2.svg";
 import {useParallaxScroll} from "../hooks/useParallaxScroll";
@@ -32,7 +32,7 @@ export const Socially = () => {
 
                 <div className="socially-description-container">
                     <p className="socially-description description-full">Socially is a social media application, focusing on ephemeral messaging and multimedia sharing. Built with <span className="highlight">Spring microservices</span> architecture, this project showcases scalable, distributed system capabilities, facilitating real-time interactions and robust backend services. The application enables users to share photos and videos that disappear after viewing, maintaining a dynamic and secure user experience.</p>
-                    <p className="socially-description description-mobile">Socially is a social media application, focusing on ephemeral messaging and multimedia sharing. The application enables users to share photos and videos that disappear after viewing, maintaining a dynamic and secure user experience.</p>
+                    <p className="socially-description description-mobile">Socially is a social media application, focusing on <span className="highlight">ephemeral messaging</span> and multimedia sharing. The application enables users to share photos and videos that disappear after viewing, maintaining a dynamic and secure user experience.</p>
                 </div>
                 <div className="socially-container-button">
                     <p>#socialmedia</p>

@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import flag from '../assets/img/flag.png';
-import cesar from '../assets/img/iulius-cesar.png';
+import flag from '../assets/img/flag.webp';
+import cesar from '../assets/img/iulius-cesar.webp';
 import arrow from "../assets/img/arrow-left.svg";
 import file from '../assets/img/file (1).svg';
 import fileFill from '../assets/img/file.svg';

@@ -1,9 +1,9 @@
-import betfairFull from "../assets/img/betfair-full.png";
-import pokerstarsFull from "../assets/img/pokerstars-full.png";
-import sisalFull from "../assets/img/sisal-full.png";
-import paddypowerFull from "../assets/img/paddypower-full.png";
-import skybetFull from "../assets/img/sky-full.png";
-import skyvegasFull from "../assets/img/skyvegas-full.png";
+import betfairFull from "../assets/img/betfair-full.webp";
+import pokerstarsFull from "../assets/img/pokerstars-full.webp";
+import sisalFull from "../assets/img/sisal-full.webp";
+import paddypowerFull from "../assets/img/paddypower-full.webp";
+import skybetFull from "../assets/img/sky-full.webp";
+import skyvegasFull from "../assets/img/skyvegas-full.webp";
 
 // Former employers, in display order. Paddy Power, Sky Bet and Sky Vegas share the Betfair
 // stack. On narrow screens the LAST ones drop out first (Sky Vegas, then Sky Bet, then

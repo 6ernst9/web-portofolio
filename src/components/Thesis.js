@@ -1,4 +1,4 @@
-import vendify1 from '../assets/img/vendify1.png';
+import vendify1 from '../assets/img/vendify1.webp';
 import {HashLink} from "react-router-hash-link";
 import arrow from "../assets/img/arrow-left2.svg";
 import {useParallaxScroll} from "../hooks/useParallaxScroll";
@@ -31,7 +31,7 @@ export const Thesis = () => {
                 </div>
                 <div className="socially-description-container">
                     <p className="vendify-description description-full">Vendify is a modern eCommerce platform designed to make building and running an online store simple, even without technical expertise. It gives entrepreneurs and small businesses a streamlined dashboard, customizable themes, and intuitive tools for managing products across a single shop or several at once. Built-in analytics, session tracking, and promotional features like discounts and highlights help store owners understand their customers and grow with confidence.</p>
-                    <p className="vendify-description description-mobile">Vendify is a modern eCommerce platform designed to make building and running an online store simple, even without technical expertise. Built-in analytics, session tracking, and promotional features help store owners understand their customers and grow with confidence.</p>
+                    <p className="vendify-description description-mobile">Vendify is a modern <span className="highlight">eCommerce platform</span> designed to make building and running an online store simple, even without technical expertise. Built-in analytics, session tracking, and promotional features help store owners understand their customers and grow with confidence.</p>
                 </div>
                 <div className="vendify-container-button">
                     <p>#thesis</p>

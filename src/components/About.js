@@ -1,6 +1,6 @@
 import logo from '../assets/img/logo.svg';
 import arrow from "../assets/img/arrow-left.svg";
-import profile from '../assets/img/profile.png';
+import profile from '../assets/img/profile.webp';
 import {GridItems} from "./GridItems";
 import {useParallaxScroll} from "../hooks/useParallaxScroll";
 

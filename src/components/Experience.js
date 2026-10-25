@@ -4,9 +4,9 @@ import {GridItems} from "./GridItems";
 import {GridPoints} from "./GridPoints";
 
 // Icon-only logos for the timeline circles (companies with a timeline entry)
-import betfairIcon from "../assets/img/betfair.png";
-import pokerstarsIcon from "../assets/img/pokerstars.png";
-import sisalIcon from "../assets/img/sisal.png";
+import betfairIcon from "../assets/img/betfair.webp";
+import pokerstarsIcon from "../assets/img/pokerstars.webp";
+import sisalIcon from "../assets/img/sisal.webp";
 
 const icons = {
     "Betfair": betfairIcon,

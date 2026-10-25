@@ -18,7 +18,7 @@ export const About = () => {
             </div>
             <div className="about-projects-container">
                 <img className="about-arrow" src={arrow}/>
-                <p className="about-text">Projects</p>
+                <p className="about-text">Resume</p>
             </div>
             <div className="about-me-container">
                 <p className="about-long-description">

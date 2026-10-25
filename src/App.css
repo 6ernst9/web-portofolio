@@ -83,6 +83,9 @@
   }
 }
 
+/* Page scrollbar: same 10px size, square (no radius, no border), purple, no arrows.
+   Chrome / Edge / Safari use the ::-webkit-scrollbar rules. The standard `scrollbar-color`
+   is only given to browsers without them (Firefox): in Chrome it would override the rules. */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -94,16 +97,28 @@
 
 ::-webkit-scrollbar-thumb {
   background: var(--brand-purple);
-  border-radius: 10px;
-  border: 2px solid #000000;
+  border-radius: 0;
+  border: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #A78BFA;
 }
 
-* {
-  scrollbar-color: var(--brand-purple) #000000;
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-corner {
+  background: #000000;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-color: var(--brand-purple) #000000;
+  }
 }
 
 ::selection {
@@ -572,6 +587,10 @@ button.navbar-toggler:focus{
 
 /************ Resume Css ************/
 .resume{
+  /* Positioned, so the firms strip (and the side label below) are placed relative to this section */
+  position: relative;
+  /* The flag (110vh) and the statue are taller than the section: clip them to it */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -685,7 +704,7 @@ button.navbar-toggler:focus{
   height: 35px;
   transform: translateY(-50%) rotate(-90deg);
   transform-origin: top left;
-  top: calc(200vh - 38px);
+  top: calc(100% - 38px);
 }
 
 @keyframes rotateText {
@@ -855,7 +874,7 @@ button.navbar-toggler:focus{
   height: 35px;
   transform: translateY(-50%) rotate(-90deg);
   transform-origin: top left;
-  top: calc(300vh - 38px);
+  top: calc(200vh - 38px);
 }
 
 @media (max-width: 481px) {
@@ -874,7 +893,7 @@ button.navbar-toggler:focus{
   }
 
   .about-sliding-text{
-    top: 260vh;
+    top: 160vh;
   }
 
   .about-projects-container{
@@ -892,6 +911,12 @@ button.navbar-toggler:focus{
 
   .about-flag{
     height: 25vh;
+  }
+}
+
+@media (max-width: 481px)  {
+  .about-sliding-text{
+    top: 130vh;
   }
 }
 
@@ -914,7 +939,7 @@ button.navbar-toggler:focus{
   }
 
   .about-sliding-text {
-    top: 200vh;
+    top: 100vh;
   }
 }
 
@@ -974,6 +999,338 @@ button.navbar-toggler:focus{
 
   .description-mobile {
     display: block;
+  }
+}
+
+/************ Firms strip (former employers) ************/
+/* Infinite carousel (InfiniteStrip.js) of wide logos (icon + name baked into each PNG),
+   placed by the host section (see .resume-firms). White-on-dark silhouettes to suit the black
+   theme; delete the `filter` and `opacity` lines to show the original colours instead. */
+.firms-strip {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  width: 100%;
+  cursor: grab;
+  /* soft fade at both ends */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+.firms-strip.is-dragging {
+  cursor: grabbing;
+}
+
+.firms-strip-item {
+  flex: none;
+  display: block;
+  width: auto;
+  max-width: none;
+  height: clamp(22px, 3.4vh, 38px);
+  margin: 0 4vw;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.6;
+  -webkit-user-drag: none;
+}
+
+@media (max-width: 768px) {
+  .firms-strip-item {
+    height: 20px;
+    margin: 0 28px;
+  }
+}
+
+/* Resume: full width, at the very top of the section */
+.resume-firms {
+  top: 30px;
+}
+
+/************ Experience Css ************/
+.experience {
+  /* Positioned, so the strip / side label / dots below are placed relative to THIS
+     section instead of the page (no more vh offsets to maintain for Experience). */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  /* 100%, not 100vw: 100vw includes the scrollbar, which pushed the dots (right: 17px)
+     further right than the other sections' ones */
+  width: 100%;
+  height: 100vh;
+}
+
+.experience-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  width: 82vw;
+  height: 100%;
+  padding: 13vh 0 6vh;
+}
+
+/* One row per role: [logo on the timeline] [dates] [details] */
+.experience-list {
+  --logo: clamp(52px, 8vh, 76px);
+  /* Explicit reset: Bootstrap's `ol { padding-left: 2rem; margin-bottom: 1rem }`
+     outranks the site's `*` reset and pushed the circles off the line. */
+  margin: 0;
+  padding: 0;
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+/* The timeline: starts at the first logo's centre, ends at the last one's.
+   The logo sits in the first grid column, so line and circles share one centre. */
+.experience-list::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--logo) / 2);
+  top: calc(100% / (var(--roles) * 2));
+  bottom: calc(100% / (var(--roles) * 2));
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.experience-item {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: var(--logo) clamp(190px, 17vw, 300px) minmax(0, 1fr);
+  grid-template-areas: "logo years details";
+  align-items: center;
+  column-gap: 2.5vw;
+}
+
+/* Dates: month + year range, current role in the site's purple. */
+.experience-years {
+  grid-area: years;
+  margin: 0;
+  font-size: clamp(15px, 2.4vh, 22px);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  color: #cfcfcf;
+}
+
+.experience-item.current .experience-years {
+  color: var(--brand-purple);
+}
+
+.experience-logo {
+  grid-area: logo;
+  position: relative;
+  z-index: 1;
+  width: var(--logo);
+  height: var(--logo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 3px solid white;
+  background: #f2f2f2;
+}
+
+.experience-item.current .experience-logo {
+  border-color: var(--brand-purple);
+}
+
+/* The global `img { width: 100% }` is overridden so logos keep their proportions. */
+.experience-logo img {
+  width: 62%;
+  height: 62%;
+  object-fit: contain;
+}
+
+.experience-details {
+  grid-area: details;
+  text-align: left;
+}
+
+/* "Job title/Company" on one line: the title leads, in bold white; the slash and the
+   company follow in a lighter weight. */
+.experience-heading {
+  margin: 0;
+  font-size: clamp(22px, 3.4vh, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #bdbdbd;
+}
+
+.experience-role {
+  font-weight: 700;
+  color: white;
+}
+
+.experience-description,
+.experience-description-phone {
+  max-width: 70ch;
+  margin: 1vh 0 0;
+  font-size: 22px; /* same as the About description */
+  line-height: 1.4;
+  color: #9a9a9a;
+}
+
+.experience-description-phone {
+  display: none;
+}
+
+/* Just above the phone layout (769-900px) the details column is narrow: let the dates wrap
+   onto two lines and give the column back to the text. */
+@media (min-width: 769px) and (max-width: 900px) {
+  .experience-item {
+    grid-template-columns: var(--logo) clamp(105px, 15vw, 130px) minmax(0, 1fr);
+    column-gap: 2vw;
+  }
+
+  .experience-years {
+    white-space: normal;
+    line-height: 1.25;
+  }
+}
+
+/* Safety net on tablets: a description never grows past 3 lines, so it cannot run into the next role */
+@media (min-width: 769px) and (max-width: 1025px) {
+  .experience-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Tablets: scale down only when the screen is short */
+@media (min-width: 769px) and (max-width: 1025px) {
+  .experience-description {
+    font-size: clamp(16px, 2.6vh, 22px);
+  }
+}
+
+.experience-bullets {
+  display: none;
+  margin: 1vh 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 22px; /* same as the About description */
+  line-height: 1.4;
+  color: #9a9a9a;
+}
+
+.experience-bullets li {
+  position: relative;
+  margin: 2px 0 0;
+  padding: 0 0 0 24px;
+}
+
+.experience-bullets li::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: #8a8a8a;
+}
+
+/* Large, tall screens: two bullet points instead of the short description.
+   (Below 1366px wide, 22px bullets would wrap and crowd the rows.) */
+@media (min-width: 1366px) and (min-height: 800px) {
+  .experience-description {
+    display: none;
+  }
+
+  .experience-bullets {
+    display: block;
+  }
+}
+
+/* Side label to the next part of the site, same as the other sections */
+.experience-next-container {
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  left: 10px;
+  position: absolute;
+  height: 35px;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: top left;
+  top: calc(100% - 38px);
+}
+
+.experience-next-container p {
+  font-weight: 700;
+  font-size: 26px;
+  color: white;
+  margin: 0;
+}
+
+/* Point grid, bottom right of the section */
+.experience-points {
+  top: calc(100% - 342px);
+  right: 17px;
+}
+
+/* Phones: logo and dates share the first line, the text sits under the dates. */
+@media (max-width: 768px) {
+  .experience {
+    height: 130vh;
+  }
+
+  /* shorter text on phones, like the other sections */
+  .experience-description {
+    display: none;
+  }
+
+  .experience-description-phone {
+    display: block;
+  }
+
+  .experience-container {
+    width: calc(100vw - 40px);
+    padding: 13vh 0 4vh;
+  }
+
+  .experience-list {
+    --logo: 52px;
+  }
+
+  .experience-list::before {
+    top: calc(var(--logo) / 2);
+    bottom: calc(100% / var(--roles) - var(--logo) / 2);
+  }
+
+  .experience-item {
+    grid-template-columns: var(--logo) minmax(0, 1fr);
+    grid-template-areas:
+      "logo years"
+      ".    details";
+    grid-template-rows: var(--logo) 1fr;
+    align-items: start;
+    column-gap: 16px;
+    row-gap: 1.5vh;
+  }
+
+  .experience-logo {
+    align-self: start;
+  }
+
+  .experience-years {
+    align-self: center;
+    font-size: 6.5vw;
+  }
+
+  .experience-next-container {
+    display: none;
   }
 }
 
@@ -1123,7 +1480,7 @@ button.navbar-toggler:focus{
   height: 35px;
   transform: translateY(-50%) rotate(-90deg);
   transform-origin: top left;
-  top: calc(400vh - 38px);
+  top: calc(500vh - 38px);
 }
 
 .socially-projects-container p{
@@ -1134,13 +1491,13 @@ button.navbar-toggler:focus{
 }
 
 .socially-points{
-  top: calc(300vh + 17px);
+  top: calc(400vh + 17px);
   right: 17px;
 }
 
 @media (max-width: 481px){
   .socially-points{
-    top: calc(390vh + 17px);
+    top: calc(520vh + 17px);
   }
 
   .mac-header{
@@ -1156,7 +1513,7 @@ button.navbar-toggler:focus{
 
 @media (min-width: 481px) and (max-width: 768px) {
   .socially-points{
-    top: calc(330vh + 17px);
+    top: calc(460vh + 17px);
   }
 }
 
@@ -1291,7 +1648,7 @@ button.navbar-toggler:focus{
   height: 35px;
   transform: translateY(-50%) rotate(-90deg);
   transform-origin: top left;
-  top: calc(700vh - 38px);
+  top: calc(800vh - 38px);
 }
 
 .casa-rosa-projects-container p {
@@ -1302,14 +1659,14 @@ button.navbar-toggler:focus{
 }
 
 .casa-rosa-points {
-  top: calc(600vh + 17px);
+  top: calc(700vh + 17px);
   right: 17px;
 }
 
 /* Mobile spacing */
 @media (max-width: 481px) {
   .casa-rosa-points {
-    top: calc(780vh + 17px);
+    top: calc(910vh + 17px);
   }
 
   .mac-header {
@@ -1325,7 +1682,7 @@ button.navbar-toggler:focus{
 
 @media (min-width: 481px) and (max-width: 768px) {
   .casa-rosa-points {
-    top: calc(720vh + 17px);
+    top: calc(850vh + 17px);
   }
 }
 
@@ -1394,7 +1751,7 @@ button.navbar-toggler:focus{
   height: 35px;
   transform: translateY(-50%) rotate(-90deg);
   transform-origin: top left;
-  top: calc(600vh - 38px);
+  top: calc(700vh - 38px);
 }
 
 .vendify-container-button {
@@ -1432,19 +1789,19 @@ button.navbar-toggler:focus{
 }
 
 .vendify-points{
-  top: calc(500vh + 17px);
+  top: calc(600vh + 17px);
   right: 17px;
 }
 
 @media (max-width: 481px){
   .vendify-points{
-    top: calc(650vh + 17px);
+    top: calc(780vh + 17px);
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
   .vendify-points{
-    top: calc(590vh + 17px);
+    top: calc(720vh + 17px);
   }
 }
 
@@ -1554,7 +1911,7 @@ button.navbar-toggler:focus{
   height: 35px;
   transform: translateY(-50%) rotate(-90deg);
   transform-origin: top left;
-  top: calc(500vh - 38px);
+  top: calc(600vh - 38px);
 }
 
 .warlords-projects-container p {
@@ -1565,19 +1922,19 @@ button.navbar-toggler:focus{
 }
 
 .warlords-points {
-  top: calc(400vh + 17px);
+  top: calc(500vh + 17px);
   right: 17px;
 }
 
 @media (max-width: 481px) {
   .warlords-points {
-    top: calc(520vh + 17px);
+    top: calc(650vh + 17px);
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
   .warlords-points {
-    top: calc(460vh + 17px);
+    top: calc(590vh + 17px);
   }
 }
 
@@ -1685,7 +2042,7 @@ button.navbar-toggler:focus{
 
 .projects-points{
   z-index: 2;
-  top: calc(800vh - 342px);
+  top: calc(900vh - 342px);
   right: 17px;
 }
 
@@ -1703,13 +2060,13 @@ button.navbar-toggler:focus{
 
 @media (max-width: 481px){
   .projects-points{
-    top: calc(1040vh - 342px);
+    top: calc(1170vh - 342px);
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
   .projects-points{
-    top: calc(980vh - 342px);
+    top: calc(1110vh - 342px);
   }
 }
 
@@ -1777,7 +2134,7 @@ button.navbar-toggler:focus{
 }
 
 .contact-points{
-  top: calc(900vh - 342px);
+  top: calc(1000vh - 342px);
   right: 17px;
 }
 
@@ -1819,13 +2176,13 @@ button.navbar-toggler:focus{
 
 @media (max-width: 481px){
   .contact-points{
-    top: calc(1140vh - 342px);
+    top: calc(1270vh - 342px);
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
   .contact-points{
-    top: calc(1080vh - 342px);
+    top: calc(1210vh - 342px);
   }
 }
 

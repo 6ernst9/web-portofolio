@@ -7,6 +7,7 @@ import fileFill from '../assets/img/file.svg';
 import portofolioPdf from "../assets/Resume.pdf"
 import { saveAs } from 'file-saver';
 import {GridItems} from "./GridItems";
+import {FirmsStrip} from "./FirmsStrip";
 import {useParallaxScroll} from "../hooks/useParallaxScroll";
 
 export const Resume = () => {
@@ -81,8 +82,9 @@ export const Resume = () => {
             <img className="iulius-cesar" src={cesar}/>
             <div className="resume-about-container">
                 <img className="about-arrow" src={arrow}/>
-                <p className="about-text">About Me</p>
+                <p className="about-text">Experience</p>
             </div>
+            <FirmsStrip className="resume-firms" />
         </section>
     )
 }

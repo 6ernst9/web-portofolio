@@ -8,6 +8,7 @@ import {Projects} from "./components/Projects";
 import {Contact} from "./components/Contact";
 import {Resume} from "./components/Resume";
 import {About} from "./components/About";
+import {Experience} from "./components/Experience";
 import {Socially} from "./components/Socially";
 import {Thesis} from "./components/Thesis";
 import {ScrollProvider} from "./hooks/useParallaxScroll";
@@ -20,8 +21,9 @@ function App() {
             <CustomCursor/>
             <NavBar />
             <Banner />
-            <Resume/>
             <About/>
+            <Resume/>
+            <Experience/>
             <Socially/>
             <Warlords/>
             <Thesis/>

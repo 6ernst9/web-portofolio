@@ -68,7 +68,7 @@ export const Resume = () => {
                 onMouseEnter={() => setFileSrc(fileFill)}
                 onMouseLeave={() => setFileSrc(file)}
                 onClick={handleDownload}>
-                <img className="resume-file" src={fileSrc}/>
+                <img className="resume-file" src={fileSrc} alt=""/>
                 <div className="circle-text">
                     {characters.map((char, index) => {
                         const angle = angleIncrement * index;
@@ -83,11 +83,11 @@ export const Resume = () => {
                 </div>
             </div>
             <div className="resume-stage">
-                <img className="resume-flag" src={flag}/>
-                <img className="iulius-cesar" src={cesar}/>
+                <img className="resume-flag" src={flag} alt="" loading="lazy" decoding="async"/>
+                <img className="iulius-cesar" src={cesar} alt="" loading="lazy" decoding="async"/>
             </div>
             <div className="resume-about-container">
-                <img className="about-arrow" src={arrow}/>
+                <img className="about-arrow" src={arrow} alt=""/>
                 <p className="about-text">Experience</p>
             </div>
             <FirmsStrip className="resume-firms" />

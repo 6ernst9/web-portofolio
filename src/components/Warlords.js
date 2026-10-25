@@ -28,7 +28,7 @@ export const Warlords = () => {
                             <div className="mac-button yellow-button"/>
                             <div className="mac-button green-button"/>
                         </div>
-                        <img src={romaniawarlords} alt="Romania Warlords website"/>
+                        <img src={romaniawarlords} alt="Romania Warlords website" loading="lazy" decoding="async"/>
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@ export const Warlords = () => {
             <p className="socially-projects-number">2/4</p>
 
             <div className="warlords-projects-container">
-                <img className="about-arrow" src={arrow} alt="arrow-icon"/>
+                <img className="about-arrow" src={arrow} alt=""/>
                 <p>Projects</p>
             </div>
 

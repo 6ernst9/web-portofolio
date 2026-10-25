@@ -35,7 +35,7 @@ export const Banner = () => {
             <GridItems />
             <GridPoints />
         <div className="about-container">
-            <img className="about-arrow" src={arrow}/>
+            <img className="about-arrow" src={arrow} alt=""/>
             <p className="about-text">About Me</p>
         </div>
     </section>

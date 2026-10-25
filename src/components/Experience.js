@@ -25,7 +25,7 @@ const roles = [
         description: "Backend on rewards and games: provider integrations, the jackpot admin tool and a core service migration to AWS.",
         mobileDescription: "Rewards and games backend, plus AWS migration.",
         bullets: [
-            "Integrate game and rewards providers such as Games Global and Tombola.",
+            "Integrate third-party game and rewards providers.",
             "Migrated a core rewards service to AWS on a Java, Spring and Cougar backend."
         ]
     },
@@ -46,11 +46,11 @@ const roles = [
         years: "Feb – Sep 2025",
         company: "SISAL",
         title: "Software Engineer",
-        description: "Remote backend microservices for regulatory compliance reporting across Italy, Spain and France.",
-        mobileDescription: "Compliance reporting for Italy, Spain, France.",
+        description: "Remote backend microservices for regulatory compliance reporting across Southern Europe.",
+        mobileDescription: "Compliance reporting across Southern Europe.",
         bullets: [
             "Spring microservices (REST, SOAP) for regulatory compliance reports.",
-            "XML reports for Italy, Spain and France, on Kafka and MongoDB."
+            "XML reports for Southern European regulators, on Kafka and MongoDB."
         ]
     },
     {
@@ -80,7 +80,7 @@ export const Experience = () => {
                         <li className={`experience-item${role.current ? " current" : ""}`} key={role.id} style={{"--i": index}}>
                             <h2 className="experience-years">{role.years}</h2>
                             <div className="experience-logo">
-                                <img src={icons[role.company]} alt="" />
+                                <img src={icons[role.company]} alt="" loading="lazy" decoding="async" />
                             </div>
                             <div className="experience-details">
                                 <h3 className="experience-heading">

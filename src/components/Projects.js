@@ -25,10 +25,16 @@ import {GridItems} from "./GridItems";
 import {GridPoints} from "./GridPoints";
 import {InfiniteStrip} from "./InfiniteStrip";
 
-// Order preserved exactly as the original hand-written <img> list.
+// Order preserved exactly as the original hand-written <img> list; [image, alt text].
 const projectImages = [
-  admin1, chess1, socialmedia, banking1, romaniawarlords2, casino1, thesis1, admin2, chess2, casarosa, casino3, resell1, romaniawarlords1, casino2, admin3, thesis2, chess3,
-  resell2, socialmedia, banking2, casarosa2, resell3,
+  [admin1, "Admin dashboard project"], [chess1, "Chess game project"], [socialmedia, "Socially social media app"],
+  [banking1, "Banking app project"], [romaniawarlords2, "Romania Warlords website"], [casino1, "Casino game project"],
+  [thesis1, "Vendify e-commerce platform"], [admin2, "Admin dashboard project"], [chess2, "Chess game project"],
+  [casarosa, "Casa Rosa holiday website"], [casino3, "Casino game project"], [resell1, "Resell marketplace project"],
+  [romaniawarlords1, "Romania Warlords website"], [casino2, "Casino game project"], [admin3, "Admin dashboard project"],
+  [thesis2, "Vendify e-commerce platform"], [chess3, "Chess game project"], [resell2, "Resell marketplace project"],
+  [socialmedia, "Socially social media app"], [banking2, "Banking app project"], [casarosa2, "Casa Rosa holiday website"],
+  [resell3, "Resell marketplace project"],
 ];
 
 export const Projects = () => {
@@ -38,11 +44,11 @@ export const Projects = () => {
       <div className="project-container">
         <div className="text-container">
           <h1>Projects</h1>
-          <p>Check below my other personal projects that I worked on.<br/>All the projects are chosen because of their challenging problem-solving skills required.</p>
+          <p>Check below my other personal projects that I worked on.</p>
         </div>
         <InfiniteStrip className="image-container" label="Project screenshots">
-          {projectImages.map((src, i) => (
-            <img src={src} alt="" key={i} draggable={false} />
+          {projectImages.map(([src, alt], i) => (
+            <img src={src} alt={alt} key={i} draggable={false} decoding="async" />
           ))}
         </InfiniteStrip>
         <HashLink to="https://github.com/6ernst9?tab=repositories">

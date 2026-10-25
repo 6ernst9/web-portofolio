@@ -26,7 +26,7 @@ export const Socially = () => {
                             <div className="mac-button yellow-button"/>
                             <div className="mac-button green-button"/>
                         </div>
-                        <img src={socially}/>
+                        <img src={socially} alt="Socially social media application" loading="lazy" decoding="async"/>
                     </div>
                 </div>
 
@@ -36,14 +36,14 @@ export const Socially = () => {
                 </div>
                 <div className="socially-container-button">
                     <p>#socialmedia</p>
-                    <HashLink to="https://github.com/6ernst9/social-media-microservices" target="_blank" rel="noreferrer">
+                    <HashLink to="https://github.com/6ernst9/socially" target="_blank" rel="noreferrer">
                         <button className="vvd"><span>View Source code</span></button>
                     </HashLink>
                 </div>
             </div>
             <p className="socially-projects-number">1/4</p>
             <div className="socially-projects-container">
-                <img className="about-arrow" src={arrow}/>
+                <img className="about-arrow" src={arrow} alt=""/>
                 <p>Projects</p>
             </div>
             <GridPoints wrapperClassName="socially-points" />

@@ -33,28 +33,31 @@ export const CasaRosa = () => {
                         <img
                             src={casarosa}
                             alt="Casa Rosa holiday accommodation website in Salento"
+                            loading="lazy"
+                            decoding="async"
                         />
                     </div>
                 </div>
 
                 <div className="casa-rosa-description-container">                                
                     <p className="casa-rosa-description description-full">
-                        Casa Rosa is a custom <span className="highlight">React</span> website
-                        developed for a holiday accommodation in Salento, Italy. It features a
-                        responsive design that helps visitors explore the property and its
-                        amenities across devices. I also implemented a private
+                        Casa Rosa is a custom <span className="highlight">React</span> website for a
+                        holiday property in Salento, Italy, with three apartments of different sizes.
+                        Each apartment has its own photo gallery, and the site is available in Italian
+                        and English with light and dark themes. Visitors pick their dates and are sent
+                        to Booking.com to book. I also built a private
                         <span className="highlight"> admin panel</span> with
                         <span className="highlight"> visit tracking and website analytics</span>,
-                        allowing the administrator to monitor traffic and visitor activity
-                        through dedicated statistics.
+                        so the owner can follow traffic and visitor activity.
                         </p>
                     
                     <p className="casa-rosa-description description-mobile">
                         A custom <span className="highlight">React</span> website for a holiday
-                        accommodation in Salento, Italy, featuring a responsive design and an
-                        intuitive browsing experience. It also includes a private
+                        property in Salento, Italy, with three apartments, Italian/English support
+                        and a Booking.com availability search. It also includes a private
                         <span className="highlight"> admin panel</span> with
-                        <span className="highlight"> visit tracking and website analytics</span>.
+                        <span className="highlight"> visit tracking and website analytics</span>,
+                        so the owner can follow visitor activity.
                         </p>
                 </div>
 
@@ -78,7 +81,7 @@ export const CasaRosa = () => {
                 <img
                     className="about-arrow"
                     src={arrow}
-                    alt="arrow-icon"
+                    alt=""
                 />
                 <p>Projects</p>
             </div>

@@ -26,7 +26,7 @@ export const Thesis = () => {
                             <div className="mac-button yellow-button"/>
                             <div className="mac-button green-button"/>
                         </div>
-                        <img src={vendify1}/>
+                        <img src={vendify1} alt="Vendify e-commerce platform" loading="lazy" decoding="async"/>
                     </div>
                 </div>
                 <div className="socially-description-container">
@@ -43,7 +43,7 @@ export const Thesis = () => {
 
             <p className="socially-projects-number">3/4</p>
             <div className="vendify-projects-container">
-                <img className="about-arrow" src={arrow} alt="arrow-icon"/>
+                <img className="about-arrow" src={arrow} alt=""/>
                 <p>Projects</p>
             </div>
             <GridPoints wrapperClassName="vendify-points" />

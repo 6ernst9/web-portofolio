@@ -17,7 +17,7 @@ export const About = () => {
                     About Me About Me About Me About Me About Me About Me</h1>
             </div>
             <div className="about-projects-container">
-                <img className="about-arrow" src={arrow}/>
+                <img className="about-arrow" src={arrow} alt=""/>
                 <p className="about-text">Resume</p>
             </div>
             <div className="about-me-container">
@@ -26,8 +26,9 @@ export const About = () => {
                     <br/><br/>Hands-on <span className="highlight">Full-Stack Software Engineer</span>, 
                     working on developing and  optimizing enterprise-level applications for industry-leading 
                     companies in online gaming and betting. I enjoy building applications, solving problems, 
-                    and finding practical solutions to technical challenges.<br/><br/>Determined development solutions 
-                    for app creation, including complex architecture, processing data & specialized scripts.</p>
+                    and finding practical solutions to technical challenges.<br/><br/>My specialities include a broad spectrum of backend and web
+                    technologies, such as Java, Spring, Kafka, PostgreSQL, MongoDB, Redis, and React
+                    with TypeScript.</p>
                 <p className="about-description">
                     Hi, welcome to my portfolio website. My name is Ernst Robert. 
                     <br/><br/>Hands-on <span className="highlight">Full-Stack Software Engineer</span>, 
@@ -35,9 +36,9 @@ export const About = () => {
                     companies in online gaming and betting. I enjoy building applications, solving problems, 
                     and finding practical solutions to technical challenges.</p>
                 <div className="about-images">
-                    <img className="about-profile" src={profile}/>
+                    <img className="about-profile" src={profile} alt="Ernst Robert" loading="lazy" decoding="async"/>
                     <div className="about-flag">
-                        <img src={logo}/>
+                        <img src={logo} alt="" loading="lazy" decoding="async"/>
                     </div>
                 </div>
             </div>

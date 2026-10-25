@@ -25,7 +25,7 @@ export const FirmsStrip = ({className = ""}) => (
     <ul className={`firms-strip ${className}`.trim()} aria-label="Companies I have worked with">
         {firms.map((firm) => (
             <li className="firms-strip-item" key={firm.name}>
-                <img src={firm.full} alt={firm.name} />
+                <img src={firm.full} alt={firm.name} loading="lazy" decoding="async" />
             </li>
         ))}
     </ul>

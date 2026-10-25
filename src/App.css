@@ -387,6 +387,50 @@ button.navbar-toggler:focus{
   right: calc(100% - 5px);
 }
 
+/* Load animation. The four corner marks start pulled in towards the centre and slide
+   outward to their corners. Only transform and opacity are animated, so the
+   layout, and every offset that depends on it, is untouched. */
+.banner-plus {
+  animation: cornerOut 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
+}
+
+.banner-plus.top-left {
+  --from-x: 8vw;
+  --from-y: 8vh;
+}
+
+.banner-plus.top-right {
+  --from-x: -8vw;
+  --from-y: 8vh;
+}
+
+.banner-plus.bottom-left {
+  --from-x: 8vw;
+  --from-y: -8vh;
+}
+
+.banner-plus.bottom-right {
+  --from-x: -8vw;
+  --from-y: -8vh;
+}
+
+@keyframes cornerOut {
+  from {
+    transform: translate(var(--from-x), var(--from-y));
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner-plus {
+    animation: none;
+  }
+}
+
 .banner-container, .grid-decoration{
   z-index: 2;
 }
@@ -414,7 +458,16 @@ button.navbar-toggler:focus{
   gap: 20px;
 }
 
+/* Taken out of the flow, so only the title and the two buttons are centred in the section.
+   Placed just above the bottom line of the grid frame (the frame stops 55px above the section
+   bottom). The body is the positioning parent (it is position: relative) and the Banner is the
+   first section, so this is measured from the top of the page, not with `bottom`. Centred on
+   100vw like the rest of the page. */
 .banner-links {
+  position: absolute;
+  top: calc(100vh - 55px);
+  left: 50vw;
+  transform: translate(-50%, -100%);
   gap: 100px;
 }
 
@@ -620,6 +673,11 @@ button.navbar-toggler:focus{
   justify-content: center;
 }
 
+/* Resume only: sits a bit below the middle, the logo carousel is above it */
+.resume-sliding-text.resume-name {
+  transform: translateY(9vh);
+}
+
 .sliding-text {
   font-weight: 700;
   font-size: 45vh;
@@ -640,11 +698,12 @@ button.navbar-toggler:focus{
   z-index: 3;
   position: absolute;
   right: 10vw;
+  top: 50%;
+  transform: translateY(-50%);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20vh 0 0 0;
   overflow: hidden;
   cursor: pointer;
 }
@@ -677,19 +736,50 @@ button.navbar-toggler:focus{
   display: inline-block;
 }
 
-.iulius-cesar {
+/* Flag and statue share one centred stage (stacked in the same grid cell), so a single
+   set of rules positions both. It starts below the logo carousel. */
+.resume-stage {
   position: absolute;
-  width: auto;
   z-index: 2;
-  height: 85vh;
+  inset: 60px 0 3vh 0;
+  display: grid;
+  /* A definite single cell, so the % heights below always resolve against the stage */
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: center;
+  pointer-events: none;
+}
+
+/* Sized by height only (width follows the image's proportions). --fit shrinks both on narrow screens. */
+.resume-stage {
+  --fit: 1;
+}
+
+.resume-stage img {
+  grid-area: 1 / 1;
+  width: auto;
+  max-width: none;
+}
+
+.iulius-cesar {
+  height: calc(86% * var(--fit));
+}
+
+/* Wider than 768px: the statue a bit bigger */
+@media (min-width: 769px) {
+  .iulius-cesar {
+    height: calc(91% * var(--fit));
+  }
 }
 
 .resume-flag {
-  position: absolute;
-  width: auto;
-  margin-left: 20vw;
-  z-index: 2;
-  height: 110vh;
+  height: calc(115% * var(--fit));
+}
+
+/* Around 500px wide: both about 20% shorter */
+@media (max-width: 600px) {
+  .resume-stage {
+    --fit: 0.8;
+  }
 }
 
 .resume-about-container {
@@ -724,43 +814,22 @@ button.navbar-toggler:focus{
   .grid-container{
     display: none;
   }
-
-  .resume-circle-container {
-    margin: 70vh 0 0 0;
-    right: auto;
-    width: 90vw;
-    height: 90vw;
-  }
 }
 
-@media (min-width: 481px) and (max-width: 641px) {
-  .resume-circle-container {
-    margin-top: 50vh;
-  }
-}
-@media (max-width:641px) {
-  .resume-flag {
-    height: 70vh;
-  }
-
-  .iulius-cesar {
-    height: 50vh;
-  }
-}
-
-@media (max-width:768px)  {
+@media (max-width: 768px)  {
   .resume-about-container{
     display: none;
   }
 }
 
-@media (min-width: 641px) and (max-width: 1025px){
-  .resume-flag {
-    height: 90vh;
-  }
-
-  .iulius-cesar {
-    height: 70vh;
+/* Tablets and phones: the circle moves to the bottom centre, over the lower part of the stage */
+@media (max-width: 1025px) {
+  .resume-circle-container {
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: 5vh;
+    transform: translateX(-50%);
   }
 }
 
@@ -1003,41 +1072,51 @@ button.navbar-toggler:focus{
 }
 
 /************ Firms strip (former employers) ************/
-/* Infinite carousel (InfiniteStrip.js) of wide logos (icon + name baked into each PNG),
-   placed by the host section (see .resume-firms). White-on-dark silhouettes to suit the black
-   theme; delete the `filter` and `opacity` lines to show the original colours instead. */
+/* Wide logos (icon + name baked into each PNG), spread across the full width and placed by the
+   host section (see .resume-firms). The list is exactly one logo tall and clips what does not
+   fit: when the screen gets narrower the logos that wrap onto a second line are cut, so the
+   last ones disappear first, one at a time. White-on-dark silhouettes to suit the black theme;
+   delete the `filter` and `opacity` lines to show the original colours instead. */
 .firms-strip {
+  --logo-height: clamp(22px, 3.4vh, 38px);
   position: absolute;
   z-index: 3;
-  left: 0;
-  width: 100%;
-  cursor: grab;
-  /* soft fade at both ends */
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-}
-
-.firms-strip.is-dragging {
-  cursor: grabbing;
+  left: 9vw;
+  right: 9vw;
+  height: var(--logo-height);
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .firms-strip-item {
   flex: none;
+  height: var(--logo-height);
+  margin: 0;
+  padding: 0;
+}
+
+.firms-strip-item img {
   display: block;
   width: auto;
   max-width: none;
-  height: clamp(22px, 3.4vh, 38px);
-  margin: 0 4vw;
-  object-fit: contain;
+  height: 100%;
   filter: brightness(0) invert(1);
   opacity: 0.6;
-  -webkit-user-drag: none;
 }
 
 @media (max-width: 768px) {
-  .firms-strip-item {
-    height: 20px;
-    margin: 0 28px;
+  .firms-strip {
+    --logo-height: 20px;
+    left: 20px;
+    right: 20px;
   }
 }
 
@@ -1334,6 +1413,63 @@ button.navbar-toggler:focus{
   }
 }
 
+/* Experience reveal (plays once, when the section scrolls into view: .is-visible comes from
+   useInView). The timeline line draws downward over 1.2s; each circle pops in just as the
+   line reaches it.
+   Only transform and opacity are animated, so nothing moves in the layout. The hidden start
+   states exist only when the visitor has not asked for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .experience-list::before {
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: top;
+  }
+
+  .experience-years {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+
+  .experience.is-visible .experience-item {
+    --reveal: calc(0.1s + var(--i) / (var(--roles) - 1) * 1.2s);
+  }
+
+  /* Each date fades in and slides a few px, starting as the line reaches its logo */
+  .experience.is-visible .experience-years {
+    animation: showDates 0.6s ease-out var(--reveal) both;
+  }
+
+  .experience.is-visible .experience-list::before {
+    animation: lineDraw 1.2s ease-out 0.1s forwards;
+  }
+
+  /* The current role keeps a slow purple pulse once everything is in */
+  .experience.is-visible .experience-item.current .experience-logo {
+    animation: ringPulse 2s ease-out 1.8s infinite;
+  }
+}
+
+@keyframes lineDraw {
+  to {
+    transform: translateX(-50%) scaleY(1);
+  }
+}
+
+@keyframes showDates {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes ringPulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand-purple) 55%, transparent);
+  }
+  70%, 100% {
+    box-shadow: 0 0 0 26px color-mix(in srgb, var(--brand-purple) 0%, transparent);
+  }
+}
+
 /************ Socially Css ************/
 .socially{
   display: flex;
@@ -1405,8 +1541,7 @@ button.navbar-toggler:focus{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
+  background-color: #2e2e2e;
   border-radius: 15px;
   border: 1px solid dimgray;
 }
@@ -1434,6 +1569,32 @@ button.navbar-toggler:focus{
 
 .green-button{
   background-color: rgb(97,195,84);
+}
+
+/* Cursor parallax (useCursorParallax.js sets --mx / --my, from -1 to 1, on the section).
+   Each element drifts the OPPOSITE way to the cursor, slowly: the long transition smooths it.
+   Uses the standalone `translate` property so it never fights an element's own transform. */
+.mac-photo,
+.resume-stage img {
+  translate: calc(var(--mx, 0) * var(--drift-x, -22px)) calc(var(--my, 0) * var(--drift-y, -16px));
+  transition: translate 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.resume-flag {
+  --drift-x: -48px;
+  --drift-y: -28px;
+}
+
+.iulius-cesar {
+  --drift-x: -16px;
+  --drift-y: -10px;
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .mac-photo,
+  .resume-stage img {
+    translate: none;
+  }
 }
 
 .mac-photo img{

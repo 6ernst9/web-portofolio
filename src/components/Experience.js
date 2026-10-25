@@ -1,5 +1,6 @@
 import arrow from "../assets/img/arrow-left.svg";
-import {useParallaxScroll} from "../hooks/useParallaxScroll";
+import {useInView} from "../hooks/useInView";
+import {GridItems} from "./GridItems";
 import {GridPoints} from "./GridPoints";
 
 // Icon-only logos for the timeline circles (companies with a timeline entry)
@@ -67,33 +68,16 @@ const roles = [
 ];
 
 export const Experience = () => {
-    const {calculateOffset} = useParallaxScroll();
+    // Reveal animation (App.css): plays once, when the section first scrolls into view
+    const [ref, inView] = useInView();
 
     return (
-        <section className="experience" id="experience">
-            <div className="resume-sliding-text" aria-hidden="true">
-                <h1
-                    className="sliding-text"
-                    style={{ transform: `translateX(${calculateOffset('right')}px)` }}>
-                    Experience/Experience/Experience/Experience/Experience/</h1>
-                <h1
-                    className="sliding-text second-text"
-                    style={{ transform: `translateX(${calculateOffset('left')}px)` }}>
-                    Experience/Experience/Experience/Experience/Experience/</h1>
-                {/* Rows 3 and 4 only show on screens up to 1025px, exactly like the Resume section */}
-                <h1
-                    className="sliding-text mobile-text second-text"
-                    style={{ transform: `translateX(${calculateOffset('right')}px)` }}>
-                    Experience/Experience/Experience/Experience/Experience/</h1>
-                <h1
-                    className="sliding-text second-text mobile-text"
-                    style={{ transform: `translateX(${calculateOffset('left')}px)` }}>
-                    Experience/Experience/Experience/Experience/Experience/</h1>
-            </div>
+        <section className={`experience${inView ? " is-visible" : ""}`} id="experience" ref={ref}>
+            <GridItems />
             <div className="experience-container">
                 <ol className="experience-list" style={{"--roles": roles.length}}>
-                    {roles.map((role) => (
-                        <li className={`experience-item${role.current ? " current" : ""}`} key={role.id}>
+                    {roles.map((role, index) => (
+                        <li className={`experience-item${role.current ? " current" : ""}`} key={role.id} style={{"--i": index}}>
                             <h2 className="experience-years">{role.years}</h2>
                             <div className="experience-logo">
                                 <img src={icons[role.company]} alt="" />

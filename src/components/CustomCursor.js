@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const FINE_POINTER = "(hover: hover) and (pointer: fine)";
-const INTERACTIVE = "a, button, [role='button'], .resume-circle-container, .infinite-strip";
+const INTERACTIVE = "a, button, [role='button'], .resume-circle-container";
 
 export default function CustomCursor() {
   const dotRef = useRef(null);

@@ -3,12 +3,15 @@ import {HashLink} from "react-router-hash-link";
 import arrow from "../assets/img/arrow-left2.svg";
 import {useParallaxScroll} from "../hooks/useParallaxScroll";
 import {GridPoints} from "./GridPoints";
+import {useCursorParallax} from "../hooks/useCursorParallax";
 
 export const Thesis = () => {
+    // Photos / statue drift slowly against the cursor (App.css, "Cursor parallax")
+    const cursorRef = useCursorParallax();
     const {calculateOffset} = useParallaxScroll();
 
     return(
-        <section className="vendify" id="vendify">
+        <section className="vendify" id="vendify" ref={cursorRef}>
             <div className="resume-sliding-text">
                 <h1
                     className="vendify-sliding-text"

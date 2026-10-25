@@ -32,6 +32,7 @@ const projectImages = [
 ];
 
 export const Projects = () => {
+
   return (
     <section className="project" id="projects">
       <div className="project-container">

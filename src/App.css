@@ -240,7 +240,20 @@ nav.navbar {
   transition: all 0.3s ease-in-out;
 }
 
-nav.navbar.toggled {
+/* The dark blurred glass is a layer behind the bar's content (not the bar itself), so the
+   Projects dropdown can blur the page too: an element with backdrop-filter would stop
+   its children from blurring what is behind it. */
+nav.navbar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s ease-in-out;
+}
+
+nav.navbar.toggled::before,
+nav.navbar.scrolled::before {
   background-color: rgba(0, 0, 0, 0.8);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
@@ -248,9 +261,6 @@ nav.navbar.toggled {
 
 nav.navbar.scrolled {
   padding: 16px 24px;
-  background-color: rgba(0, 0, 0, 0.8);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
 }
 
 nav.navbar .navbar-nav .nav-link.navbar-link {
@@ -289,31 +299,50 @@ nav.navbar a.navbar-brand{
   margin: 0;
 }
 
-.navbar-collapse.collapsing{
-  transition: all 0.3s ease-out;
-}
+/* Hamburger menu (below 992px): the links open as a centred column under the bar. */
+@media (max-width: 991.98px) {
+  /* The arrow sits right after the word "Projects" without taking space from it, so the word
+     stays centred like the other links (24px = the link's side padding, minus a small gap). */
+  .nav-projects-row {
+    position: relative;
+    width: fit-content; /* hug the word, so the arrow stays put when the list below is wider */
+    margin-inline: auto;
+  }
 
-.navbar-collapse {
-  transition: height 0.3s ease-out;
-  overflow: hidden;
-}
+  button.nav-arrow {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: -22px;
+  }
 
-.navbar-collapse.show {
-  display: flex !important;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+  .navbar-collapse.collapsing{
+    transition: all 0.3s ease-out;
+  }
 
-.navbar-nav {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  padding: 20px 0;
-  text-align: center;
+  .navbar-collapse {
+    transition: height 0.3s ease-out;
+    overflow: hidden;
+  }
+
+  .navbar-collapse.show {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navbar-nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+    text-align: center;
+  }
 }
 
 button.navbar-toggler{
@@ -324,9 +353,203 @@ button.navbar-toggler:focus{
   box-shadow: none;
 }
 
+/* Projects dropdown: the "Projects" link plus an arrow; the list opens under it. */
+.nav-projects-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.nav-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  opacity: 0.8;
+}
+
+button.nav-arrow:hover,
+.nav-projects.open button.nav-arrow {
+  opacity: 1;
+}
+
+button.nav-arrow img {
+  width: 22px;
+  height: 22px;
+}
+
+.nav-arrow-up {
+  display: none;
+}
+
+.nav-projects.open .nav-arrow-up {
+  display: block;
+}
+
+.nav-projects.open .nav-arrow-down {
+  display: none;
+}
+
+.nav-dropdown {
+  display: none;
+}
+
+.nav-projects.open .nav-dropdown {
+  display: block;
+}
+
+.nav-dropdown-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0 4px;
+}
+
+/* In the hamburger menu the list is a quieter version of the big links above it */
+.nav-dropdown-link {
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: 0.8px;
+  color: white;
+  text-decoration: none;
+  opacity: 0.75;
+}
+
+.nav-dropdown-link:hover,
+.nav-dropdown-link.active {
+  color: white;
+  opacity: 1;
+}
+
+/* Full bar (992px and wider): logo and name on the left, the links on the right. */
+@media (min-width: 992px) {
+  nav.navbar {
+    align-items: center;
+  }
+
+  /* The banner's corner mark sits under the right edge of the bar: keep the links clear of it,
+     in every state (the scrolled state has its own padding shorthand, hence both selectors). */
+  nav.navbar,
+  nav.navbar.scrolled {
+    padding-right: calc(3% + 7vh + 24px);
+  }
+
+  /* (nav.navbar a: Bootstrap's stylesheet loads after this one and has its own margin on the brand) */
+  nav.navbar a.navbar-brand {
+    margin-right: 24px;
+  }
+
+  /* The bar's own bottom padding (it shrinks when scrolled): the dropdown has to start below it */
+  nav.navbar {
+    --nav-pad-b: 24px;
+  }
+
+  nav.navbar.scrolled {
+    --nav-pad-b: 16px;
+  }
+
+  /* The links area is as tall as the bar's content, so "Projects" ends where the padding begins */
+  /* (nav.navbar in front: Bootstrap's own stylesheet loads after this one and would win a tie) */
+  nav.navbar .navbar-collapse {
+    align-self: stretch;
+    align-items: stretch;
+    overflow: visible;
+  }
+
+  .navbar-nav {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  nav.navbar .navbar-nav .nav-link.navbar-link {
+    font-size: 20px;
+    padding: 6px 14px;
+  }
+
+  .nav-projects {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+  }
+
+  button.nav-arrow {
+    width: 24px;
+    margin-left: -12px;
+  }
+
+  button.nav-arrow img {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* The list hangs under "Projects", its glass starting exactly at the bottom edge of the bar.
+     The transparent top padding covers the bar's padding, so the pointer can move from the
+     link into the list without leaving the hover area. */
+  .nav-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    padding-top: var(--nav-pad-b);
+  }
+
+  .nav-projects.open .nav-dropdown {
+    display: flex;
+  }
+
+  .nav-dropdown-box {
+    position: relative;
+    flex: none;
+    width: max-content;
+    min-width: 210px;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 0;
+  }
+
+  /* Same glass as the scrolled bar: dark, blurred, square corners, no outline. It is drawn BEHIND
+     the bar's own glass and reaches 4px up under it, so the top edge of the list is hidden under
+     the bar. (With the edge in plain view, display scaling such as 125% / 150% left a bright
+     hairline between bar and list, because an edge that lands between two screen pixels lets
+     the page show through.) The links stay in front. Needs no transform / opacity on the ancestors,
+     so the layer joins the bar's own stacking order. */
+  .nav-dropdown-box::before {
+    content: "";
+    position: absolute;
+    inset: -4px 0 0 0;
+    z-index: -2;
+    background-color: rgba(0, 0, 0, 0.8);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
+
+  /* Same type as the bar's links; hovering (or being on that section) is just full brightness. */
+  .nav-dropdown-link {
+    padding: 8px 20px;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.8px;
+    opacity: 0.8;
+    text-align: left;
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 768px) {
   .navbar-logo{
     font-size: 35px;
+  }
+
+  .nav-dropdown-link {
+    font-size: 24px;
   }
 
   nav.navbar button.navbar-toggler{
@@ -2348,4 +2571,61 @@ button.navbar-toggler:focus{
   .contact-links{
     display: none;
   }
+}
+
+/************ Footer Css ************/
+/* The last thing on the page: purple, with the logo mark and the name in black, cut off by the
+   bottom edge. It stays fixed at the bottom of the screen, UNDER the page: .page-content (all the
+   sections) covers it and ends with a margin as tall as the footer, so scrolling to the end
+   slides the page away and uncovers the footer, which itself never moves.
+   Because the page then ends on purple, mobile Safari also tints its bottom bar to match. */
+.page-content {
+  position: relative;
+  z-index: 1;
+  /* Opaque, so the fixed footer never shows through gaps between sections */
+  background-color: black;
+  /* As tall as the footer. A percentage margin is a share of the page WIDTH, exactly like the
+     footer's own height below (aspect-ratio), so the two always match (no scrollbar maths). */
+  margin-bottom: 17.6%;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  aspect-ratio: 100 / 17.6;
+  overflow: hidden;
+  container-type: inline-size;
+  background-color: var(--brand-purple);
+}
+
+/* Logo and name together span the full width of the footer. Their size is one font size, so the
+   whole row scales with the width. The row is moved down by 40% of its own height: the rest of it
+   (60%) shows, the lower part is cut off by the bottom of the screen, and a little
+   purple stays above. */
+.footer-brand {
+  display: flex;
+  align-items: flex-end;
+  font-size: 25.9vw; /* fallback for browsers without container units */
+  font-size: 25.9cqw;
+  gap: 0.12em;
+  transform: translateY(40%);
+}
+
+.footer-logo {
+  height: 0.89em;
+  width: auto;
+  fill: black;
+}
+
+.footer-name {
+  font-family: 'Vermin Vibes', cursive;
+  font-size: 1em;
+  line-height: 0.8;
+  color: black;
 }

@@ -23,7 +23,7 @@ const roles = [
         company: "Betfair",
         title: "Software Engineer",
         description: "Backend on rewards and games: provider integrations, the jackpot admin tool and a core service migration to AWS.",
-        mobileDescription: "Rewards and games backend, plus AWS migration.",
+        mobileDescription: "Rewards and games backend, integrating third-party providers.",
         bullets: [
             "Integrate third-party game and rewards providers.",
             "Migrated a core rewards service to AWS on a Java, Spring and Cougar backend."
@@ -34,8 +34,8 @@ const roles = [
         years: "Aug 2023 – Feb 2026",
         company: "PokerStars",
         title: "Software Engineer",
-        description: "Built the authentication platform coordinating logins across Pragmatic, SISAL and Betfair.",
-        mobileDescription: "Login platform for Pragmatic, SISAL and Betfair.",
+        description: "Built the authentication platform coordinating logins across partner brands.",
+        mobileDescription: "Login platform for partner brands.",
         bullets: [
             "Built the authentication platform on Spring, OAuth2 and PostgreSQL.",
             "Coordinated logins across Pragmatic, SISAL and Betfair."

@@ -6,6 +6,7 @@ import {CasaRosa} from "./components/CasaRosa";
 import {Warlords} from './components/Warlords'
 import {Projects} from "./components/Projects";
 import {Contact} from "./components/Contact";
+import {Footer} from "./components/Footer";
 import {Resume} from "./components/Resume";
 import {About} from "./components/About";
 import {Experience} from "./components/Experience";
@@ -20,6 +21,7 @@ function App() {
         <div className="App">
             <CustomCursor/>
             <NavBar />
+            <main className="page-content">
             <Banner />
             <About/>
             <Resume/>
@@ -30,6 +32,8 @@ function App() {
             <CasaRosa/>
             <Projects />
             <Contact />
+            </main>
+            <Footer />
     </div>
     </ScrollProvider>
   );

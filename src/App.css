@@ -2,6 +2,9 @@
   --brand-purple: rgb(91 34 255);
   /* The one grey of the Experience text: dates, description, bullets and their ">" markers */
   --grey: #bdbdbd;
+  /* The one solid colour of the navbar and its dropdown (and the open hamburger menu). Both use this
+     same value, so they are always identical: change it here. */
+  --nav-solid: #000;
 }
 
 /************ Custom Cursor Css ************/
@@ -240,15 +243,15 @@ nav.navbar {
   transition: all 0.3s ease-in-out;
 }
 
-/* The dark blurred glass is a layer behind the bar's content (not the bar itself), so the
-   Projects dropdown can blur the page too: an element with backdrop-filter would stop
-   its children from blurring what is behind it. */
+/* The bar's background is a layer behind its content: dark, blurred glass once the page is scrolled
+   (transparent at the top). While the Projects dropdown is open on the full bar it turns solid
+   (see below), in the same colour as the list, so the two are one and the same. */
 nav.navbar::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -301,20 +304,27 @@ nav.navbar a.navbar-brand{
 
 /* Hamburger menu (below 992px): the links open as a centred column under the bar. */
 @media (max-width: 991.98px) {
-  /* The glass lives on the layer behind the bar and is always there; its opacity brings it in and
-     out. Open, it grows to cover the whole screen (a menu overlay); closing, it shrinks back with
-     the menu and fades out in step with it, instead of disappearing the moment the button is
-     pressed. (Without the .scrolled state the bar itself is transparent at the top of the page.) */
+  /* The open menu is as tall as the screen (the bar's height + the menu = 100dvh), so ONE edge moves
+     down at one even pace, 0.3s: the bottom of the menu, with the bar's background (::before, as
+     tall as the bar) following it. The links stay at the top of it. */
+  nav.navbar {
+    --bar-h: 94px; /* the closed bar: 46px logo + 24px above and below */
+  }
+
+  nav.navbar.scrolled {
+    --bar-h: 78px;
+  }
+
+  /* The background is always there; its opacity brings it in and out (at the top of the page the
+     bar itself is transparent, when scrolled it is already solid) */
   nav.navbar::before {
-    bottom: auto;
-    height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     opacity: 0;
     transition:
       opacity 0.3s ease-out,
-      height 0.3s ease-out;
+      background-color 0.3s ease-out;
   }
 
   nav.navbar.scrolled::before,
@@ -322,9 +332,10 @@ nav.navbar a.navbar-brand{
     opacity: 1;
   }
 
+  /* Open, the whole menu (bar and the screen under it) is solid, like the desktop bar while its
+     dropdown is open */
   nav.navbar.menu-open::before {
-    height: 100vh;
-    height: 100dvh;
+    background-color: var(--nav-solid);
   }
 
   /* The arrow sits right after the word "Projects" without taking space from it, so the word
@@ -347,6 +358,7 @@ nav.navbar a.navbar-brand{
     transition: all 0.3s ease-out;
   }
 
+
   .navbar-collapse {
     transition: height 0.3s ease-out;
     overflow: hidden;
@@ -361,9 +373,12 @@ nav.navbar a.navbar-brand{
 
   .navbar-nav {
     width: 100%;
+    /* Fills the screen below the bar, so the menu opens all the way down in one movement */
+    min-height: calc(100vh - var(--bar-h));
+    min-height: calc(100dvh - var(--bar-h));
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 20px;
     padding: 20px 0;
@@ -371,8 +386,34 @@ nav.navbar a.navbar-brand{
   }
 }
 
-button.navbar-toggler{
+/* The button shows the menu icon, and an X while the menu is open: both icons are in the button, and
+   they cross-fade. The X is laid over the menu icon and fitted to it, so the button never changes
+   size, whatever the size of the X's own file. */
+button.navbar-toggler {
   border: none;
+  position: relative;
+}
+
+button.navbar-toggler img {
+  transition: opacity 0.2s ease;
+}
+
+button.navbar-toggler img.toggler-close {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.8); /* the X a bit smaller than the menu icon; change 0.8 to taste */
+}
+
+nav.navbar.menu-open img.toggler-close {
+  opacity: 1;
+}
+
+nav.navbar.menu-open img.toggler-menu {
+  opacity: 0;
 }
 
 button.navbar-toggler:focus{
@@ -424,20 +465,23 @@ button.nav-arrow img {
    grid row going from 0fr to 1fr, so no height has to be known), and shrinks back the same way.
    Closed, it is hidden for the pointer and the keyboard once the closing has finished. */
 .nav-dropdown {
-  display: grid;
-  grid-template-rows: 0fr;
+  display: block;
+  /* --list-h: the list's own height, measured by NavBar.js. (Not a grid row going from 0fr to 1fr:
+     the browser makes the box around such a row taller than the row while it animates, so the
+     text showed up ahead of the list, and the links below it moved ahead of the list too.) */
+  height: 0;
   overflow: hidden;
   visibility: hidden;
   transition:
-    grid-template-rows 0.3s ease-out,
+    height 0.3s ease-out,
     visibility 0s linear 0.3s;
 }
 
 .nav-projects.open .nav-dropdown {
-  grid-template-rows: 1fr;
+  height: var(--list-h, auto);
   visibility: visible;
   transition:
-    grid-template-rows 0.3s ease-out,
+    height 0.3s ease-out,
     visibility 0s;
 }
 
@@ -450,6 +494,9 @@ button.nav-arrow img {
 
 .nav-dropdown-box {
   min-height: 0;
+  /* The box clips its own links: it is exactly as tall as the opening row, so the text never shows
+     below the part that has opened (the outer box can be taller than the row while it animates) */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -485,25 +532,23 @@ button.nav-arrow img {
 
 /* Full bar (992px and wider): logo and name on the left, the links on the right. */
 @media (min-width: 992px) {
-  nav.navbar {
-    align-items: center;
-  }
-
-  /* The banner's corner mark sits under the right edge of the bar: keep the links clear of it,
-     in every state (the scrolled state has its own padding shorthand, hence both selectors). */
+  /* The same padding on both sides. (The scrolled state has its own padding shorthand, hence both
+     selectors.) */
   nav.navbar,
   nav.navbar.scrolled {
-    padding-right: calc(3% + 7vh + 24px);
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+
+  nav.navbar {
+    align-items: center;
+    /* The bar's own bottom padding (it shrinks when scrolled): the dropdown has to start below it */
+    --nav-pad-b: 24px;
   }
 
   /* (nav.navbar a: Bootstrap's stylesheet loads after this one and has its own margin on the brand) */
   nav.navbar a.navbar-brand {
     margin-right: 24px;
-  }
-
-  /* The bar's own bottom padding (it shrinks when scrolled): the dropdown has to start below it */
-  nav.navbar {
-    --nav-pad-b: 24px;
   }
 
   nav.navbar.scrolled {
@@ -523,6 +568,8 @@ button.nav-arrow img {
     align-self: stretch;
     align-items: stretch;
     overflow: visible;
+    flex-grow: 0;
+    margin-left: auto; /* the links sit at the far right, ERNST stays next to the logo */
   }
 
   .navbar-nav {
@@ -564,60 +611,76 @@ button.nav-arrow img {
        it would make this box its own stacking layer and break the glass's join with the bar. */
     left: -160px;
     right: -160px;
-    grid-template-columns: max-content;
+    display: flex;
     justify-content: center;
+    box-sizing: content-box; /* --list-h is the list itself, without this padding */
     padding-top: var(--nav-pad-b);
     /* The empty sides do not catch the pointer; the list and the strip above it (below) do */
     pointer-events: none;
   }
 
-  .nav-dropdown-box {
+  /* Keeps the pointer inside the dropdown while it travels from "Projects" down to the list
+     across the bar's bottom padding. It belongs to the outer box (the list box clips its own
+     contents, which would cut off anything hanging outside it). */
+  .nav-dropdown::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-pad-b);
     pointer-events: auto;
   }
 
-  /* Keeps the pointer inside the dropdown while it travels from "Projects" down to the list
-     across the bar's bottom padding */
-  .nav-dropdown-box::after {
+  /* The bar turns solid while the list is open, the same colour as the list: two solid areas of one
+     colour, so there is no blur edge to make them differ. It is a second layer over the glass that
+     fades in. The order is: opening, the bar turns solid FIRST (0.2s) and the list opens after it (0.3s,
+     the list's own delay is below); closing, the list closes first and the bar goes back to glass after. */
+  nav.navbar::after {
     content: "";
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 100%;
-    height: var(--nav-pad-b);
+    inset: 0;
+    z-index: -1;
+    background-color: var(--nav-solid);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out 0.3s;
   }
 
+  nav.navbar.projects-open::after {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .nav-projects.open .nav-dropdown {
+    transition:
+      height 0.3s ease-out 0.2s,
+      visibility 0s;
+  }
+
+  /* Solid, in the bar's own colour, with square corners and no outline. The 1px shadow above it
+     lies under the bar's edge: with two solid areas of one colour overlapping, there is no seam at
+     any display scaling. */
   .nav-dropdown-box {
     position: relative;
+    flex: none;
+    align-self: flex-start; /* its own full height; the box around it clips it while it opens */
     min-width: 210px;
     align-items: stretch;
     gap: 0;
     /* No padding on the box itself: it would stay visible as a strip when the list is closed to
        zero height. The space above and below the links is on the first and last link instead. */
     padding: 0;
+    background-color: var(--nav-solid);
+    box-shadow: 0 -1px 0 var(--nav-solid);
+    pointer-events: auto; /* the outer box ignores the pointer (see above), the list itself does not */
   }
 
   .nav-dropdown-link:first-child {
-    padding-top: 16px;
+    padding-top: 8px;
   }
 
   .nav-dropdown-link:last-child {
     padding-bottom: 16px;
-  }
-
-  /* Same glass as the scrolled bar: dark, blurred, square corners, no outline. It is drawn BEHIND
-     the bar's own glass and reaches 4px up under it, so the top edge of the list is hidden under
-     the bar. (With the edge in plain view, display scaling such as 125% / 150% left a bright
-     hairline between bar and list, because an edge that lands between two screen pixels lets
-     the page show through.) The links stay in front. Needs no transform / opacity on the ancestors,
-     so the layer joins the bar's own stacking order. */
-  .nav-dropdown-box::before {
-    content: "";
-    position: absolute;
-    inset: -4px 0 0 0;
-    z-index: -2;
-    background-color: rgba(0, 0, 0, 0.8);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
   }
 
   /* Same type as the bar's links; hovering (or being on that section) is just full brightness. */
@@ -678,6 +741,7 @@ button.nav-arrow img {
   width: 5px;
   height: 7vh;
   background-color: var(--brand-purple);
+  animation: cornerOut 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
 }
 
 .banner-plus::after {
@@ -703,8 +767,8 @@ button.nav-arrow img {
 }
 
 .top-right{
-  left: calc(97% - 5px);
-  top: 3vw;
+  left: calc(100% - 60px);
+  top: 55px;
 }
 
 .top-right::after{
@@ -725,10 +789,6 @@ button.nav-arrow img {
 /* Load animation. The four corner marks start pulled in towards the centre and slide
    outward to their corners. Only transform and opacity are animated, so the
    layout, and every offset that depends on it, is untouched. */
-.banner-plus {
-  animation: cornerOut 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
-}
-
 .banner-plus.top-left {
   --from-x: 8vw;
   --from-y: 8vh;
@@ -1092,6 +1152,8 @@ button.nav-arrow img {
 
 .iulius-cesar {
   height: calc(86% * var(--fit));
+  --drift-x: -16px;
+  --drift-y: -10px;
 }
 
 /* Wider than 768px: the statue a bit bigger */
@@ -1103,6 +1165,8 @@ button.nav-arrow img {
 
 .resume-flag {
   height: calc(115% * var(--fit));
+  --drift-x: -48px;
+  --drift-y: -28px;
 }
 
 /* 481px and narrower the Resume section is 130vh tall (the stage is a % of it), so a smaller
@@ -1140,10 +1204,6 @@ button.nav-arrow img {
 @media (max-width: 481px)  {
   .resume{
     height: 130vh;
-  }
-
-  .grid-container{
-    display: none;
   }
 }
 
@@ -1630,13 +1690,7 @@ button.nav-arrow img {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-  }
-}
-
-/* Tablets: a size down from the desktop description */
-@media (min-width: 769px) and (max-width: 1025px) {
-  .experience-description {
-    font-size: 20px;
+    font-size: 20px; /* a size down from the desktop description */
   }
 }
 
@@ -1960,16 +2014,6 @@ button.nav-arrow img {
   transition: translate 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.resume-flag {
-  --drift-x: -48px;
-  --drift-y: -28px;
-}
-
-.iulius-cesar {
-  --drift-x: -16px;
-  --drift-y: -10px;
-}
-
 @media (prefers-reduced-motion: reduce), (hover: none) {
   .mac-photo,
   .resume-stage img {
@@ -2191,20 +2235,6 @@ button.nav-arrow img {
 .casa-rosa-points {
   top: 17px;
 }
-
-/* Mobile spacing */
-@media (max-width: 481px) {
-  .mac-header {
-    gap: 3px;
-    padding: 8px 10px;
-  }
-
-  .mac-button {
-    width: 6px;
-    height: 6px;
-  }
-}
-
 
 @media (max-width: 768px) {
   .casa-rosa {

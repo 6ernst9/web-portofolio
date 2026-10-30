@@ -2732,14 +2732,16 @@ button.nav-arrow img {
   align-items: flex-end;
   font-size: 25.9vw; /* fallback for browsers without container units */
   font-size: 25.9cqw;
-  gap: 0.12em;
+  gap: 0.22em;
   transform: translateY(40%);
 }
 
 .footer-logo {
   height: 0.89em;
   width: auto;
-  fill: black;
+  /* The mark's own proportions, so browsers that cannot work the width out from the SVG file
+     (it has no fixed size) still give it exactly this width. */
+  aspect-ratio: 628.6 / 685.5;
 }
 
 .footer-name {

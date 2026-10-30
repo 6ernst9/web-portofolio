@@ -67,7 +67,7 @@ export const NavBar = () => {
   }
 
   return (
-      <Navbar expand="lg" className={scrolled ? "scrolled" : toggled ? "toggled" : ""}>
+      <Navbar expand="lg" className={`${scrolled ? "scrolled" : toggled ? "toggled" : ""}${toggled ? " menu-open" : ""}`}>
           <Navbar.Brand href="/">
             <img src={logo} alt="Logo" />
           </Navbar.Brand>

@@ -301,6 +301,32 @@ nav.navbar a.navbar-brand{
 
 /* Hamburger menu (below 992px): the links open as a centred column under the bar. */
 @media (max-width: 991.98px) {
+  /* The glass lives on the layer behind the bar and is always there; its opacity brings it in and
+     out. Open, it grows to cover the whole screen (a menu overlay); closing, it shrinks back with
+     the menu and fades out in step with it, instead of disappearing the moment the button is
+     pressed. (Without the .scrolled state the bar itself is transparent at the top of the page.) */
+  nav.navbar::before {
+    bottom: auto;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    opacity: 0;
+    transition:
+      opacity 0.3s ease-out,
+      height 0.3s ease-out;
+  }
+
+  nav.navbar.scrolled::before,
+  nav.navbar.menu-open::before {
+    opacity: 1;
+  }
+
+  nav.navbar.menu-open::before {
+    height: 100vh;
+    height: 100dvh;
+  }
+
   /* The arrow sits right after the word "Projects" without taking space from it, so the word
      stays centred like the other links (24px = the link's side padding, minus a small gap). */
   .nav-projects-row {
@@ -394,20 +420,51 @@ button.nav-arrow img {
   display: none;
 }
 
+/* The list opens like the hamburger menu itself: it grows to its height over 0.3s, ease-out (a
+   grid row going from 0fr to 1fr, so no height has to be known), and shrinks back the same way.
+   Closed, it is hidden for the pointer and the keyboard once the closing has finished. */
 .nav-dropdown {
-  display: none;
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  visibility: hidden;
+  transition:
+    grid-template-rows 0.3s ease-out,
+    visibility 0s linear 0.3s;
 }
 
 .nav-projects.open .nav-dropdown {
-  display: block;
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition:
+    grid-template-rows 0.3s ease-out,
+    visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-dropdown,
+  .nav-projects.open .nav-dropdown {
+    transition: none;
+  }
 }
 
 .nav-dropdown-box {
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 14px;
-  padding: 14px 0 4px;
+  /* No padding on the box itself: it would keep the closed list 18px tall. The space around the
+     links is on the first and last link instead. */
+  padding: 0;
+}
+
+.nav-dropdown-link:first-child {
+  padding-top: 14px;
+}
+
+.nav-dropdown-link:last-child {
+  padding-bottom: 4px;
 }
 
 /* In the hamburger menu the list is a quieter version of the big links above it */
@@ -453,6 +510,13 @@ button.nav-arrow img {
     --nav-pad-b: 16px;
   }
 
+  /* At the top of the page the bar is taller (24px under the links) and has no glass, so a list
+     starting at the bar's bottom edge would float too far from the links. Here it starts 8px
+     higher, which is the same distance from the links as when the bar is scrolled (16px). */
+  nav.navbar:not(.scrolled) .nav-dropdown {
+    padding-top: calc(var(--nav-pad-b) - 8px);
+  }
+
   /* The links area is as tall as the bar's content, so "Projects" ends where the padding begins */
   /* (nav.navbar in front: Bootstrap's own stylesheet loads after this one and would win a tie) */
   nav.navbar .navbar-collapse {
@@ -495,24 +559,49 @@ button.nav-arrow img {
   .nav-dropdown {
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
+    /* Wider than "Projects" on both sides (the list is wider than the word, and this box clips
+       what is outside it while the list opens); the list is centred in it. No transform here:
+       it would make this box its own stacking layer and break the glass's join with the bar. */
+    left: -160px;
+    right: -160px;
+    grid-template-columns: max-content;
     justify-content: center;
     padding-top: var(--nav-pad-b);
+    /* The empty sides do not catch the pointer; the list and the strip above it (below) do */
+    pointer-events: none;
   }
 
-  .nav-projects.open .nav-dropdown {
-    display: flex;
+  .nav-dropdown-box {
+    pointer-events: auto;
+  }
+
+  /* Keeps the pointer inside the dropdown while it travels from "Projects" down to the list
+     across the bar's bottom padding */
+  .nav-dropdown-box::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: var(--nav-pad-b);
   }
 
   .nav-dropdown-box {
     position: relative;
-    flex: none;
-    width: max-content;
     min-width: 210px;
     align-items: stretch;
     gap: 0;
-    padding: 8px 0;
+    /* No padding on the box itself: it would stay visible as a strip when the list is closed to
+       zero height. The space above and below the links is on the first and last link instead. */
+    padding: 0;
+  }
+
+  .nav-dropdown-link:first-child {
+    padding-top: 16px;
+  }
+
+  .nav-dropdown-link:last-child {
+    padding-bottom: 16px;
   }
 
   /* Same glass as the scrolled bar: dark, blurred, square corners, no outline. It is drawn BEHIND

@@ -177,7 +177,7 @@ html {
 body {
   font-weight: 400;
   overflow-x: hidden;
-  background-color: black !important;
+  background-color: #5B22FF !important;
   color: white !important;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -304,16 +304,9 @@ nav.navbar a.navbar-brand{
 
 /* Hamburger menu (below 992px): the links open as a centred column under the bar. */
 @media (max-width: 991.98px) {
-  /* The open menu is as tall as the screen (the bar's height + the menu = 100dvh), so ONE edge moves
-     down at one even pace, 0.3s: the bottom of the menu, with the bar's background (::before, as
-     tall as the bar) following it. The links stay at the top of it. */
-  nav.navbar {
-    --bar-h: 94px; /* the closed bar: 46px logo + 24px above and below */
-  }
-
-  nav.navbar.scrolled {
-    --bar-h: 78px;
-  }
+  /* The open menu is only as tall as its links: its bottom edge moves down at one even pace, 0.3s,
+     with the bar's background (::before, which covers the whole bar) following it. It does not
+     reach the bottom of the screen, so Safari's bottom bar is not made black by it. */
 
   /* The background is always there; its opacity brings it in and out (at the top of the page the
      bar itself is transparent, when scrolled it is already solid) */
@@ -322,8 +315,11 @@ nav.navbar a.navbar-brand{
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     opacity: 0;
+    /* Closing at the top of the page (where the bar has no background of its own): the panel stays
+       solid while the menu shrinks and only fades in the last 0.1s, so the links never sit over the
+       page's text with the panel half gone. Same 0.3s in all. */
     transition:
-      opacity 0.3s ease-out,
+      opacity 0.1s ease-out 0.2s,
       background-color 0.3s ease-out;
   }
 
@@ -336,6 +332,10 @@ nav.navbar a.navbar-brand{
      dropdown is open */
   nav.navbar.menu-open::before {
     background-color: var(--nav-solid);
+    /* Opening: the panel comes in with the menu, 0.3s */
+    transition:
+      opacity 0.3s ease-out,
+      background-color 0.3s ease-out;
   }
 
   /* The arrow sits right after the word "Projects" without taking space from it, so the word
@@ -373,9 +373,6 @@ nav.navbar a.navbar-brand{
 
   .navbar-nav {
     width: 100%;
-    /* Fills the screen below the bar, so the menu opens all the way down in one movement */
-    min-height: calc(100vh - var(--bar-h));
-    min-height: calc(100dvh - var(--bar-h));
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -2693,19 +2690,26 @@ button.nav-arrow img {
 }
 
 /************ Footer Css ************/
-/* The last thing on the page: purple, with the logo mark and the name in black, cut off by the
-   bottom edge. It stays fixed at the bottom of the screen, UNDER the page: .page-content (all the
-   sections) covers it and ends with a margin as tall as the footer, so scrolling to the end
-   slides the page away and uncovers the footer, which itself never moves.
-   Because the page then ends on purple, mobile Safari also tints its bottom bar to match. */
+/* The last thing on the page: an image (footer.svg: purple, with the logo mark and the name in
+   black, cut off by the bottom edge). It stays fixed at the bottom of the screen, UNDER the page:
+   .page-content (all the sections) covers it and ends with a margin as tall as the footer, so
+   scrolling to the end slides the page away and uncovers the footer, which itself never moves.
+   It is an image, not an element with a background-color, because Safari on iOS 26 tints its bars
+   with the background-color of fixed elements at the screen edge (that made the bottom bar solid
+   purple); it ignores images, so the translucent bar just shows the footer through it. */
 .page-content {
   position: relative;
   z-index: 1;
   /* Opaque, so the fixed footer never shows through gaps between sections */
   background-color: black;
-  /* As tall as the footer. A percentage margin is a share of the page WIDTH, exactly like the
-     footer's own height below (aspect-ratio), so the two always match (no scrollbar maths). */
-  margin-bottom: 17.6%;
+}
+
+/* The space after the page that the footer shows through at the very end, as tall as the footer. A
+   percentage padding is a share of the page WIDTH, exactly like the footer's own height (the image
+   is 100 x 17.6), so the two always match. */
+.footer-spacer {
+  height: 0;
+  padding-bottom: 17.6%;
 }
 
 .footer {
@@ -2714,39 +2718,11 @@ button.nav-arrow img {
   right: 0;
   bottom: 0;
   z-index: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  aspect-ratio: 100 / 17.6;
-  overflow: hidden;
-  container-type: inline-size;
-  background-color: var(--brand-purple);
+  line-height: 0;
 }
 
-/* Logo and name together span the full width of the footer. Their size is one font size, so the
-   whole row scales with the width. The row is moved down by 40% of its own height: the rest of it
-   (60%) shows, the lower part is cut off by the bottom of the screen, and a little
-   purple stays above. */
-.footer-brand {
-  display: flex;
-  align-items: flex-end;
-  font-size: 25.9vw; /* fallback for browsers without container units */
-  font-size: 25.9cqw;
-  gap: 0.22em;
-  transform: translateY(40%);
-}
-
-.footer-logo {
-  height: 0.89em;
-  width: auto;
-  /* The mark's own proportions, so browsers that cannot work the width out from the SVG file
-     (it has no fixed size) still give it exactly this width. */
-  aspect-ratio: 628.6 / 685.5;
-}
-
-.footer-name {
-  font-family: 'Vermin Vibes', cursive;
-  font-size: 1em;
-  line-height: 0.8;
-  color: black;
+.footer-img {
+  display: block;
+  width: 100%;
+  height: auto;
 }

@@ -1,10 +1,10 @@
-import logo from "../assets/img/logo.svg";
+import footer from "../assets/img/footer.svg";
 
 export const Footer = () => (
-    <footer className="footer" role="contentinfo">
-        <div className="footer-brand" role="img" aria-label="Ernst Robert">
-            <img className="footer-logo" src={logo} alt="" aria-hidden="true" />
-            <span className="footer-name" aria-hidden="true">ERNST</span>
-        </div>
-    </footer>
+    <>
+        <div className="footer-spacer" aria-hidden="true" />
+        <footer className="footer" role="contentinfo">
+            <img className="footer-img" src={footer} alt="Ernst Robert" />
+        </footer>
+    </>
 );

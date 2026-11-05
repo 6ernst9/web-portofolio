@@ -1,14 +1,13 @@
 :root {
   --brand-purple: rgb(91 34 255);
-  /* The one grey of the Experience text: dates, description, bullets and their ">" markers */
+
   --grey: #bdbdbd;
-  /* The one solid colour of the navbar and its dropdown (and the open hamburger menu). Both use this
-     same value, so they are always identical: change it here. */
+
   --nav-solid: #000;
 }
 
 /************ Custom Cursor Css ************/
-/* The dot + ring that replace the system cursor (CustomCursor.js); mouse devices only */
+
 @media (hover: hover) and (pointer: fine) {
   html,
   body,
@@ -53,7 +52,6 @@
       opacity 0.3s ease;
   }
 
-  /* Hidden until the first mouse move (and when the pointer leaves the window) */
   .custom-cursor,
   .custom-cursor-ring {
     opacity: 0;
@@ -91,9 +89,7 @@
 }
 
 /************ Scrollbar Css ************/
-/* Page scrollbar: same 10px size, square (no radius, no border), purple, no arrows.
-   Chrome / Edge / Safari use the ::-webkit-scrollbar rules. The standard `scrollbar-color`
-   is only given to browsers without them (Firefox): in Chrome it would override the rules. */
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -177,8 +173,7 @@ html {
 body {
   font-weight: 400;
   overflow-x: hidden;
-  /* Purple, not black: on iPhone Safari it is what shows (as a glow) behind the translucent top
-     and bottom bars. The page itself is black, see .page-content. */
+
   background-color: #5B22FF !important;
   color: white !important;
   -ms-overflow-style: none;
@@ -219,10 +214,6 @@ input:focus, textarea:focus, select:focus {
   outline: none;
 }
 
-/* Shared base for every call-to-action button across the site
-   (each one already carries className="vvd"). Section-specific
-   rules below only need their theme colors - not these repeated
-   layout/timing properties. */
 .vvd {
   font-weight: 400;
   padding: 20px 34px;
@@ -245,9 +236,6 @@ nav.navbar {
   transition: all 0.3s ease-in-out;
 }
 
-/* The bar's background is a layer behind its content: dark, blurred glass once the page is scrolled
-   (transparent at the top). While the Projects dropdown is open on the full bar it turns solid
-   (see below), in the same colour as the list, so the two are one and the same. */
 nav.navbar::before {
   content: "";
   position: absolute;
@@ -304,22 +292,14 @@ nav.navbar a.navbar-brand{
   margin: 0;
 }
 
-/* Hamburger menu (below 992px): the links open as a centred column under the bar. */
 @media (max-width: 991.98px) {
-  /* The open menu is only as tall as its links: its bottom edge moves down at one even pace, 0.3s,
-     with the bar's background (::before, which covers the whole bar) following it. It does not
-     reach the bottom of the screen, so Safari's bottom bar is not made black by it. */
 
-  /* The background is always there; its opacity brings it in and out (at the top of the page the
-     bar itself is transparent, when scrolled it is already solid) */
   nav.navbar::before {
     background-color: rgba(0, 0, 0, 0.8);
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     opacity: 0;
-    /* Closing at the top of the page (where the bar has no background of its own): the panel stays
-       solid while the menu shrinks and only fades in the last 0.1s, so the links never sit over the
-       page's text with the panel half gone. Same 0.3s in all. */
+
     transition:
       opacity 0.1s ease-out 0.2s,
       background-color 0.3s ease-out;
@@ -330,21 +310,17 @@ nav.navbar a.navbar-brand{
     opacity: 1;
   }
 
-  /* Open, the whole menu (bar and the screen under it) is solid, like the desktop bar while its
-     dropdown is open */
   nav.navbar.menu-open::before {
     background-color: var(--nav-solid);
-    /* Opening: the panel comes in with the menu, 0.3s */
+
     transition:
       opacity 0.3s ease-out,
       background-color 0.3s ease-out;
   }
 
-  /* The arrow sits right after the word "Projects" without taking space from it, so the word
-     stays centred like the other links (24px = the link's side padding, minus a small gap). */
   .nav-projects-row {
     position: relative;
-    width: fit-content; /* hug the word, so the arrow stays put when the list below is wider */
+    width: fit-content;
     margin-inline: auto;
   }
 
@@ -359,7 +335,6 @@ nav.navbar a.navbar-brand{
   .navbar-collapse.collapsing{
     transition: all 0.3s ease-out;
   }
-
 
   .navbar-collapse {
     transition: height 0.3s ease-out;
@@ -385,9 +360,6 @@ nav.navbar a.navbar-brand{
   }
 }
 
-/* The button shows the menu icon, and an X while the menu is open: both icons are in the button, and
-   they cross-fade. The X is laid over the menu icon and fitted to it, so the button never changes
-   size, whatever the size of the X's own file. */
 button.navbar-toggler {
   border: none;
   position: relative;
@@ -404,7 +376,7 @@ button.navbar-toggler img.toggler-close {
   height: 100%;
   object-fit: contain;
   opacity: 0;
-  transform: scale(0.8); /* the X a bit smaller than the menu icon; change 0.8 to taste */
+  transform: scale(0.8);
 }
 
 nav.navbar.menu-open img.toggler-close {
@@ -419,7 +391,6 @@ button.navbar-toggler:focus{
   box-shadow: none;
 }
 
-/* Projects dropdown: the "Projects" link plus an arrow; the list opens under it. */
 .nav-projects-row {
   display: flex;
   align-items: center;
@@ -460,14 +431,9 @@ button.nav-arrow img {
   display: none;
 }
 
-/* The list opens like the hamburger menu itself: it grows to its height over 0.3s, ease-out (a
-   grid row going from 0fr to 1fr, so no height has to be known), and shrinks back the same way.
-   Closed, it is hidden for the pointer and the keyboard once the closing has finished. */
 .nav-dropdown {
   display: block;
-  /* --list-h: the list's own height, measured by NavBar.js. (Not a grid row going from 0fr to 1fr:
-     the browser makes the box around such a row taller than the row while it animates, so the
-     text showed up ahead of the list, and the links below it moved ahead of the list too.) */
+
   height: 0;
   overflow: hidden;
   visibility: hidden;
@@ -493,15 +459,13 @@ button.nav-arrow img {
 
 .nav-dropdown-box {
   min-height: 0;
-  /* The box clips its own links: it is exactly as tall as the opening row, so the text never shows
-     below the part that has opened (the outer box can be taller than the row while it animates) */
+
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 14px;
-  /* No padding on the box itself: it would keep the closed list 18px tall. The space around the
-     links is on the first and last link instead. */
+
   padding: 0;
 }
 
@@ -513,7 +477,6 @@ button.nav-arrow img {
   padding-bottom: 4px;
 }
 
-/* In the hamburger menu the list is a quieter version of the big links above it */
 .nav-dropdown-link {
   font-weight: 500;
   font-size: 26px;
@@ -529,10 +492,8 @@ button.nav-arrow img {
   opacity: 1;
 }
 
-/* Full bar (992px and wider): logo and name on the left, the links on the right. */
 @media (min-width: 992px) {
-  /* The same padding on both sides. (The scrolled state has its own padding shorthand, hence both
-     selectors.) */
+
   nav.navbar,
   nav.navbar.scrolled {
     padding-left: 70px;
@@ -541,11 +502,10 @@ button.nav-arrow img {
 
   nav.navbar {
     align-items: center;
-    /* The bar's own bottom padding (it shrinks when scrolled): the dropdown has to start below it */
+
     --nav-pad-b: 24px;
   }
 
-  /* (nav.navbar a: Bootstrap's stylesheet loads after this one and has its own margin on the brand) */
   nav.navbar a.navbar-brand {
     margin-right: 24px;
   }
@@ -554,21 +514,16 @@ button.nav-arrow img {
     --nav-pad-b: 16px;
   }
 
-  /* At the top of the page the bar is taller (24px under the links) and has no glass, so a list
-     starting at the bar's bottom edge would float too far from the links. Here it starts 8px
-     higher, which is the same distance from the links as when the bar is scrolled (16px). */
   nav.navbar:not(.scrolled) .nav-dropdown {
     padding-top: calc(var(--nav-pad-b) - 8px);
   }
 
-  /* The links area is as tall as the bar's content, so "Projects" ends where the padding begins */
-  /* (nav.navbar in front: Bootstrap's own stylesheet loads after this one and would win a tie) */
   nav.navbar .navbar-collapse {
     align-self: stretch;
     align-items: stretch;
     overflow: visible;
     flex-grow: 0;
-    margin-left: auto; /* the links sit at the far right, ERNST stays next to the logo */
+    margin-left: auto;
   }
 
   .navbar-nav {
@@ -599,28 +554,20 @@ button.nav-arrow img {
     height: 18px;
   }
 
-  /* The list hangs under "Projects", its glass starting exactly at the bottom edge of the bar.
-     The transparent top padding covers the bar's padding, so the pointer can move from the
-     link into the list without leaving the hover area. */
   .nav-dropdown {
     position: absolute;
     top: 100%;
-    /* Wider than "Projects" on both sides (the list is wider than the word, and this box clips
-       what is outside it while the list opens); the list is centred in it. No transform here:
-       it would make this box its own stacking layer and break the glass's join with the bar. */
+
     left: -160px;
     right: -160px;
     display: flex;
     justify-content: center;
-    box-sizing: content-box; /* --list-h is the list itself, without this padding */
+    box-sizing: content-box;
     padding-top: var(--nav-pad-b);
-    /* The empty sides do not catch the pointer; the list and the strip above it (below) do */
+
     pointer-events: none;
   }
 
-  /* Keeps the pointer inside the dropdown while it travels from "Projects" down to the list
-     across the bar's bottom padding. It belongs to the outer box (the list box clips its own
-     contents, which would cut off anything hanging outside it). */
   .nav-dropdown::before {
     content: "";
     position: absolute;
@@ -631,10 +578,6 @@ button.nav-arrow img {
     pointer-events: auto;
   }
 
-  /* The bar turns solid while the list is open, the same colour as the list: two solid areas of one
-     colour, so there is no blur edge to make them differ. It is a second layer over the glass that
-     fades in. The order is: opening, the bar turns solid FIRST (0.2s) and the list opens after it (0.3s,
-     the list's own delay is below); closing, the list closes first and the bar goes back to glass after. */
   nav.navbar::after {
     content: "";
     position: absolute;
@@ -656,22 +599,18 @@ button.nav-arrow img {
       visibility 0s;
   }
 
-  /* Solid, in the bar's own colour, with square corners and no outline. The 1px shadow above it
-     lies under the bar's edge: with two solid areas of one colour overlapping, there is no seam at
-     any display scaling. */
   .nav-dropdown-box {
     position: relative;
     flex: none;
-    align-self: flex-start; /* its own full height; the box around it clips it while it opens */
+    align-self: flex-start;
     min-width: 210px;
     align-items: stretch;
     gap: 0;
-    /* No padding on the box itself: it would stay visible as a strip when the list is closed to
-       zero height. The space above and below the links is on the first and last link instead. */
+
     padding: 0;
     background-color: var(--nav-solid);
     box-shadow: 0 -1px 0 var(--nav-solid);
-    pointer-events: auto; /* the outer box ignores the pointer (see above), the list itself does not */
+    pointer-events: auto;
   }
 
   .nav-dropdown-link:first-child {
@@ -682,7 +621,6 @@ button.nav-arrow img {
     padding-bottom: 16px;
   }
 
-  /* Same type as the bar's links; hovering (or being on that section) is just full brightness. */
   .nav-dropdown-link {
     padding: 8px 20px;
     font-weight: 700;
@@ -709,10 +647,7 @@ button.nav-arrow img {
 }
 
 /************ Page sections ************/
-/* Every section is a positioning context: its dot grid, side label and sliding text are placed
-   relative to the SECTION (top / bottom of itself), never as an offset from the top of the page.
-   Adding, removing or resizing sections therefore never needs any offset to be recalculated.
-   Sections are `width: 100%` (the visible page), not 100vw, which would include the scrollbar. */
+
 .banner,
 .about,
 .socially,
@@ -785,9 +720,7 @@ button.nav-arrow img {
 }
 
 /************ Banner Animation Css ************/
-/* Load animation. The four corner marks start pulled in towards the centre and slide
-   outward to their corners. Only transform and opacity are animated, so the
-   layout, and every offset that depends on it, is untouched. */
+
 .banner-plus.top-left {
   --from-x: 8vw;
   --from-y: 8vh;
@@ -852,11 +785,6 @@ button.nav-arrow img {
   gap: 20px;
 }
 
-/* Taken out of the flow, so only the title and the two buttons are centred in the section.
-   Placed just above the bottom line of the grid frame (the frame stops 55px above the section
-   bottom). The body is the positioning parent (it is position: relative) and the Banner is the
-   first section, so this is measured from the top of the page, not with `bottom`. Centred on
-   the section width. */
 .banner-links {
   position: absolute;
   top: calc(100vh - 55px);
@@ -897,10 +825,15 @@ button.nav-arrow img {
   padding: 0;
   display: grid;
   z-index: 1;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  --cols: 10;
+  --inset: 110px;
+  --ratio: 0.9;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  grid-template-rows: repeat(auto-fill, minmax(calc((100vw - var(--inset)) / var(--cols) * var(--ratio)), 1fr));
+  grid-auto-rows: 0;
+  overflow: hidden;
   width: calc(100% - 110px);
-  height: calc(100vh - 110px);
+  height: calc(100% - 110px);
   border: 0.01em solid #101010;
 }
 
@@ -910,7 +843,7 @@ button.nav-arrow img {
 }
 
 .grid-points {
-  /* Only shown where the line grid is hidden (phones, see the max-width 481px block below) */
+
   display: none;
 }
 
@@ -990,8 +923,11 @@ button.nav-arrow img {
 }
 
 @media (max-width: 481px)  {
+
   .banner{
-    height: 130vh;
+    height: auto;
+    min-height: 100vh;
+    padding: 100px 0 200px;
   }
 
   .banner-buttons{
@@ -1002,9 +938,6 @@ button.nav-arrow img {
     display: none;
   }
 
-  /* The dots take the place of the line grid. Same grid as on desktop (15 x 9, 35px apart), centred
-     on the section: it is wider than a phone, so its sides run off the screen evenly and no margin
-     shows at the edges. */
   .grid-points{
     display: grid;
     z-index: 1;
@@ -1020,13 +953,21 @@ button.nav-arrow img {
 }
 
 @media (max-width:768px)  {
-   .banner-links, .about-container, .grid-decoration{
+   .banner-links, .grid-decoration{
      display: none;
    }
 
   .grid-container{
+    --inset: 40px;
+    --ratio: 1.2;
     width: calc(100% - 40px);
-    height: calc(100vh - 40px);
+    height: calc(100% - 40px);
+  }
+}
+
+@media (max-width:1281px) {
+  .grid-container{
+    --cols: 8;
   }
 }
 
@@ -1035,22 +976,24 @@ button.nav-arrow img {
     font-size: 50px;
   }
 
-  /* Fewer, wider cells: 10 columns on a narrower screen made tall thin bricks. 5 columns x 6 rows
-     (30 cells) are close to square, the cells after the 30th are not shown. */
   .grid-container{
-    grid-template-columns: repeat(5, 1fr);
+    --cols: 5;
   }
+}
 
-  .grid-item:nth-child(n+31){
-    display: none;
+@media (min-width: 769px) and (max-width: 1281px) {
+  .grid-container{
+    --inset: 75px;
+    width: calc(100% - 75px);
+    height: calc(100% - 75px);
   }
 }
 
 /************ Resume Css ************/
 .resume{
-  /* Positioned, so the side label below is placed relative to this section */
+
   position: relative;
-  /* The flag (110vh) and the statue are taller than the section: clip them to it */
+
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1058,19 +1001,14 @@ button.nav-arrow img {
   align-items: center;
   background-color: black;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 100px 0;
 }
 
 .resume-sliding-text{
   position: absolute;
   z-index: 2;
-  /* Explicit full-width + centering, instead of relying on the browser's
-     "static position" fallback for an absolutely-positioned flex child
-     (no top/left set). That fallback is inconsistently implemented
-     across browsers when combined with flexbox, and is sensitive to
-     this element's order among its siblings — it's what caused the
-     Contact section's sliding text to sit off-center before its DOM
-     order was aligned with every other section. */
+
   left: 0;
   right: 0;
   text-align: center;
@@ -1089,7 +1027,6 @@ button.nav-arrow img {
   display: inline-block;
 }
 
-/* Rows overlap by a fixed share of the text size (it is 45vh), so they stay as tight on short and tall screens */
 .second-text {
   margin-top: -0.2em;
 }
@@ -1140,20 +1077,16 @@ button.nav-arrow img {
   display: inline-block;
 }
 
-/* Flag and statue share one centred stage (stacked in the same grid cell), so a single
-   set of rules positions both. It starts below the logo carousel. */
 .resume-stage {
   position: absolute;
   z-index: 2;
   inset: 60px 0 3vh 0;
   display: grid;
-  /* A definite single cell, so the % heights below always resolve against the stage */
+
   grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   place-items: center;
   pointer-events: none;
-  /* Sized by height only (width follows the image's proportions). --fit shrinks both on narrow screens:
-     1 from 650px wide up, 0.8 (20% shorter) at 500px and below, and a smooth slide in between.
-     tan(atan2(a, b)) turns the length ratio a / b into a plain number, which a calc() can then scale. */
+
   --fit: calc(0.8 + 0.2 * clamp(0, tan(atan2(100vw - 500px, 150px)), 1));
 }
 
@@ -1169,7 +1102,6 @@ button.nav-arrow img {
   --drift-y: -10px;
 }
 
-/* Wider than 768px: the statue a bit bigger */
 @media (min-width: 769px) {
   .iulius-cesar {
     height: calc(91% * var(--fit));
@@ -1180,14 +1112,6 @@ button.nav-arrow img {
   height: calc(115% * var(--fit));
   --drift-x: -48px;
   --drift-y: -28px;
-}
-
-/* 481px and narrower the Resume section is 130vh tall (the stage is a % of it), so a smaller
-   factor keeps the flag and statue at the size they have just above 481px. */
-@media (max-width: 481px) {
-  .resume-stage {
-    --fit: 0.6;
-  }
 }
 
 .resume-about-container {
@@ -1214,19 +1138,6 @@ button.nav-arrow img {
   }
 }
 
-@media (max-width: 481px)  {
-  .resume{
-    height: 130vh;
-  }
-}
-
-@media (max-width: 768px)  {
-  .resume-about-container{
-    display: none;
-  }
-}
-
-/* Tablets and phones: the circle moves to the bottom centre, over the lower part of the stage */
 @media (max-width: 1025px) {
   .resume-circle-container {
     right: auto;
@@ -1251,8 +1162,7 @@ button.nav-arrow img {
   }
 }
 /************ About Css ************/
-/* Sliding "About Me" text behind, and the text centred on top of it. The section is as tall as its
-   text needs (at least a screen), so there is no per-screen height or offset to keep in sync. */
+
 .about{
   display: flex;
   flex-direction: column;
@@ -1261,14 +1171,14 @@ button.nav-arrow img {
   background-color: black;
   width: 100%;
   min-height: 100vh;
-  padding: 110px 0;
+  padding: 100px 0;
 }
 
 .sliding-text-white {
   font-weight: 700;
   font-size: 45vh;
   margin-top: -30vh;
-  color: #D9D9D9;
+  color: rgb(11,11,11);
   white-space: nowrap;
   display: inline-block;
 }
@@ -1276,19 +1186,17 @@ button.nav-arrow img {
 .about-me-container{
   position: relative;
   z-index: 4;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  justify-content: center;
-  gap: 70px;
-  width: min(1100px, calc(100% - 110px));
+  gap: 40px;
+  width: 80vw;
 }
 
 .about-text-block{
   display: flex;
   flex-direction: column;
   gap: 28px;
-  max-width: 560px;
 }
 
 .about-text-block p{
@@ -1300,20 +1208,20 @@ button.nav-arrow img {
   color: white;
 }
 
-/* The photo stands on a purple line (just under it, not over it), so it does not look cut off at the
-   bottom. The line is a little wider than the photo: it starts 10px to the left of the photo with a short fade, and runs 15% past it on the right, fading out over the last 140px. */
 .about-photo{
   position: relative;
-  flex: none;
+  justify-self: center;
+  width: fit-content;
+  max-width: 100%;
   line-height: 0;
 }
 
 .about-photo img{
   display: block;
-  height: 62vh;
-  max-height: 560px;
   width: auto;
-  /* Darkened a little, so it sits in the black page */
+  height: auto;
+  max-width: 100%;
+  max-height: 62vh;
   filter: grayscale(100%) brightness(60%);
 }
 
@@ -1348,34 +1256,50 @@ button.nav-arrow img {
   top: calc(100% - 38px);
 }
 
-@media (max-width: 961px){
+@media (max-width: 1025px){
   .sliding-text-white{
     margin-top: -10vh;
   }
 
-  /* Photo above the text */
   .about-me-container{
+    display: flex;
     flex-direction: column-reverse;
+    align-items: center;
     gap: 40px;
-    width: calc(100% - 40px);
+    width: calc(100% - 155px);
   }
 
   .about-photo img{
-    height: 32vh;
+    max-height: 32vh;
   }
 }
 
 @media (max-width: 768px){
-  .about-projects-container{
+  .about-me-container{
+    width: calc(100% - 40px);
+  }
+}
+
+@media (min-width: 482px) and (max-width: 768px){
+  .about-me-container{
+    width: calc(100% - 120px);
+  }
+}
+
+@media (min-width: 1026px) and (max-width: 1281px){
+  .about-me-container{
+    width: calc(100vw - 155px);
+  }
+}
+
+@media (min-width: 482px) and (max-width: 1281px){
+  .about-intro{
     display: none;
   }
 }
 
 /************ Shared project-description mobile/desktop toggle ************/
-/* Each project section renders two <p> tags with the same base
-   description class plus one of these: the full text (desktop) and a
-   shorter version with one sentence trimmed (mobile, where the 130vh
-   section height doesn't have room for the full copy). */
+
 .description-mobile {
   display: none;
 }
@@ -1392,16 +1316,14 @@ button.nav-arrow img {
 
 /************ Experience Css ************/
 .experience {
-  /* Positioned, so the strip / side label / dots below are placed relative to THIS
-     section instead of the page (no more vh offsets to maintain for Experience). */
+
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: black;
-  /* 100%, not 100vw: 100vw includes the scrollbar, which pushed the dots (right: 17px)
-     further right than the other sections' ones */
+
   width: 100%;
   height: 100vh;
 }
@@ -1411,16 +1333,13 @@ button.nav-arrow img {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  width: 82vw;
   height: 100%;
   padding: 9vh 0;
 }
 
-/* One row per role: [logo on the timeline] [dates] [details] */
 .experience-list {
   --logo: clamp(52px, 8vh, 76px);
-  /* Explicit reset: Bootstrap's `ol { padding-left: 2rem; margin-bottom: 1rem }`
-     outranks the site's `*` reset and pushed the circles off the line. */
+
   margin: 0;
   padding: 0;
   position: relative;
@@ -1431,14 +1350,12 @@ button.nav-arrow img {
   list-style: none;
 }
 
-/* The timeline: starts at the first logo's centre, ends at the last one's.
-   The logo sits in the first grid column, so line and circles share one centre. */
 .experience-list::before {
   content: "";
   position: absolute;
   left: calc(var(--logo) / 2);
-  top: calc(100% / (var(--roles) * 2));
-  bottom: calc(100% / (var(--roles) * 2));
+  top: var(--line-top, calc(100% / (var(--roles) * 2)));
+  bottom: var(--line-bottom, calc(100% / (var(--roles) * 2)));
   width: 2px;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.45);
@@ -1449,20 +1366,21 @@ button.nav-arrow img {
   min-height: 0;
   display: grid;
   grid-template-columns: var(--logo) clamp(215px, 17vw, 300px) minmax(0, 1fr);
-  /* The logo and date sit in the middle row, centred in the role's slot. The details hang from
-     the top of that row, so the job title lines up with the logo's centre and the bullets run below. */
-  grid-template-rows: 1fr var(--logo) 1fr;
+
+  grid-template-rows: 1fr auto 1fr;
   grid-template-areas:
     ".    .     ."
     "logo years details"
-    ".    .     details";
-  align-items: center;
+    ".    .     .";
+  align-items: start;
   column-gap: 2.5vw;
 }
 
-/* Dates: month + year range, current role in the site's purple and bold. */
 .experience-years {
   grid-area: years;
+  height: var(--logo);
+  display: flex;
+  align-items: center;
   margin: 0;
   font-size: 20px;
   font-weight: 500;
@@ -1494,7 +1412,6 @@ button.nav-arrow img {
   border-color: var(--brand-purple);
 }
 
-/* The global `img { width: 100% }` is overridden so logos keep their proportions. */
 .experience-logo img {
   width: 62%;
   height: 62%;
@@ -1503,14 +1420,10 @@ button.nav-arrow img {
 
 .experience-details {
   grid-area: details;
-  align-self: start;
-  /* Half of (logo height - one heading line of 26px x 1.2) centres the title on the logo */
   margin-top: calc((var(--logo) - 31.2px) / 2);
   text-align: left;
 }
 
-/* "Job title/Company" on one line: the title leads, in bold white; the slash and the
-   company follow in a lighter weight. */
 .experience-heading {
   margin: 0;
   font-size: 26px;
@@ -1524,28 +1437,11 @@ button.nav-arrow img {
   color: white;
 }
 
-/* The company stands out next to the bold title in the site's purple. */
 .experience-company {
   color: var(--brand-purple);
 }
 
-.experience-description,
-.experience-description-phone {
-  max-width: 70ch;
-  margin: 1vh 0 0;
-  font-size: 22px; /* same as the About description */
-  line-height: 1.4;
-  color: var(--grey);
-}
-
-/* The phone text only shows in the phone layout (the group rule above styles both) */
-.experience-description-phone {
-  display: none;
-}
-
-/* Just above the phone layout (769-900px) the details column is narrow: let the dates wrap
-   onto two lines and give the column back to the text. */
-@media (min-width: 769px) and (max-width: 900px) {
+@media (min-width: 769px) and (max-width: 1025px) {
   .experience-item {
     grid-template-columns: var(--logo) clamp(105px, 15vw, 130px) minmax(0, 1fr);
     column-gap: 2vw;
@@ -1557,54 +1453,51 @@ button.nav-arrow img {
   }
 }
 
-/* Safety net on tablets: a description never grows past 3 lines, so it cannot run into the next role */
-@media (min-width: 769px) and (max-width: 1025px) {
-  .experience-description {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    font-size: 20px; /* a size down from the desktop description */
-  }
-}
-
 .experience-bullets {
-  display: none;
+  display: block;
   margin: 1vh 0 0;
   padding: 0;
   list-style: none;
-  font-size: 22px; /* same as the About description */
+  font-size: 22px;
   line-height: 1.4;
   color: var(--grey);
 }
 
 .experience-bullets li {
   position: relative;
-  margin: 2px 0 0;
+  margin: 8px 0 0;
   padding: 0 0 0 24px;
 }
 
 .experience-bullets li::before {
-  content: ">";
+  content: "•";
   position: absolute;
   left: 0;
   font-weight: 700;
   color: var(--grey);
 }
 
-/* Large, tall screens: two bullet points instead of the short description.
-   (Below 1366px wide, 22px bullets would wrap and crowd the rows.) */
-@media (min-width: 1366px) and (min-height: 800px) {
-  .experience-description {
-    display: none;
+@media (max-width: 1281px), (max-height: 799px) {
+  .experience {
+    height: auto;
+    min-height: 100vh;
   }
 
-  .experience-bullets {
-    display: block;
+  .experience-container {
+    height: auto;
+    padding: 100px 0;
+  }
+
+  .experience-list {
+    flex: none;
+  }
+
+  .experience-item {
+    flex: none;
+    padding: 2vh 0;
   }
 }
 
-/* Side label to the next part of the site, same as the other sections */
 .experience-next-container {
   z-index: 2;
   display: flex;
@@ -1627,41 +1520,17 @@ button.nav-arrow img {
   margin: 0;
 }
 
-/* Phones: logo and dates share the first line, the text sits under the dates. */
 @media (max-width: 768px) {
-  /* The section follows its content (at least one screen tall) and the content is centred in it,
-     instead of a fixed 130vh with the text packed at the top of each row. */
-  .experience {
-    height: auto;
-    min-height: 100vh;
-  }
 
-  /* shorter text on phones, like the other sections */
-  .experience-description {
-    display: none;
-  }
-
-  .experience-description-phone {
-    display: block;
-  }
-
-  .experience-container {
-    width: calc(100vw - 40px);
-    height: auto;
-    padding: 9vh 0;
-  }
-
-  /* Rows are all as tall as the tallest one, so the timeline line (which assumes equal rows) still ends at the last logo */
   .experience-list {
     --logo: 52px;
-    flex: none;
     display: grid;
     grid-auto-rows: 1fr;
   }
 
   .experience-list::before {
-    top: calc(var(--logo) / 2);
-    bottom: calc(100% / var(--roles) - var(--logo) / 2);
+    top: var(--line-top, calc(var(--logo) / 2));
+    bottom: var(--line-bottom, calc(100% / var(--roles) - var(--logo) / 2));
   }
 
   .experience-item {
@@ -1673,12 +1542,12 @@ button.nav-arrow img {
     align-items: start;
     column-gap: 16px;
     row-gap: 0;
-    /* Air goes after each role, not between its date and its text, so the text reads as
-       belonging to the date above it. */
-    padding-bottom: 3.5vh;
+
+    padding: 0 0 3.5vh;
   }
 
   .experience-details {
+    align-self: start;
     margin-top: -4px;
   }
 
@@ -1690,13 +1559,8 @@ button.nav-arrow img {
     align-self: center;
     font-size: 20px;
   }
-
-  .experience-next-container {
-    display: none;
-  }
 }
 
-/* Small phones: the role / company line one size down so it wraps less */
 @media (max-width: 481px) {
   .experience-heading {
     font-size: 22px;
@@ -1704,11 +1568,7 @@ button.nav-arrow img {
 }
 
 /************ Experience Animation Css ************/
-/* Experience reveal (plays once, when the section scrolls into view: .is-visible comes from
-   useInView). The timeline line draws downward over 1.2s; each date fades in
-   as the line reaches its logo; the current role's ring then pulses.
-   Only transform and opacity are animated, so nothing moves in the layout. The hidden start
-   states exist only when the visitor has not asked for reduced motion. */
+
 @media (prefers-reduced-motion: no-preference) {
   .experience-list::before {
     transform: translateX(-50%) scaleY(0);
@@ -1723,7 +1583,6 @@ button.nav-arrow img {
     --reveal: calc(0.1s + var(--i) / (var(--roles) - 1) * 1.2s);
   }
 
-  /* Each date fades in, starting as the line reaches its logo */
   .experience.is-visible .experience-years {
     animation: showDates 0.6s ease-out var(--reveal) both;
   }
@@ -1732,7 +1591,6 @@ button.nav-arrow img {
     animation: lineDraw 1.2s ease-out 0.1s forwards;
   }
 
-  /* The current role keeps a slow purple pulse once everything is in */
   .experience.is-visible .experience-item.current .experience-logo {
     animation: ringPulse 2s ease-out 1.8s infinite;
   }
@@ -1796,7 +1654,6 @@ button.nav-arrow img {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 2fr 1fr;
   gap: 0 30px;
-  width: 80vw;
   height: 90vh;
 }
 
@@ -1861,9 +1718,7 @@ button.nav-arrow img {
 }
 
 /************ Cursor Parallax Css (project photos, Resume flag + statue) ************/
-/* Cursor parallax (useCursorParallax.js sets --mx / --my, from -1 to 1, on the section).
-   Each element drifts the OPPOSITE way to the cursor, slowly: the long transition smooths it.
-   Uses the standalone `translate` property so it never fights an element's own transform. */
+
 .mac-photo,
 .resume-stage img {
   translate: calc(var(--mx, 0) * var(--drift-x, -22px)) calc(var(--my, 0) * var(--drift-y, -16px));
@@ -1943,44 +1798,29 @@ button.nav-arrow img {
   }
 }
 
-
-@media (max-width:768px)  {
-  .socially-container{
-    width: calc(100vw - 40px);
-  }
-
-  .socially-projects-container, .socially-projects-number{
-    display: none;
-  }
-}
-
 @media (max-width: 1025px){
   .socially-container{
+    position: relative;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
   }
+}
 
-  .socially-description-container{
+@media (max-width: 1281px){
+  section .socially-projects-number,
+  section .about-container,
+  section .about-projects-container,
+  section .resume-about-container,
+  section .experience-next-container,
+  section .socially-projects-container,
+  section .casa-rosa-projects-container,
+  section .vendify-projects-container,
+  section .warlords-projects-container{
     display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .socially {
-    height: 130vh;
-  }
-
-  .socially-description-container {
-    display: flex;
-  }
-}
-
-@media (min-width: 1025px) and (max-width: 1281px){
-  .socially-container{
-    width: calc(100vw - 110px);
   }
 }
 
@@ -2004,7 +1844,6 @@ button.nav-arrow img {
   display: inline-block;
 }
 
-/* Description on the LEFT */
 .casa-rosa-description-container {
   display: flex;
   justify-content: center;
@@ -2022,7 +1861,6 @@ button.nav-arrow img {
   color: black;
 }
 
-/* Website screenshot on the RIGHT */
 .casa-rosa-photo {
   grid-row: 1 / 2;
   grid-column: 2 / 3;
@@ -2035,7 +1873,6 @@ button.nav-arrow img {
   max-width: 100%;
 }
 
-/* Keep the same button approach as the other projects */
 .casa-rosa-container-button {
   grid-row: 2 / 3;
   grid-column: 1 / 3;
@@ -2082,30 +1919,6 @@ button.nav-arrow img {
   font-size: 26px;
   color: black;
   margin: 0;
-}
-
-@media (max-width: 768px) {
-  .casa-rosa {
-    height: 130vh;
-  }
-
-  .casa-rosa-projects-container {
-    display: none;
-  }
-}
-
-/* Tablet: description hidden. Phones: the short description is shown again
-   (this block must come AFTER the max-width:1025px one to win the cascade). */
-@media (max-width: 1025px) {
-  .casa-rosa-description-container {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .casa-rosa-description-container {
-    display: flex;
-  }
 }
 
 /************ Vendify Css ************/
@@ -2184,21 +1997,6 @@ button.nav-arrow img {
   font-size: 26px;
   color: black;
   margin: 0;
-}
-
-
-
-
-@media (max-width: 768px) {
-  .vendify-projects-container{
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .vendify {
-    height: 130vh;
-  }
 }
 
 /************ Warlords Css ************/
@@ -2299,31 +2097,6 @@ button.nav-arrow img {
   margin: 0;
 }
 
-
-
-
-@media (max-width: 768px) {
-  .warlords-projects-container {
-    display: none;
-  }
-}
-
-@media (max-width: 1025px) {
-  .warlords-description-container {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .warlords {
-    height: 130vh;
-  }
-
-  .warlords-description-container {
-    display: flex;
-  }
-}
-
 /************ Projects Css ************/
 .project {
   display: flex;
@@ -2332,7 +2105,7 @@ button.nav-arrow img {
   align-items: center;
   background-color: rgb(0, 0, 0);
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .project h1 {
@@ -2361,7 +2134,6 @@ button.nav-arrow img {
   gap: 35px;
 }
 
-/* Infinite carousel (InfiniteStrip.js): scrolls with the page AND by hand */
 .infinite-strip {
   overflow-x: auto;
   overflow-y: hidden;
@@ -2393,8 +2165,7 @@ button.nav-arrow img {
 }
 
 .image-container img {
-  /* The global `img { width: 100% }` would make every slide as wide as its
-     whole copy of the strip; let the width follow the height instead. */
+
   width: auto;
   max-width: none;
   flex: none;
@@ -2416,10 +2187,8 @@ button.nav-arrow img {
   background-color: rgba(255, 255, 255, .9)
 }
 
-
-
 @media (max-width: 768px) {
-  /* Same smaller page-title size as the Contact title */
+
   .project h1 {
     font-size: 50px;
   }
@@ -2433,7 +2202,8 @@ button.nav-arrow img {
   align-items: center;
   background-color: white;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 100px 0;
 }
 
 .contact-container{
@@ -2518,8 +2288,6 @@ button.nav-arrow img {
   color: black;
 }
 
-
-
 @media (max-width: 768px) {
   .contact-container h1{
     font-size: 50px;
@@ -2531,23 +2299,14 @@ button.nav-arrow img {
 }
 
 /************ Footer Css ************/
-/* The last thing on the page: an image (footer.svg: purple, with the logo mark and the name in
-   black, cut off by the bottom edge). It stays fixed at the bottom of the screen, UNDER the page:
-   .page-content (all the sections) covers it and ends with a spacer as tall as the footer, so
-   scrolling to the end slides the page away and uncovers the footer, which itself never moves.
-   The footer has no background-color on purpose: on iPhone (iOS 26) Safari tints its bars from the
-   background-color of fixed elements at the screen edge, which made the bottom bar solid purple.
-   The purple glow behind the translucent bars comes from the body background-color instead. */
+
 .page-content {
   position: relative;
   z-index: 1;
-  /* Opaque, so the fixed footer never shows through gaps between sections */
+
   background-color: black;
 }
 
-/* The space after the page that the footer shows through at the very end, as tall as the footer. A
-   percentage padding is a share of the page WIDTH, exactly like the footer's own height (the image
-   is 100 x 17.6), so the two always match. */
 .footer-spacer {
   height: 0;
   padding-bottom: 17.6%;
@@ -2560,14 +2319,60 @@ button.nav-arrow img {
   bottom: 0;
   z-index: 0;
   line-height: 0;
-  /* The image is taller than the visible footer: its upper part is plain purple. The page covers it
-     (only the bottom 17.6% of the image is ever seen), but when the page is pulled past the end
-     (in-app browsers such as Instagram's, where the body colour does not show there), what shows
-     above the artwork is that purple and not white. */
+
+}
+
+.footer-away {
+  visibility: hidden;
 }
 
 .footer-img {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/************ Content width ************/
+
+.socially-container,
+.experience-container,
+.contact-container{
+  width: 80vw;
+}
+
+@media (max-width: 1281px){
+  .socially-container,
+  .experience-container,
+  .contact-container{
+    width: calc(100vw - 155px);
+  }
+}
+
+@media (max-width: 768px){
+  .socially-container,
+  .experience-container,
+  .contact-container{
+    width: calc(100vw - 120px);
+  }
+}
+
+@media (max-width: 481px){
+  .socially-container,
+  .experience-container,
+  .contact-container{
+    width: calc(100vw - 40px);
+  }
+}
+
+/************ Project section height ************/
+
+@media (max-width: 1025px){
+  .socially,
+  .casa-rosa,
+  .vendify,
+  .warlords{
+    height: auto;
+    min-height: 100vh;
+    padding: 100px 0;
+  }
 }

@@ -4,7 +4,6 @@ import { useParallaxScroll } from "../hooks/useParallaxScroll";
 import {useCursorParallax} from "../hooks/useCursorParallax";
 
 export const CasaRosa = () => {
-    // Photos / statue drift slowly against the cursor (App.css, "Cursor parallax")
     const cursorRef = useCursorParallax();
     const { calculateOffset } = useParallaxScroll();
 
@@ -14,7 +13,7 @@ export const CasaRosa = () => {
                 <h1
                     className="casa-rosa-sliding-text"
                     style={{
-                        transform: `translateX(${calculateOffset("left")}px)`,
+                        transform: `translateX(${calculateOffset('right')}px)`,
                     }}
                 >
                     Casa Rosa/Casa Rosa/Casa Rosa/Casa Rosa/Casa Rosa/Casa Rosa/Casa Rosa/Casa Rosa

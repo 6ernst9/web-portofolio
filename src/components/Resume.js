@@ -11,14 +11,9 @@ import {useParallaxScroll} from "../hooks/useParallaxScroll";
 import {useCursorParallax} from "../hooks/useCursorParallax";
 
 export const Resume = () => {
-    // Photos / statue drift slowly against the cursor (App.css, "Cursor parallax")
     const cursorRef = useCursorParallax();
     const {calculateOffset} = useParallaxScroll();
     const [fileSrc, setFileSrc] = useState(file);
-    // Track viewport width in state (updated on resize) instead of reading
-    // window.innerWidth directly during render — reading it inline meant
-    // this literally couldn't respond to orientation changes without a
-    // full remount, and touched window on every re-render.
     const [viewportWidth, setViewportWidth] = useState(
         typeof window !== 'undefined' ? window.innerWidth : 0
     );
@@ -45,20 +40,19 @@ export const Resume = () => {
             <div className="resume-sliding-text resume-name">
                 <h1
                     className="sliding-text"
-                    style={{ transform: `translateX(${calculateOffset('right')}px)` }}>
+                    style={{ transform: `translateX(${calculateOffset('left')}px)` }}>
                     ERNST ROBERT ERNST ROBERT ERNST ROBERT ERNST ROBERT</h1>
                 <h1
                     className="sliding-text second-text"
-                    style={{ transform: `translateX(${calculateOffset('left')}px)` }}>
-                    ERNST ROBERT ERNST ROBERT ERNST ROBERT ERNST ROBERT</h1>
-                {/* Rows 3 and 4 only show on screens up to 1025px (see .mobile-text in App.css) */}
-                <h1
-                    className="sliding-text mobile-text second-text"
                     style={{ transform: `translateX(${calculateOffset('right')}px)` }}>
                     ERNST ROBERT ERNST ROBERT ERNST ROBERT ERNST ROBERT</h1>
                 <h1
-                    className="sliding-text second-text mobile-text"
+                    className="sliding-text mobile-text second-text"
                     style={{ transform: `translateX(${calculateOffset('left')}px)` }}>
+                    ERNST ROBERT ERNST ROBERT ERNST ROBERT ERNST ROBERT</h1>
+                <h1
+                    className="sliding-text second-text mobile-text"
+                    style={{ transform: `translateX(${calculateOffset('right')}px)` }}>
                     ERNST ROBERT ERNST ROBERT ERNST ROBERT ERNST ROBERT</h1>
             </div>
             <div

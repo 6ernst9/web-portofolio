@@ -32,6 +32,9 @@ export const InfiniteStrip = ({children, className = "", speed = 0.75, label}) =
     const lastScrollY = useRef(typeof window !== "undefined" ? window.scrollY : 0);
     const repeatRef = useRef(1);
     const lastDragX = useRef(null);
+    const touching = useRef(false);     // a finger is on the strip
+    const busyUntil = useRef(0);        // the user scrolled it by hand until about this time
+    const wrapTimer = useRef(null);
 
     // How many times the item list repeats INSIDE one copy. Normally 1; a short
     // list (e.g. a skills strip) repeats until one copy is wider than the screen.
@@ -63,12 +66,31 @@ export const InfiniteStrip = ({children, className = "", speed = 0.75, label}) =
         lastWritten.current = p;
     }, []);
 
-    // User scrolling: only intervene when they've crossed into copy A or C.
+    // User scrolling: when they have crossed into copy A or C, move the position back into B, but
+    // only once the strip has stopped (finger up and no scroll event for a moment). Writing
+    // scrollLeft while a swipe or its momentum is still running makes iOS Safari stop the scroll
+    // and blank the strip, sometimes for good. B is wide enough that there is always content
+    // ahead until then.
     const onScroll = () => {
+        const el = viewportRef.current;
+        // A scroll event caused by our own write is not the user
+        if (!el || Math.abs(el.scrollLeft - lastWritten.current) <= 1) return;
+
+        busyUntil.current = performance.now() + 200;
         adopt();
+
         const w = copyWidth.current;
         if (w && (position.current < w || position.current >= 2 * w)) {
-            commit();
+            clearTimeout(wrapTimer.current);
+            const settle = () => {
+                if (touching.current || performance.now() < busyUntil.current) {
+                    wrapTimer.current = setTimeout(settle, 120);
+                } else {
+                    adopt();
+                    commit();
+                }
+            };
+            wrapTimer.current = setTimeout(settle, 150);
         }
     };
 
@@ -77,6 +99,9 @@ export const InfiniteStrip = ({children, className = "", speed = 0.75, label}) =
         const dy = y - lastScrollY.current;
         lastScrollY.current = y;
         if (!dy || !copyWidth.current) return;
+
+        // Do not write scrollLeft under the user's finger (or its momentum): they are in charge
+        if (touching.current || performance.now() < busyUntil.current) return;
 
         adopt();
         position.current += dy * speed;
@@ -118,6 +143,7 @@ export const InfiniteStrip = ({children, className = "", speed = 0.75, label}) =
         return () => {
             if (observer) observer.disconnect();
             window.removeEventListener("resize", measure);
+            clearTimeout(wrapTimer.current);
         };
     }, [measure]);
 
@@ -144,6 +170,9 @@ export const InfiniteStrip = ({children, className = "", speed = 0.75, label}) =
             ref={viewportRef}
             className={`infinite-strip${dragging ? " is-dragging" : ""} ${className}`.trim()}
             onScroll={onScroll}
+            onTouchStart={() => { touching.current = true; }}
+            onTouchEnd={() => { touching.current = false; }}
+            onTouchCancel={() => { touching.current = false; }}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={endDrag}

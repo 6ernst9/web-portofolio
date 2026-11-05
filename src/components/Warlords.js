@@ -5,7 +5,6 @@ import {useParallaxScroll} from "../hooks/useParallaxScroll";
 import {useCursorParallax} from "../hooks/useCursorParallax";
 
 export const Warlords = () => {
-    // Photos / statue drift slowly against the cursor (App.css, "Cursor parallax")
     const cursorRef = useCursorParallax();
     const {calculateOffset} = useParallaxScroll();
 
@@ -14,7 +13,7 @@ export const Warlords = () => {
             <div className="resume-sliding-text">
                 <h1
                     className="warlords-sliding-text"
-                    style={{ transform: `translateX(${calculateOffset('left')}px)` }}>
+                    style={{ transform: `translateX(${calculateOffset('right')}px)` }}>
                     Romania Warlords/Romania Warlords/Romania Warlords/Romania Warlords/Romania Warlords
                 </h1>
             </div>

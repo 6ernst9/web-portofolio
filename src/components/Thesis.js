@@ -5,7 +5,6 @@ import {useParallaxScroll} from "../hooks/useParallaxScroll";
 import {useCursorParallax} from "../hooks/useCursorParallax";
 
 export const Thesis = () => {
-    // Photos / statue drift slowly against the cursor (App.css, "Cursor parallax")
     const cursorRef = useCursorParallax();
     const {calculateOffset} = useParallaxScroll();
 
@@ -14,7 +13,7 @@ export const Thesis = () => {
             <div className="resume-sliding-text">
                 <h1
                     className="vendify-sliding-text"
-                    style={{ transform: `translateX(${calculateOffset('right')}px)` }}>
+                    style={{ transform: `translateX(${calculateOffset('left')}px)` }}>
                     Vendify/Vendify/Vendify/Vendify/Vendify/Vendify/Vendify/Vendify/Vendify/Vendify/Vendify/Vendify</h1>
             </div>
             <div className="socially-container">

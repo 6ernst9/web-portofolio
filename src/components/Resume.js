@@ -7,7 +7,6 @@ import fileFill from '../assets/img/file.svg';
 import portofolioPdf from "../assets/Resume.pdf"
 import { saveAs } from 'file-saver';
 import {GridItems} from "./GridItems";
-import {FirmsStrip} from "./FirmsStrip";
 import {useParallaxScroll} from "../hooks/useParallaxScroll";
 import {useCursorParallax} from "../hooks/useCursorParallax";
 
@@ -90,7 +89,6 @@ export const Resume = () => {
                 <img className="about-arrow" src={arrow} alt=""/>
                 <p className="about-text">Experience</p>
             </div>
-            <FirmsStrip className="resume-firms" />
         </section>
     )
 }

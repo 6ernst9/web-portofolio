@@ -1,7 +1,6 @@
 import casarosa from "../assets/img/casarosa.webp";
 import arrow from "../assets/img/arrow-left2.svg";
 import { useParallaxScroll } from "../hooks/useParallaxScroll";
-import { GridPoints } from "./GridPoints";
 import {useCursorParallax} from "../hooks/useCursorParallax";
 
 export const CasaRosa = () => {
@@ -86,7 +85,6 @@ export const CasaRosa = () => {
                 <p>Projects</p>
             </div>
 
-            <GridPoints wrapperClassName="casa-rosa-points" />
         </section>
     );
 };

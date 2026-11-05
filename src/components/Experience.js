@@ -1,7 +1,6 @@
 import arrow from "../assets/img/arrow-left.svg";
 import {useInView} from "../hooks/useInView";
 import {GridItems} from "./GridItems";
-import {GridPoints} from "./GridPoints";
 
 // Icon-only logos for the timeline circles (companies with a timeline entry)
 import betfairIcon from "../assets/img/betfair.webp";
@@ -105,7 +104,6 @@ export const Experience = () => {
                 <img className="about-arrow" src={arrow} alt="" />
                 <p>Projects</p>
             </div>
-            <GridPoints wrapperClassName="experience-points" />
         </section>
     );
 };

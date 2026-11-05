@@ -2,7 +2,6 @@ import romaniawarlords from '../assets/img/romaniawarlords1.webp';
 import arrow from "../assets/img/arrow-left2.svg";
 import {HashLink} from "react-router-hash-link";
 import {useParallaxScroll} from "../hooks/useParallaxScroll";
-import {GridPoints} from "./GridPoints";
 import {useCursorParallax} from "../hooks/useCursorParallax";
 
 export const Warlords = () => {
@@ -67,7 +66,6 @@ export const Warlords = () => {
                 <p>Projects</p>
             </div>
 
-            <GridPoints wrapperClassName="warlords-points" />
         </section>
     )
 }

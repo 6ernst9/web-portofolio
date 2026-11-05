@@ -177,6 +177,8 @@ html {
 body {
   font-weight: 400;
   overflow-x: hidden;
+  /* Purple, not black: on iPhone Safari it is what shows (as a glow) behind the translucent top
+     and bottom bars. The page itself is black, see .page-content. */
   background-color: #5B22FF !important;
   color: white !important;
   -ms-overflow-style: none;
@@ -908,16 +910,8 @@ button.nav-arrow img {
 }
 
 .grid-points {
-  z-index: 1;
-  position: absolute;
-  /* Default: bottom-right of its own section. Sections that want it at the top override `top`. */
-  top: calc(100% - 342px);
-  right: 17px;
-  padding: 0;
-  display: grid;
-  gap: 35px;
-  grid-template-columns: repeat(15, 1fr);
-  grid-template-rows: repeat(9, 1fr);
+  /* Only shown where the line grid is hidden (phones, see the max-width 481px block below) */
+  display: none;
 }
 
 .grid-point {
@@ -1008,8 +1002,20 @@ button.nav-arrow img {
     display: none;
   }
 
+  /* The dots take the place of the line grid. Same grid as on desktop (15 x 9, 35px apart), centred
+     on the section: it is wider than a phone, so its sides run off the screen evenly and no margin
+     shows at the edges. */
   .grid-points{
-    left: 17px;
+    display: grid;
+    z-index: 1;
+    position: absolute;
+    top: calc(100% - 342px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0;
+    gap: 35px;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: repeat(9, 1fr);
   }
 }
 
@@ -1028,11 +1034,21 @@ button.nav-arrow img {
   .banner h1, .banner h2{
     font-size: 50px;
   }
+
+  /* Fewer, wider cells: 10 columns on a narrower screen made tall thin bricks. 5 columns x 6 rows
+     (30 cells) are close to square, the cells after the 30th are not shown. */
+  .grid-container{
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .grid-item:nth-child(n+31){
+    display: none;
+  }
 }
 
 /************ Resume Css ************/
 .resume{
-  /* Positioned, so the firms strip (and the side label below) are placed relative to this section */
+  /* Positioned, so the side label below is placed relative to this section */
   position: relative;
   /* The flag (110vh) and the statue are taller than the section: clip them to it */
   overflow: hidden;
@@ -1235,6 +1251,8 @@ button.nav-arrow img {
   }
 }
 /************ About Css ************/
+/* Sliding "About Me" text behind, and the text centred on top of it. The section is as tall as its
+   text needs (at least a screen), so there is no per-screen height or offset to keep in sync. */
 .about{
   display: flex;
   flex-direction: column;
@@ -1242,7 +1260,8 @@ button.nav-arrow img {
   align-items: center;
   background-color: black;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 110px 0;
 }
 
 .sliding-text-white {
@@ -1255,68 +1274,63 @@ button.nav-arrow img {
 }
 
 .about-me-container{
-  position: absolute;
+  position: relative;
+  z-index: 4;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-  width: 90vw;
-  height: 100vh;
+  justify-content: center;
+  gap: 70px;
+  width: min(1100px, calc(100% - 110px));
 }
 
-.about-me-container p{
-  z-index: 4;
-  max-width: 30vw;
+.about-text-block{
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 560px;
+}
+
+.about-text-block p{
+  margin: 0;
   overflow-wrap: break-word;
-  word-break: break-word;
   font-size: 22px;
   font-weight: 400;
   line-height: 1.8;
   color: white;
 }
 
-.about-description{
-  display: none;
+/* The photo stands on a purple line (just under it, not over it), so it does not look cut off at the
+   bottom. The line is a little wider than the photo: it starts 10px to the left of the photo with a short fade, and runs 15% past it on the right, fading out over the last 140px. */
+.about-photo{
+  position: relative;
+  flex: none;
+  line-height: 0;
+}
+
+.about-photo img{
+  display: block;
+  height: 62vh;
+  max-height: 560px;
+  width: auto;
+  /* Darkened a little, so it sits in the black page */
+  filter: grayscale(100%) brightness(60%);
+}
+
+.about-photo::after{
+  content: "";
+  position: absolute;
+  left: -10px;
+  right: -15%;
+  top: 100%;
+  height: 6px;
+  background: linear-gradient(to right, transparent, var(--brand-purple) 16px, var(--brand-purple) calc(100% - 140px), transparent);
 }
 
 .highlight{
   z-index: 5;
   color: var(--brand-purple);
   text-decoration: underline;
-}
-
-.about-images{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.about-flag{
-  background-color: var(--brand-purple);
-  padding: 50px;
-  height: calc(100vh - 110px);
-  width: auto;
-  aspect-ratio: 3/4;
-  display: flex;
-  z-index: 1;
-  justify-content: center;
-  align-items: center;
-}
-
-.about-flag img{
-  color: black;
-  width: 100%;
-  height: auto;
-}
-
-.about-profile{
-  position: absolute;
-  z-index: 4;
-  height: 80vh;
-  margin-right: 15vw;
-  width: auto;
-  filter: grayscale(100%) brightness(40%);
 }
 
 .about-projects-container {
@@ -1334,109 +1348,26 @@ button.nav-arrow img {
   top: calc(100% - 38px);
 }
 
-@media (max-width: 481px) {
-  .about-long-description {
-    display: none;
-  }
-
-  .about-description {
-    display: block;
-  }
-}
-
-@media (max-width: 768px)  {
-  .about{
-    height: 130vh;
-  }
-
-  .about-sliding-text{
-    top: 60vh;
-  }
-
-  .about-projects-container{
-    display: none;
-  }
-
-  .about-me-container{
-    width: calc(100vw - 40px);
-    flex-direction: column-reverse;
-  }
-
-  .about-profile{
-    height: 30vh;
-  }
-
-  .about-flag{
-    height: 25vh;
-  }
-}
-
-@media (max-width: 481px)  {
-  .about-sliding-text{
-    top: 0;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 961px){
-  .about-me-container{
-    width: calc(100vw - 110px);
-    flex-direction: column-reverse;
-    justify-content: space-evenly;
-  }
-
-  .about-profile{
-    height: 40vh;
-    margin-right: 0;
-  }
-
-  .about-flag{
-    width: 40vw;
-    aspect-ratio: 1;
-    height: auto;
-  }
-
-  .about-sliding-text {
-    top: 0;
-  }
-}
-
 @media (max-width: 961px){
   .sliding-text-white{
     margin-top: -10vh;
   }
 
-  .about-me-container p{
-    max-width: 100vw;
+  /* Photo above the text */
+  .about-me-container{
+    flex-direction: column-reverse;
+    gap: 40px;
+    width: calc(100% - 40px);
   }
 
-
-  .about-flag{
-    aspect-ratio: 1;
-    margin-right: 20vw;
-  }
-
-  .about-profile{
-    margin-right: 0;
+  .about-photo img{
+    height: 32vh;
   }
 }
 
-@media (min-width: 961px) and (max-width: 1281px){
-  .about-flag{
-    height: 75vh;
-  }
-
-  .about-profile{
-    height: 65vh;
-  }
-
-  .about-me-container p{
-    max-width: 40vw;
-  }
-}
-
-@media (min-width: 961px) and (max-width: 1025px){
-  .about-profile{
-    height: 50vh;
+@media (max-width: 768px){
+  .about-projects-container{
+    display: none;
   }
 }
 
@@ -1457,60 +1388,6 @@ button.nav-arrow img {
   .description-mobile {
     display: block;
   }
-}
-
-/************ Firms strip (former employers) ************/
-/* Wide logos (icon + name baked into each PNG), spread across the full width and placed by the
-   host section (see .resume-firms). The list is exactly one logo tall and clips what does not
-   fit: when the screen gets narrower the logos that wrap onto a second line are cut, so the
-   last ones disappear first, one at a time. White-on-dark silhouettes to suit the black theme;
-   delete the `filter` and `opacity` lines to show the original colours instead. */
-.firms-strip {
-  --logo-height: clamp(22px, 3.4vh, 38px);
-  position: absolute;
-  z-index: 3;
-  left: 9%;
-  right: 9%;
-  height: var(--logo-height);
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  align-items: center;
-  justify-content: space-between;
-  gap: 60px 24px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.firms-strip-item {
-  flex: none;
-  height: var(--logo-height);
-  margin: 0;
-  padding: 0;
-}
-
-.firms-strip-item img {
-  display: block;
-  width: auto;
-  max-width: none;
-  height: 100%;
-  filter: brightness(0) invert(1);
-  opacity: 0.6;
-}
-
-@media (max-width: 768px) {
-  .firms-strip {
-    --logo-height: 20px;
-    left: 20px;
-    right: 20px;
-  }
-}
-
-/* Resume: full width, at the very top of the section */
-.resume-firms {
-  top: 30px;
 }
 
 /************ Experience Css ************/
@@ -1748,24 +1625,6 @@ button.nav-arrow img {
   font-size: 26px;
   color: white;
   margin: 0;
-}
-
-/* Point grid, bottom right of the section. It sits under the last roles' text, so the dots
-   fade out towards the left (where the text is) and stay full only in the free corner. */
-.experience-points {
-  top: calc(100% - 342px);
-  right: 17px;
-  -webkit-mask-image: linear-gradient(to right, transparent 25%, black 75%);
-  mask-image: linear-gradient(to right, transparent 25%, black 75%);
-}
-
-/* On phones the text spans the whole width, so the fade runs top to bottom instead:
-   the dots are full at the bottom of the section and fade out towards the top, behind the text. */
-@media (max-width: 768px) {
-  .experience-points {
-    -webkit-mask-image: linear-gradient(to top, black 10%, transparent 70%);
-    mask-image: linear-gradient(to top, black 10%, transparent 70%);
-  }
 }
 
 /* Phones: logo and dates share the first line, the text sits under the dates. */
@@ -2072,10 +1931,6 @@ button.nav-arrow img {
   margin: 0;
 }
 
-.socially-points {
-  top: 17px;
-}
-
 @media (max-width: 481px){
   .mac-header{
     gap: 3px;
@@ -2229,10 +2084,6 @@ button.nav-arrow img {
   margin: 0;
 }
 
-.casa-rosa-points {
-  top: 17px;
-}
-
 @media (max-width: 768px) {
   .casa-rosa {
     height: 130vh;
@@ -2335,9 +2186,6 @@ button.nav-arrow img {
   margin: 0;
 }
 
-.vendify-points {
-  top: 17px;
-}
 
 
 
@@ -2451,9 +2299,6 @@ button.nav-arrow img {
   margin: 0;
 }
 
-.warlords-points {
-  top: 17px;
-}
 
 
 
@@ -2557,10 +2402,6 @@ button.nav-arrow img {
   height: 50vh;
   margin: 0 10px;
   -webkit-user-drag: none;
-}
-
-.projects-points {
-  z-index: 2;
 }
 
 .project-container button {
@@ -2692,11 +2533,11 @@ button.nav-arrow img {
 /************ Footer Css ************/
 /* The last thing on the page: an image (footer.svg: purple, with the logo mark and the name in
    black, cut off by the bottom edge). It stays fixed at the bottom of the screen, UNDER the page:
-   .page-content (all the sections) covers it and ends with a margin as tall as the footer, so
+   .page-content (all the sections) covers it and ends with a spacer as tall as the footer, so
    scrolling to the end slides the page away and uncovers the footer, which itself never moves.
-   It is an image, not an element with a background-color, because Safari on iOS 26 tints its bars
-   with the background-color of fixed elements at the screen edge (that made the bottom bar solid
-   purple); it ignores images, so the translucent bar just shows the footer through it. */
+   The footer has no background-color on purpose: on iPhone (iOS 26) Safari tints its bars from the
+   background-color of fixed elements at the screen edge, which made the bottom bar solid purple.
+   The purple glow behind the translucent bars comes from the body background-color instead. */
 .page-content {
   position: relative;
   z-index: 1;
@@ -2719,6 +2560,10 @@ button.nav-arrow img {
   bottom: 0;
   z-index: 0;
   line-height: 0;
+  /* The image is taller than the visible footer: its upper part is plain purple. The page covers it
+     (only the bottom 17.6% of the image is ever seen), but when the page is pulled past the end
+     (in-app browsers such as Instagram's, where the body colour does not show there), what shows
+     above the artwork is that purple and not white. */
 }
 
 .footer-img {

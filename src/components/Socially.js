@@ -2,7 +2,6 @@ import socially from '../assets/img/socialmedia.webp';
 import {HashLink} from "react-router-hash-link";
 import arrow from "../assets/img/arrow-left2.svg";
 import {useParallaxScroll} from "../hooks/useParallaxScroll";
-import {GridPoints} from "./GridPoints";
 import {useCursorParallax} from "../hooks/useCursorParallax";
 
 export const Socially = () => {
@@ -46,7 +45,6 @@ export const Socially = () => {
                 <img className="about-arrow" src={arrow} alt=""/>
                 <p>Projects</p>
             </div>
-            <GridPoints wrapperClassName="socially-points" />
         </section>
     )
 }

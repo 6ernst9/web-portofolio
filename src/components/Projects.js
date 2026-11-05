@@ -22,7 +22,6 @@ import romaniawarlords2 from "../assets/img/romaniawarlords2.webp";
 
 import {HashLink} from "react-router-hash-link";
 import {GridItems} from "./GridItems";
-import {GridPoints} from "./GridPoints";
 import {InfiniteStrip} from "./InfiniteStrip";
 
 // Order preserved exactly as the original hand-written <img> list; [image, alt text].
@@ -55,7 +54,6 @@ export const Projects = () => {
           <button className="vvd"><span>View Github projects</span></button>
         </HashLink>
       </div>
-      <GridPoints wrapperClassName="projects-points" />
       <GridItems />
     </section>
   )

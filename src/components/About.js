@@ -1,6 +1,5 @@
-import logo from '../assets/img/logo.svg';
 import arrow from "../assets/img/arrow-left.svg";
-import profile from '../assets/img/profile.webp';
+import profile from "../assets/img/profile.webp";
 import {GridItems} from "./GridItems";
 import {useParallaxScroll} from "../hooks/useParallaxScroll";
 
@@ -21,25 +20,17 @@ export const About = () => {
                 <p className="about-text">Resume</p>
             </div>
             <div className="about-me-container">
-                <p className="about-long-description">
-                    Hi, welcome to my portfolio website. My name is Ernst Robert. 
-                    <br/><br/>Hands-on <span className="highlight">Full-Stack Software Engineer</span>, 
-                    working on developing and  optimizing enterprise-level applications for industry-leading 
-                    companies in online gaming and betting. I enjoy building applications, solving problems, 
-                    and finding practical solutions to technical challenges.<br/><br/>My specialities include a broad spectrum of backend and web
-                    technologies, such as Java, Spring, Kafka, PostgreSQL, MongoDB, Redis, and React
-                    with TypeScript.</p>
-                <p className="about-description">
-                    Hi, welcome to my portfolio website. My name is Ernst Robert. 
-                    <br/><br/>Hands-on <span className="highlight">Full-Stack Software Engineer</span>, 
-                    working on developing and  optimizing enterprise-level applications for industry-leading 
-                    companies in online gaming and betting. I enjoy building applications, solving problems, 
+                <div className="about-text-block">
+                <p>Hi, welcome to my portfolio website. My name is Ernst Robert.</p>
+                <p>Hands-on <span className="highlight">Full-Stack Software Engineer</span>,
+                    working on developing and optimizing enterprise-level applications for industry-leading
+                    companies in online gaming and betting. I enjoy building applications, solving problems,
                     and finding practical solutions to technical challenges.</p>
-                <div className="about-images">
-                    <img className="about-profile" src={profile} alt="Ernst Robert" loading="lazy" decoding="async"/>
-                    <div className="about-flag">
-                        <img src={logo} alt="" loading="lazy" decoding="async"/>
-                    </div>
+                <p>My specialities include a broad spectrum of backend and web technologies, such as
+                    Java, Spring, Kafka, PostgreSQL, MongoDB, Redis, and React with TypeScript.</p>
+                </div>
+                <div className="about-photo">
+                    <img src={profile} alt="Ernst Robert" loading="lazy" decoding="async"/>
                 </div>
             </div>
         </section>

@@ -13,10 +13,12 @@ import {Experience} from "./components/Experience";
 import {Socially} from "./components/Socially";
 import {Thesis} from "./components/Thesis";
 import {ScrollProvider} from "./hooks/useParallaxScroll";
+import {ThemeProvider} from "./hooks/useTheme";
 import CustomCursor from './components/CustomCursor';
 
 function App() {
   return (
+    <ThemeProvider>
     <ScrollProvider>
         <div className="App">
             <CustomCursor/>
@@ -36,6 +38,7 @@ function App() {
             <Footer />
     </div>
     </ScrollProvider>
+    </ThemeProvider>
   );
 }
 

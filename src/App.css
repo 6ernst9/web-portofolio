@@ -1,9 +1,69 @@
 :root {
   --brand-purple: rgb(91 34 255);
 
-  --grey: #bdbdbd;
+  --gray-1: #0b0b0b;
+  --gray-2: #2e2e2e;
+  --gray-3: #5c5c5c;
+  --gray-4: #bdbdbd;
+  --gray-5: #ebebeb;
 
+  --bg: #000;
+  --fg: #fff;
+  --grey: var(--gray-4);
+  --dim: var(--gray-2);
+  --ghost: var(--gray-1);
+  --grid-line: var(--gray-1);
+  --line-faint: rgba(255, 255, 255, 0.45);
+  --ring: #fff;
   --nav-solid: #000;
+  --nav-glass: rgba(0, 0, 0, 0.8);
+  --btn-bg: #000;
+  --btn-fg: #fff;
+  --btn-border: #fff;
+  --btn-hover-bg: rgba(255, 255, 255, 0.9);
+  --btn-hover-fg: #000;
+  --photo-filter: grayscale(100%) brightness(60%);
+  --icon-filter: none;
+  --toggle-filter: brightness(0.74);
+  --contact-bg: #fff;
+  --contact-fg: #000;
+  --contact-ghost: var(--gray-5);
+  --contact-dim: var(--gray-2);
+  --mac-bg: rgba(0, 0, 0, 0.8);
+  --mac-border: var(--gray-3);
+  --card-border: transparent;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #fff;
+  --fg: var(--gray-1);
+  --grey: var(--gray-3);
+  --dim: var(--gray-4);
+  --ghost: var(--gray-5);
+  --grid-line: var(--gray-5);
+  --line-faint: rgba(0, 0, 0, 0.35);
+  --ring: var(--gray-1);
+  --nav-solid: #fff;
+  --nav-glass: rgba(255, 255, 255, 0.8);
+  --btn-bg: #fff;
+  --btn-fg: var(--gray-1);
+  --btn-border: var(--gray-1);
+  --btn-hover-bg: rgba(0, 0, 0, 0.9);
+  --btn-hover-fg: #fff;
+  --photo-filter: grayscale(100%) brightness(95%);
+  --icon-filter: invert(1);
+  --toggle-filter: brightness(0.36);
+  --mac-bg: rgba(235, 235, 235, 0.9);
+  --mac-border: var(--gray-4);
+  --card-border: var(--gray-4);
+  color-scheme: light;
+}
+
+:root.theme-fade *,
+:root.theme-fade *::before,
+:root.theme-fade *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
 }
 
 /************ Custom Cursor Css ************/
@@ -96,7 +156,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: black;
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -116,12 +176,12 @@
 }
 
 ::-webkit-scrollbar-corner {
-  background: black;
+  background: var(--bg);
 }
 
 @supports not selector(::-webkit-scrollbar) {
   * {
-    scrollbar-color: var(--brand-purple) black;
+    scrollbar-color: var(--brand-purple) var(--bg);
   }
 }
 
@@ -175,7 +235,7 @@ body {
   overflow-x: hidden;
 
   background-color: #5B22FF !important;
-  color: white !important;
+  color: var(--fg) !important;
   -ms-overflow-style: none;
   scrollbar-width: none;
   position: relative;
@@ -196,7 +256,7 @@ p, a, li, button, ul {
 }
 
 a:link a:visited a:hover a:active{
-  color: white;
+  color: var(--fg);
   text-decoration: none;
 }
 
@@ -247,7 +307,7 @@ nav.navbar::before {
 
 nav.navbar.toggled::before,
 nav.navbar.scrolled::before {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--nav-glass);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
 }
@@ -259,15 +319,14 @@ nav.navbar.scrolled {
 nav.navbar .navbar-nav .nav-link.navbar-link {
   font-weight: 700;
   font-size: 40px;
-  color: white !important;
+  color: var(--grey) !important;
   letter-spacing: 0.8px;
   padding: 0 25px;
-  opacity: 0.8;
 }
 
 nav.navbar .navbar-nav a.nav-link.navbar-link:hover,
 nav.navbar .navbar-nav a.nav-link.navbar-link.active {
-    opacity: 1;
+    color: var(--fg) !important;
 }
 
 span.navbar-text {
@@ -287,7 +346,7 @@ nav.navbar a.navbar-brand{
 .navbar-logo{
   font-family: 'Vermin Vibes', cursive;
   font-size: 40px;
-  color: white;
+  color: var(--fg);
   line-height: 1;
   margin: 0;
 }
@@ -295,7 +354,7 @@ nav.navbar a.navbar-brand{
 @media (max-width: 991.98px) {
 
   nav.navbar::before {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: var(--nav-glass);
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     opacity: 0;
@@ -481,15 +540,13 @@ button.nav-arrow img {
   font-weight: 500;
   font-size: 26px;
   letter-spacing: 0.8px;
-  color: white;
+  color: var(--grey);
   text-decoration: none;
-  opacity: 0.75;
 }
 
 .nav-dropdown-link:hover,
 .nav-dropdown-link.active {
-  color: white;
-  opacity: 1;
+  color: var(--fg);
 }
 
 @media (min-width: 992px) {
@@ -596,7 +653,7 @@ button.nav-arrow img {
   .nav-projects.open .nav-dropdown {
     transition:
       height 0.3s ease-out 0.2s,
-      visibility 0s;
+      visibility 0s linear 0.2s;
   }
 
   .nav-dropdown-box {
@@ -626,7 +683,6 @@ button.nav-arrow img {
     font-weight: 700;
     font-size: 20px;
     letter-spacing: 0.8px;
-    opacity: 0.8;
     text-align: left;
     white-space: nowrap;
   }
@@ -665,7 +721,7 @@ button.nav-arrow img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: var(--bg);
   width: 100%;
   height: 100vh;
 }
@@ -798,26 +854,26 @@ button.nav-arrow img {
   font-size: 22px;
   font-weight: 700;
   line-height: 1;
-  color: #2e2e2e;
+  color: var(--dim);
   margin-bottom: 20px;
   transition: 0.3s ease-in-out;
   display: block;
 }
 
 .banner-links a:hover {
-  color: white;
+  color: var(--fg);
 }
 
 .banner button {
-  color: white;
-  border: 1px solid white;
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-border);
   position: relative;
-  background-color: black;
+  background-color: var(--btn-bg);
 }
 
 .banner button:hover {
-  color: black;
-  background-color: rgba(255, 255, 255, .9)
+  color: var(--btn-hover-fg);
+  background-color: var(--btn-hover-bg)
 }
 
 .grid-container {
@@ -834,12 +890,12 @@ button.nav-arrow img {
   overflow: hidden;
   width: calc(100% - 110px);
   height: calc(100% - 110px);
-  border: 0.01em solid #101010;
+  border: 0.01em solid var(--grid-line);
 }
 
 .grid-item {
-  background-color: black;
-  border: 0.01em solid #101010;
+  background-color: var(--bg);
+  border: 0.01em solid var(--grid-line);
 }
 
 .grid-points {
@@ -851,7 +907,7 @@ button.nav-arrow img {
   width: 5px;
   height: 5px;
   border-radius: 5px;
-  background-color: white;
+  background-color: var(--fg);
 }
 
 .banner h1 {
@@ -861,7 +917,7 @@ button.nav-arrow img {
   line-height: 1.2;
   display: block;
   text-align: center;
-  color: white;
+  color: var(--fg);
 }
 
 .namespace-title{
@@ -879,7 +935,7 @@ button.nav-arrow img {
   font-size: 68px;
   font-weight: 400;
   line-height: 1.2;
-  color: white;
+  color: var(--fg);
   display: block;
   text-align: center;
 }
@@ -906,7 +962,7 @@ button.nav-arrow img {
 .about-text, .about-container p {
   font-weight: 700;
   font-size: 26px;
-  color: white;
+  color: var(--fg);
   margin: 0;
 }
 
@@ -999,7 +1055,7 @@ button.nav-arrow img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: var(--bg);
   width: 100%;
   min-height: 100vh;
   padding: 100px 0;
@@ -1022,7 +1078,7 @@ button.nav-arrow img {
 .sliding-text {
   font-weight: 700;
   font-size: 45vh;
-  color: rgb(11,11,11);
+  color: var(--ghost);
   white-space: nowrap;
   display: inline-block;
 }
@@ -1055,7 +1111,7 @@ button.nav-arrow img {
   height: 100%;
   font-size: 35px;
   font-weight: 400;
-  color: white;
+  color: var(--fg);
   transform-origin: center;
   display: flex;
   justify-content: center;
@@ -1168,7 +1224,7 @@ button.nav-arrow img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: var(--bg);
   width: 100%;
   min-height: 100vh;
   padding: 100px 0;
@@ -1178,7 +1234,7 @@ button.nav-arrow img {
   font-weight: 700;
   font-size: 45vh;
   margin-top: -30vh;
-  color: rgb(11,11,11);
+  color: var(--ghost);
   white-space: nowrap;
   display: inline-block;
 }
@@ -1205,7 +1261,7 @@ button.nav-arrow img {
   font-size: 22px;
   font-weight: 400;
   line-height: 1.8;
-  color: white;
+  color: var(--fg);
 }
 
 .about-photo{
@@ -1222,7 +1278,7 @@ button.nav-arrow img {
   height: auto;
   max-width: 100%;
   max-height: 62vh;
-  filter: grayscale(100%) brightness(60%);
+  filter: var(--photo-filter);
 }
 
 .about-photo::after{
@@ -1322,7 +1378,7 @@ button.nav-arrow img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: var(--bg);
 
   width: 100%;
   height: 100vh;
@@ -1358,7 +1414,7 @@ button.nav-arrow img {
   bottom: var(--line-bottom, calc(100% / (var(--roles) * 2)));
   width: 2px;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.45);
+  background: var(--line-faint);
 }
 
 .experience-item {
@@ -1404,7 +1460,7 @@ button.nav-arrow img {
   justify-content: center;
   overflow: hidden;
   border-radius: 50%;
-  border: 3px solid white;
+  border: 3px solid var(--ring);
   background: white;
 }
 
@@ -1429,12 +1485,12 @@ button.nav-arrow img {
   font-size: 26px;
   font-weight: 400;
   line-height: 1.2;
-  color: white;
+  color: var(--fg);
 }
 
 .experience-role {
   font-weight: 700;
-  color: white;
+  color: var(--fg);
 }
 
 .experience-company {
@@ -1516,7 +1572,7 @@ button.nav-arrow img {
 .experience-next-container p {
   font-weight: 700;
   font-size: 26px;
-  color: white;
+  color: var(--fg);
   margin: 0;
 }
 
@@ -1687,9 +1743,9 @@ button.nav-arrow img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--mac-bg);
   border-radius: 15px;
-  border: 1px solid dimgray;
+  border: 1px solid var(--mac-border);
 }
 
 .mac-header {
@@ -2103,13 +2159,13 @@ button.nav-arrow img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(0, 0, 0);
+  background-color: var(--bg);
   width: 100%;
   min-height: 100vh;
 }
 
 .project h1 {
-  color: white;
+  color: var(--fg);
   font-size: 68px;
   font-weight: 700;
   text-align: center;
@@ -2117,7 +2173,7 @@ button.nav-arrow img {
 }
 
 .project p{
-  color: white;
+  color: var(--fg);
   font-size: 22px;
   font-weight: 400;
   line-height: 1.8;
@@ -2169,6 +2225,7 @@ button.nav-arrow img {
   width: auto;
   max-width: none;
   flex: none;
+  border: 2px solid var(--card-border);
   border-radius: 20px;
   height: 50vh;
   margin: 0 10px;
@@ -2176,15 +2233,15 @@ button.nav-arrow img {
 }
 
 .project-container button {
-  color: white;
-  border: 1px solid white;
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-border);
   position: relative;
-  background-color: black;
+  background-color: var(--btn-bg);
 }
 
 .project-container button:hover {
-  color: black;
-  background-color: rgba(255, 255, 255, .9)
+  color: var(--btn-hover-fg);
+  background-color: var(--btn-hover-bg)
 }
 
 @media (max-width: 768px) {
@@ -2200,7 +2257,7 @@ button.nav-arrow img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: var(--contact-bg);
   width: 100%;
   min-height: 100vh;
   padding: 100px 0;
@@ -2228,7 +2285,7 @@ button.nav-arrow img {
 
 .contact-container p{
   flex: 3;
-  color: black;
+  color: var(--contact-fg);
   font-size: 22px;
   font-weight: 400;
   line-height: 1.8;
@@ -2238,14 +2295,14 @@ button.nav-arrow img {
 .contact-container button {
   flex: 3;
   color: var(--brand-purple);
-  border: 2px solid black;
+  border: 2px solid var(--contact-fg);
   position: relative;
-  background-color: white;
+  background-color: var(--contact-bg);
 }
 
 .contact-container button:hover {
-  color: white;
-  background-color: rgba(0, 0, 0, .9)
+  color: var(--contact-bg);
+  background-color: var(--contact-fg)
 }
 
 .contact-point{
@@ -2255,7 +2312,7 @@ button.nav-arrow img {
 .contact-sliding-text {
   font-weight: 700;
   font-size: 45vh;
-  color: rgb(236, 236, 236);
+  color: var(--contact-ghost);
   margin-bottom: 30vh;
   white-space: nowrap;
   display: inline-block;
@@ -2278,14 +2335,14 @@ button.nav-arrow img {
   font-size: 22px;
   font-weight: 700;
   line-height: 1;
-  color: #2e2e2e;
+  color: var(--contact-dim);
   margin-bottom: 20px;
   transition: 0.3s ease-in-out;
   display: block;
 }
 
 .contact-links a:hover {
-  color: black;
+  color: var(--contact-fg);
 }
 
 @media (max-width: 768px) {
@@ -2304,7 +2361,7 @@ button.nav-arrow img {
   position: relative;
   z-index: 1;
 
-  background-color: black;
+  background-color: var(--bg);
 }
 
 .footer-spacer {
@@ -2374,5 +2431,91 @@ button.nav-arrow img {
     height: auto;
     min-height: 100vh;
     padding: 100px 0;
+  }
+}
+
+/************ Theme Toggle Css ************/
+nav.navbar img:not(.navbar-brand img),
+.about-arrow {
+  filter: var(--icon-filter);
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.theme-toggle img {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.3s ease-in-out;
+}
+
+nav.navbar button.theme-toggle img {
+  filter: var(--toggle-filter);
+}
+
+nav.navbar button.theme-toggle:hover img,
+nav.navbar button.theme-toggle:focus-visible img {
+  filter: var(--icon-filter);
+}
+
+@media (max-width: 991.98px) {
+  .theme-toggle {
+    margin: 0;
+  }
+}
+
+.socially-projects-container .about-arrow,
+.casa-rosa-projects-container .about-arrow,
+.vendify-projects-container .about-arrow,
+.warlords-projects-container .about-arrow {
+  filter: brightness(0);
+}
+
+:root[data-theme="light"] nav.navbar.scrolled,
+:root[data-theme="light"] nav.navbar.toggled,
+:root[data-theme="light"] nav.navbar.menu-open,
+:root[data-theme="light"] nav.navbar.dark-hold {
+  --fg: #fff;
+  --grey: var(--gray-4);
+  --nav-glass: rgba(0, 0, 0, 0.92);
+  --nav-solid: #000;
+  --icon-filter: none;
+  --toggle-filter: brightness(0.74);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] .nav-dropdown-box {
+  --fg: #fff;
+  --nav-solid: #000;
+}
+
+:root[data-theme="light"] nav.navbar::after {
+  background-color: #000;
+}
+
+:root[data-theme="light"] .navbar-logo {
+  color: var(--grey);
+}
+
+:root[data-theme="light"] nav.navbar.scrolled .navbar-logo,
+:root[data-theme="light"] nav.navbar.toggled .navbar-logo,
+:root[data-theme="light"] nav.navbar.menu-open .navbar-logo,
+:root[data-theme="light"] nav.navbar.dark-hold .navbar-logo {
+  color: var(--fg);
+}
+
+@media (max-width: 991.98px) {
+  :root[data-theme="light"] .navbar-logo {
+    color: var(--fg);
   }
 }

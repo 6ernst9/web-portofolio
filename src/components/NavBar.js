@@ -5,8 +5,7 @@ import menu from '../assets/img/menu.svg';
 import closeIcon from '../assets/img/close.svg';
 import arrowDown from '../assets/img/arrow-down.svg';
 import arrowUp from '../assets/img/arrow-up.svg';
-
-// Sections reached from the "Projects" dropdown (its own anchor comes last: "All projects").
+import {ThemeToggle} from "./ThemeToggle";
 const PROJECT_LINKS = [
   { id: 'socially', label: 'Socially' },
   { id: 'warlords', label: 'Romania Warlords' },
@@ -15,20 +14,21 @@ const PROJECT_LINKS = [
   { id: 'projects', label: 'All projects' },
 ];
 const PROJECT_IDS = PROJECT_LINKS.map((link) => link.id);
-
-// Wide screens show the full bar (below this width the hamburger menu is used, see App.css).
+const NAV_IDS = ["home", "about", "experience", "contact", ...PROJECT_IDS];
 const DESKTOP_HOVER = "(min-width: 992px) and (hover: hover)";
+const linkFromHash = () => {
+  const id = window.location.hash.replace("#", "");
+  return NAV_IDS.includes(id) ? id : null;
+};
 
 export const NavBar = () => {
-  const [activeLink, setActiveLink] = useState('home');
+  const [activeLink, setActiveLink] = useState(linkFromHash);
   const [scrolled, setScrolled] = useState(false);
   const [toggled, setToggled] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(false);
+  const [darkHold, setDarkHold] = useState(false);
   const dropRef = useRef(null);
   const dropBoxRef = useRef(null);
-
-  // The Projects list opens by growing to its own height (App.css), so that height is written onto
-  // it as --list-h: now, and whenever the list changes size (screen size, fonts).
   useLayoutEffect(() => {
     const drop = dropRef.current;
     const box = dropBoxRef.current;
@@ -45,6 +45,15 @@ export const NavBar = () => {
   }, []);
 
   useEffect(() => {
+    if (projectsOpen) {
+      setDarkHold(true);
+      return undefined;
+    }
+    const timer = window.setTimeout(() => setDarkHold(false), 300);
+    return () => window.clearTimeout(timer);
+  }, [projectsOpen]);
+
+  useEffect(() => {
     const onScroll = () => {
       if (window.scrollY > 50) {
         setScrolled(true);
@@ -57,8 +66,6 @@ export const NavBar = () => {
 
     return () => window.removeEventListener("scroll", onScroll);
   }, [])
-
-  // Choosing a link also closes the hamburger menu (and its Projects list)
   const onUpdateActiveLink = (value) => {
     setActiveLink(value);
     closeMenu();
@@ -66,15 +73,9 @@ export const NavBar = () => {
   }
 
   const closeMenu = () => setToggled(false);
-
-  // Closing the hamburger menu (button, or choosing a link) also folds its Projects list away
   useEffect(() => {
     if (!toggled && !window.matchMedia(DESKTOP_HOVER).matches) setProjectsOpen(false);
   }, [toggled]);
-
-  // The "Projects" word: with a mouse on the full bar it goes to the section, as before. In the
-  // hamburger menu (and on touch screens), where the arrow is a small target, tapping the word
-  // opens and closes the list instead.
   const onProjectsLinkClick = (event) => {
     if (window.matchMedia(DESKTOP_HOVER).matches) {
       onUpdateActiveLink('projects');
@@ -85,9 +86,6 @@ export const NavBar = () => {
   }
 
   const linkClass = (id) => (activeLink === id ? 'active navbar-link' : 'navbar-link');
-
-  // The dropdown opens on hover on desktop, and with the arrow button everywhere else
-  // (hamburger menu, touch screens, keyboard).
   const onProjectsEnter = () => {
     if (window.matchMedia(DESKTOP_HOVER).matches) setProjectsOpen(true);
   }
@@ -105,7 +103,7 @@ export const NavBar = () => {
   }
 
   return (
-      <Navbar expand="lg" expanded={toggled} onToggle={setToggled} className={`${scrolled ? "scrolled" : toggled ? "toggled" : ""}${toggled ? " menu-open" : ""}${projectsOpen ? " projects-open" : ""}`}>
+      <Navbar expand="lg" expanded={toggled} onToggle={setToggled} className={`${scrolled ? "scrolled" : toggled ? "toggled" : ""}${toggled ? " menu-open" : ""}${projectsOpen ? " projects-open" : ""}${darkHold ? " dark-hold" : ""}`}>
           <Navbar.Brand href="/">
             <img src={logo} alt="Logo" />
           </Navbar.Brand>
@@ -158,6 +156,7 @@ export const NavBar = () => {
               </div>
 
               <Nav.Link href="#contact" className={linkClass('contact')} onClick={() => onUpdateActiveLink('contact')}>Contact</Nav.Link>
+              <ThemeToggle />
             </Nav>
           </Navbar.Collapse>
       </Navbar>

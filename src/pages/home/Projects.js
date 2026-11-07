@@ -1,0 +1,58 @@
+import admin1 from "../../assets/img/projects/adminproject1.webp";
+import admin2 from "../../assets/img/projects/adminproject2.webp";
+import admin3 from "../../assets/img/projects/adminproject3.webp";
+import chess1 from "../../assets/img/projects/chess1.webp";
+import chess2 from "../../assets/img/projects/chess2.webp";
+import chess3 from "../../assets/img/projects/chess3.webp";
+import casino1 from "../../assets/img/projects/casinoproject1.webp";
+import casino2 from "../../assets/img/projects/casinoproject2.webp";
+import casino3 from "../../assets/img/projects/casinoproject3.webp";
+import resell1 from "../../assets/img/projects/resellproject1.webp";
+import resell2 from "../../assets/img/projects/resellproject2.webp";
+import resell3 from "../../assets/img/projects/resellproject3.webp";
+import banking1 from '../../assets/img/projects/banking1.webp'
+import banking2 from '../../assets/img/projects/banking2.webp'
+import casarosa from "../../assets/img/projects/casarosa.webp";
+import casarosa2 from "../../assets/img/projects/casarosa2.webp";
+import socialmedia from "../../assets/img/projects/socialmedia.webp";
+import thesis1 from "../../assets/img/projects/vendify1.webp";
+import thesis2 from "../../assets/img/projects/vendify2.webp";
+import romaniawarlords1 from "../../assets/img/projects/romaniawarlords1.webp";
+import romaniawarlords2 from "../../assets/img/projects/romaniawarlords2.webp";
+
+import {HashLink} from "react-router-hash-link";
+import {InfiniteStrip} from "./InfiniteStrip";
+import "./Projects.css";
+
+const projectImages = [
+  [admin1, "Admin dashboard project"], [chess1, "Chess game project"], [socialmedia, "Socially social media app"],
+  [banking1, "Banking app project"], [romaniawarlords2, "Romania Warlords website"], [casino1, "Casino game project"],
+  [thesis1, "Vendify e-commerce platform"], [admin2, "Admin dashboard project"], [chess2, "Chess game project"],
+  [casarosa, "Casa Rosa holiday website"], [casino3, "Casino game project"], [resell1, "Resell marketplace project"],
+  [romaniawarlords1, "Romania Warlords website"], [casino2, "Casino game project"], [admin3, "Admin dashboard project"],
+  [thesis2, "Vendify e-commerce platform"], [chess3, "Chess game project"], [resell2, "Resell marketplace project"],
+  [socialmedia, "Socially social media app"], [banking2, "Banking app project"], [casarosa2, "Casa Rosa holiday website"],
+  [resell3, "Resell marketplace project"],
+];
+
+export const Projects = () => {
+
+  return (
+    <section className="project" id="projects">
+      <div className="project-container">
+        <div className="text-container">
+          <h1>Projects</h1>
+          <p>Check below my other personal projects that I worked on.</p>
+        </div>
+        <InfiniteStrip className="image-container" label="Project screenshots">
+          {projectImages.map(([src, alt], i) => (
+            <img src={src} alt={alt} key={i} draggable={false} decoding="async" />
+          ))}
+        </InfiniteStrip>
+        <HashLink to="/projects">
+          <button className="vvd"><span>View projects</span></button>
+        </HashLink>
+      </div>
+    </section>
+  )
+}

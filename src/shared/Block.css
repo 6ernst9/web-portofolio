@@ -1,0 +1,48 @@
+/************ Blocks Css ************/
+
+.block {
+  --block-w: 80vw;
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  padding: 45px 0;
+}
+
+.block-hero {
+  padding-top: 140px;
+}
+
+.block-inner {
+  position: relative;
+  z-index: 1;
+  width: var(--block-w);
+  margin: 0 auto;
+}
+
+.block + .block::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--block-w);
+  transform: translateX(-50%);
+  border-top: 1px solid var(--line-faint);
+}
+
+@media (max-width: 1281px) {
+  .block {
+    --block-w: calc(100vw - 155px);
+  }
+}
+
+@media (max-width: 768px) {
+  .block {
+    --block-w: calc(100vw - 120px);
+  }
+}
+
+@media (max-width: 481px) {
+  .block {
+    --block-w: calc(100vw - 40px);
+  }
+}

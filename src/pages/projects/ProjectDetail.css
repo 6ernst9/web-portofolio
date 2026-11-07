@@ -1,0 +1,159 @@
+.project-detail {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding: 100px 0;
+  scroll-margin-top: -75px;
+  color: black;
+}
+
+.project-detail-container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+  width: 80vw;
+  margin: 0 auto;
+  grid-template-areas:
+    "photo text"
+    "aside photo2";
+}
+
+.project-detail-sliding {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.project-detail-sliding-text {
+  flex-shrink: 0;
+  margin-left: -3000px;
+  font-size: 45vh;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.project-detail-photo {
+  grid-area: photo;
+  display: flex;
+  justify-content: center;
+}
+
+.project-detail-photo-two {
+  grid-area: photo2;
+}
+
+.project-detail-text {
+  grid-area: text;
+}
+
+.project-detail-aside {
+  grid-area: aside;
+}
+
+.project-detail-text .project-detail-story {
+  margin: 0 0 16px;
+  font-size: 20px;
+  line-height: 1.8;
+}
+
+.project-detail-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 56px;
+}
+
+.project-detail-text .project-detail-tag,
+.project-detail-tag {
+  margin: 0 0 16px;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.project-detail-text p {
+  font-size: 20px;
+  line-height: 1.8;
+}
+
+.project-detail-list {
+  margin: 0;
+  padding: 0 0 0 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.project-detail-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.project-detail-text .skill-pills li {
+  border-color: rgba(0, 0, 0, .45);
+  color: black;
+}
+
+.project-detail-aside button {
+  color: black;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.project-detail-aside button:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, .9);
+}
+
+@media (max-width: 1281px) {
+  .project-detail-container {
+    width: calc(100vw - 155px);
+  }
+}
+
+@media (max-width: 1025px) {
+  .project-detail-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    grid-template-areas:
+      "photo"
+      "text"
+      "photo2"
+      "aside";
+  }
+}
+
+@media (max-width: 768px) {
+  .project-detail-container {
+    width: calc(100vw - 120px);
+  }
+  .project-detail-list,
+  .project-detail-text p,
+  .project-detail-text .project-detail-story {
+    font-size: 18px;
+  }
+  .project-detail-text .project-detail-tag,
+  .project-detail-tag {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 481px) {
+  .project-detail-container {
+    width: calc(100vw - 40px);
+  }
+}

@@ -1,0 +1,24 @@
+.about-page {
+  padding: 0 0 55px;
+}
+
+.page-block h2 {
+  margin-bottom: 20px;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.page-block p {
+  font-size: 20px;
+  line-height: 1.8;
+  color: var(--grey);
+}
+
+@media (max-width: 768px) {
+  .page-block p {
+    font-size: 18px;
+  }
+  .page-block h2 {
+    font-size: 28px;
+  }
+}

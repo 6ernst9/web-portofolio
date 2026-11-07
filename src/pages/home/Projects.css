@@ -1,0 +1,76 @@
+.project {
+  position: relative;
+}
+
+/************ Projects Css ************/
+
+.project {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg);
+  width: 100%;
+  min-height: 100vh;
+}
+
+.project h1 {
+  color: var(--fg);
+  font-size: 68px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.project p {
+  color: var(--fg);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.project-container {
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 35px;
+}
+
+.image-container {
+  width: 100%;
+  height: 50vh;
+}
+
+.image-container img {
+
+  width: auto;
+  max-width: none;
+  flex: none;
+  border: 2px solid var(--card-border);
+  border-radius: 20px;
+  height: 50vh;
+  margin: 0 10px;
+  -webkit-user-drag: none;
+}
+
+.project-container button {
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-border);
+  position: relative;
+  background-color: var(--btn-bg);
+}
+
+.project-container button:hover {
+  color: var(--btn-hover-fg);
+  background-color: var(--btn-hover-bg)
+}
+
+@media (max-width: 768px) {
+  .project h1 {
+    font-size: 50px;
+  }
+}

@@ -1,0 +1,60 @@
+.vendify {
+  position: relative;
+}
+
+/************ Vendify Css ************/
+
+.vendify {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #00E88F;
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 0;
+}
+
+.vendify-sliding-text {
+  font-weight: 700;
+  font-size: 45vh;
+  color: #00C67D;
+  margin-top: 30vh;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.vendify-container-button {
+  grid-row: 2 / 3;
+  grid-column: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.vendify-container-button p {
+  font-weight: 700;
+  color: black;
+  font-size: 40px;
+}
+
+.vendify-container-button button {
+  color: black;
+  border: 1px solid black;
+  position: relative;
+  background-color: white;
+}
+
+.vendify-container-button button:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, .9)
+}
+
+@media (max-width: 1025px) {
+  .vendify {
+    height: auto;
+    min-height: 100vh;
+    padding: 100px 0;
+  }
+}

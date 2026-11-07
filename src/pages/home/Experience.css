@@ -1,0 +1,248 @@
+/************ Shared project-description mobile/desktop toggle ************/
+
+/************ Experience Css ************/
+
+.experience {
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg);
+
+  width: 100%;
+  height: 100vh;
+}
+
+.experience-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 9vh 0;
+}
+
+.experience-list {
+  --logo: clamp(52px, 8vh, 76px);
+
+  margin: 0;
+  padding: 0;
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.experience-list::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--logo) / 2);
+  top: var(--line-top, calc(100% / (var(--roles) * 2)));
+  bottom: var(--line-bottom, calc(100% / (var(--roles) * 2)));
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--line-faint);
+}
+
+.experience-item {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: var(--logo) clamp(215px, 17vw, 300px) minmax(0, 1fr);
+
+  grid-template-rows: 1fr auto 1fr;
+  grid-template-areas:
+    ".    .     ."
+    "logo years details"
+    ".    .     .";
+  align-items: start;
+  column-gap: 2.5vw;
+}
+
+.experience-years {
+  grid-area: years;
+  height: var(--logo);
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--grey);
+}
+
+.experience-item.current .experience-years {
+  color: var(--brand-purple);
+}
+
+.experience-logo {
+  grid-area: logo;
+  position: relative;
+  z-index: 1;
+  width: var(--logo);
+  height: var(--logo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 3px solid var(--ring);
+  background: white;
+}
+
+.experience-item.current .experience-logo {
+  border-color: var(--brand-purple);
+}
+
+.experience-logo img {
+  width: 62%;
+  height: 62%;
+  object-fit: contain;
+}
+
+.experience-logo-plain img {
+  transform: translateY(7%);
+  filter: brightness(0) saturate(100%) invert(49%) sepia(67%) saturate(4128%) hue-rotate(231deg) brightness(78%) contrast(195%);
+}
+
+.experience-details {
+  grid-area: details;
+  margin-top: calc((var(--logo) - 31.2px) / 2);
+  text-align: left;
+}
+
+.experience-heading {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--fg);
+}
+
+.experience-role {
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.experience-summary {
+  margin: 10px 0 0;
+  max-width: 880px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--grey);
+}
+
+.experience-company {
+  color: var(--brand-purple);
+}
+
+@media (min-width: 769px) and (max-width: 1025px) {
+  .experience-item {
+    grid-template-columns: var(--logo) clamp(105px, 15vw, 130px) minmax(0, 1fr);
+    column-gap: 2vw;
+  }
+  .experience-years {
+    white-space: normal;
+    line-height: 1.25;
+  }
+}
+
+@media (max-width: 1281px), (max-height: 799px) {
+  .experience {
+    height: auto;
+    min-height: 100vh;
+  }
+  .experience-container {
+    height: auto;
+    padding: 100px 0;
+  }
+  .experience-list {
+    flex: none;
+  }
+  .experience-item {
+    flex: none;
+    padding: 2vh 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .experience-list {
+    --logo: 52px;
+    display: grid;
+    grid-auto-rows: 1fr;
+  }
+  .experience-list::before {
+    top: var(--line-top, calc(var(--logo) / 2));
+    bottom: var(--line-bottom, calc(100% / var(--roles) - var(--logo) / 2));
+  }
+  .experience-item {
+    grid-template-columns: var(--logo) minmax(0, 1fr);
+    grid-template-areas:
+      "logo years"
+      ".    details";
+    grid-template-rows: var(--logo) 1fr;
+    align-items: start;
+    column-gap: 16px;
+    row-gap: 0;
+
+    padding: 0 0 3.5vh;
+  }
+  .experience-details {
+    align-self: start;
+    margin-top: -4px;
+  }
+  .experience-logo {
+    align-self: start;
+  }
+  .experience-years {
+    align-self: center;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 481px) {
+  .experience-heading {
+    font-size: 22px;
+  }
+}
+
+/************ Experience Animation Css ************/
+
+@media (prefers-reduced-motion: no-preference) {
+  .experience-item.current .experience-logo {
+    animation: ringPulse 2s ease-out infinite;
+  }
+}
+
+.experience-container {
+  width: 80vw;
+}
+
+@media (max-width: 1281px) {
+  .experience-container {
+    width: calc(100vw - 155px);
+  }
+}
+
+@media (max-width: 768px) {
+  .experience-container {
+    width: calc(100vw - 120px);
+  }
+}
+
+@media (max-width: 481px) {
+  .experience-container {
+    width: calc(100vw - 40px);
+  }
+}
+
+.experience > .section-button {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 90px;
+}

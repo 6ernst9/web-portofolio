@@ -1,0 +1,54 @@
+.page-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-height: 100vh;
+  padding: 140px 0 100px;
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+.page-title {
+  margin: 0 0 40px;
+  font-size: 68px;
+  font-weight: 700;
+}
+
+.page-lead {
+  font-size: 22px;
+  color: var(--grey);
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 48px;
+  }
+}
+
+.block-hero .page-title {
+  margin-bottom: 12px;
+}
+
+.page-sliding {
+  position: absolute;
+  top: 225px;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  display: flex;
+  transform: translateY(-50%);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.page-sliding-text {
+  flex-shrink: 0;
+  font-size: clamp(120px, 14vw, 210px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ghost);
+  white-space: nowrap;
+}

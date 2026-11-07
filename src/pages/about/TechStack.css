@@ -1,0 +1,26 @@
+.stack-groups {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.stack-group {
+  display: grid;
+  grid-template-columns: minmax(150px, 220px) 1fr;
+  align-items: baseline;
+  gap: 6px 30px;
+  padding: 16px 0;
+}
+
+.stack-group h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+@media (max-width: 768px) {
+  .stack-group {
+    grid-template-columns: 1fr;
+  }
+}

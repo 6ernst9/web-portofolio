@@ -1,0 +1,71 @@
+:root {
+  --brand-purple: rgb(91 34 255);
+
+  --gray-1: #0b0b0b;
+  --gray-2: #2e2e2e;
+  --gray-3: #5c5c5c;
+  --gray-4: #bdbdbd;
+  --gray-5: #ebebeb;
+
+  --bg: #000;
+  --fg: #fff;
+  --grey: var(--gray-4);
+  --dim: var(--gray-2);
+  --ghost: var(--gray-1);
+  --grid-line: var(--gray-1);
+  --line-faint: rgba(255, 255, 255, 0.45);
+  --ring: #fff;
+  --nav-solid: #000;
+  --nav-glass: rgba(0, 0, 0, 0.8);
+  --btn-bg: #000;
+  --btn-fg: #fff;
+  --btn-border: #fff;
+  --btn-hover-bg: rgba(255, 255, 255, 0.9);
+  --btn-hover-fg: #000;
+  --photo-filter: grayscale(100%) brightness(60%);
+  --icon-filter: none;
+  --toggle-filter: brightness(0.74);
+  --contact-bg: #fff;
+  --contact-fg: #000;
+  --contact-ghost: var(--gray-5);
+  --contact-dim: var(--gray-2);
+  --mac-bg: rgba(0, 0, 0, 0.8);
+  --mac-border: var(--gray-3);
+  --card-border: transparent;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #fff;
+  --fg: var(--gray-1);
+  --grey: var(--gray-3);
+  --dim: var(--gray-4);
+  --ghost: var(--gray-5);
+  --grid-line: var(--gray-5);
+  --line-faint: rgba(0, 0, 0, 0.35);
+  --ring: var(--gray-1);
+  --nav-solid: #fff;
+  --nav-glass: rgba(255, 255, 255, 0.8);
+  --btn-bg: #fff;
+  --btn-fg: var(--gray-1);
+  --btn-border: var(--gray-1);
+  --btn-hover-bg: rgba(0, 0, 0, 0.9);
+  --btn-hover-fg: #fff;
+  --photo-filter: grayscale(100%) brightness(95%);
+  --icon-filter: invert(1);
+  --toggle-filter: brightness(0.36);
+  --contact-bg: var(--gray-1);
+  --contact-fg: #fff;
+  --contact-ghost: #141414;
+  --contact-dim: var(--gray-4);
+  --mac-bg: rgba(235, 235, 235, 0.9);
+  --mac-border: var(--gray-4);
+  --card-border: var(--gray-4);
+  color-scheme: light;
+}
+
+:root.theme-fade *,
+:root.theme-fade *::before,
+:root.theme-fade *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}

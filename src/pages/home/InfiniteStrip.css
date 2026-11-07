@@ -1,0 +1,24 @@
+.infinite-strip {
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-behavior: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.infinite-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.infinite-strip-track {
+  display: flex;
+  width: max-content;
+}
+
+.infinite-strip-copy {
+  display: flex;
+  flex: none;
+}

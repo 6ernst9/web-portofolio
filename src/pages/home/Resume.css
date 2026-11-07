@@ -1,0 +1,153 @@
+/************ Resume Css ************/
+
+.resume {
+
+  position: relative;
+
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg);
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px 0;
+}
+
+.sliding-text {
+  font-weight: 700;
+  font-size: 45vh;
+  color: var(--ghost);
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.second-text {
+  margin-top: -0.2em;
+}
+
+.mobile-text {
+  display: none;
+}
+
+.resume-circle-container {
+  z-index: 3;
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.circle-text {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 35px;
+  font-weight: 400;
+  color: var(--fg);
+  transform-origin: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: rotateText 30s linear infinite;
+}
+
+.resume-file {
+  width: 70px;
+  height: 70px;
+}
+
+.circle-text span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 0 0;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.resume-stage {
+  position: absolute;
+  z-index: 2;
+  inset: 60px 0 3vh 0;
+  display: grid;
+
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: center;
+  pointer-events: none;
+
+  --fit: calc(0.8 + 0.2 * clamp(0, tan(atan2(100vw - 500px, 150px)), 1));
+}
+
+.resume-stage img {
+  grid-area: 1 / 1;
+  width: auto;
+  max-width: none;
+}
+
+.iulius-cesar {
+  height: calc(86% * var(--fit));
+  --drift-x: -16px;
+  --drift-y: -10px;
+}
+
+@media (min-width: 769px) {
+  .iulius-cesar {
+    height: calc(91% * var(--fit));
+  }
+}
+
+.resume-flag {
+  height: calc(115% * var(--fit));
+  --drift-x: -48px;
+  --drift-y: -28px;
+}
+
+@keyframes rotateText {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@media (max-width: 1025px) {
+  .resume-circle-container {
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: 5vh;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width:1025px) {
+  .mobile-text {
+    display: block;
+  }
+  .second-text {
+    margin-top: -0.25em;
+  }
+  .sliding-text {
+    font-size: 22vh;
+  }
+}
+
+.resume-stage img {
+  translate: calc(var(--mx, 0) * var(--drift-x, -22px)) calc(var(--my, 0) * var(--drift-y, -16px));
+  transition: translate 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .resume-stage img {
+    translate: none;
+  }
+}

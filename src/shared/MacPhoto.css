@@ -1,0 +1,76 @@
+.mac-photo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--mac-bg);
+  border-radius: 15px;
+  border: 1px solid var(--mac-border);
+}
+
+.mac-header {
+  z-index: 4;
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 10px 15px;
+}
+
+.mac-button {
+  width: 10px;
+  height: 10px;
+  border-radius: 20px;
+  background-color: rgb(238,105,95);
+}
+
+.yellow-button {
+  background-color: rgb(246,190,79);
+}
+
+.green-button {
+  background-color: rgb(97,195,84);
+}
+
+/************ Cursor Parallax Css (project photos, Resume flag + statue) ************/
+
+.mac-photo {
+  translate: calc(var(--mx, 0) * var(--drift-x, -22px)) calc(var(--my, 0) * var(--drift-y, -16px));
+  transition: translate 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .mac-photo {
+    translate: none;
+  }
+}
+
+.mac-photo img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0 0 15px 15px;
+}
+
+@media (max-width: 481px) {
+  .mac-header {
+    gap: 3px;
+    padding: 8px 10px;
+  }
+  .mac-button {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+.casa-rosa-photo .mac-photo {
+  max-width: 100%;
+}
+
+.warlords-photo .mac-photo {
+  max-width: 100%;
+}
+
+.project-detail-photo .mac-photo {
+  max-width: 100%;
+}

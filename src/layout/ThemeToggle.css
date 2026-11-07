@@ -1,0 +1,33 @@
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.theme-toggle img {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.3s ease-in-out;
+}
+
+nav.navbar button.theme-toggle img {
+  filter: var(--toggle-filter);
+}
+
+nav.navbar button.theme-toggle:hover img,
+nav.navbar button.theme-toggle:focus-visible img {
+  filter: var(--icon-filter);
+}
+
+@media (max-width: 991.98px) {
+  .theme-toggle {
+    margin: 0;
+  }
+}

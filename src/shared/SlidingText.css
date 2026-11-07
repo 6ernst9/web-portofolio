@@ -1,0 +1,13 @@
+.resume-sliding-text {
+  position: absolute;
+  z-index: 2;
+
+  left: 0;
+  right: 0;
+  text-align: center;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

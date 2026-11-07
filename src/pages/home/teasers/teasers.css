@@ -1,0 +1,138 @@
+.socially-projects-number {
+  position: absolute;
+  z-index: 2;
+  font-weight: 700;
+  font-size: 26px;
+  color: black;
+  align-self: flex-start;
+  margin-left: 10px;
+}
+
+.socially-container {
+  z-index: 2;
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr 1fr;
+  gap: 0 30px;
+  height: 90vh;
+}
+
+.socially-photo {
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 1025px) {
+  .socially-container {
+    position: relative;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 1281px) {
+  section .socially-projects-number {
+    display: none;
+  }
+}
+
+@media (max-width: 999px) {
+  .socially-container.is-teaser {
+    row-gap: 72px;
+  }
+  .socially-container.is-teaser .mac-photo {
+    max-width: 100%;
+  }
+  .socially-container.is-teaser .mac-photo img {
+    width: auto;
+    max-width: 100%;
+    max-height: max(150px, calc(100vh - 420px));
+    object-fit: contain;
+  }
+}
+
+@media (min-width: 1000px) {
+  .socially-container.is-teaser {
+    width: min(1200px, 90vw);
+    height: auto;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-rows: auto;
+    align-items: center;
+    gap: 0 60px;
+  }
+  .socially-container.is-teaser > :first-child {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .socially-container.is-teaser > :last-child {
+    grid-row: 1;
+    grid-column: 2;
+  }
+  .socially-container.is-teaser > :first-child {
+    min-width: 0;
+  }
+  .socially-container.is-teaser .mac-photo {
+    max-width: 100%;
+    min-width: 0;
+  }
+  .socially-container.is-teaser .mac-photo img {
+    object-fit: contain;
+    max-height: 68vh;
+    width: auto;
+    max-width: 100%;
+  }
+  .socially-container.is-teaser:has(.warlords-container-button),
+  .socially-container.is-teaser:has(.casa-rosa-container-button) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  }
+  .socially-container.is-teaser:has(.warlords-container-button) > :first-child,
+  .socially-container.is-teaser:has(.casa-rosa-container-button) > :first-child {
+    grid-column: 2;
+  }
+  .socially-container.is-teaser:has(.warlords-container-button) > :last-child,
+  .socially-container.is-teaser:has(.casa-rosa-container-button) > :last-child {
+    grid-column: 1;
+  }
+}
+
+/************ Content width ************/
+
+.socially-container {
+  width: 80vw;
+}
+
+@media (max-width: 1281px) {
+  .socially-container {
+    width: calc(100vw - 155px);
+  }
+}
+
+@media (max-width: 768px) {
+  .socially-container {
+    width: calc(100vw - 120px);
+  }
+}
+
+@media (max-width: 481px) {
+  .socially-container {
+    width: calc(100vw - 40px);
+  }
+}
+
+/************ Multipage Css ************/
+
+@media (max-width: 999px) {
+  .socially-container.is-teaser .socially-photo,
+  .socially-container.is-teaser .warlords-photo,
+  .socially-container.is-teaser .casa-rosa-photo {
+    grid-column: 1 / 3;
+  }
+}

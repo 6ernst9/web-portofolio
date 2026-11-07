@@ -1,0 +1,191 @@
+/************ Scrollbar Css ************/
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-purple);
+  border-radius: 0;
+  border: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A78BFA;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bg);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-color: var(--brand-purple) var(--bg);
+  }
+}
+
+::selection {
+  background: var(--brand-purple);
+  color: white;
+}
+
+::-moz-selection {
+  background: var(--brand-purple);
+  color: white;
+}
+
+/************ Custom Font ************/
+
+@font-face {
+	font-family: Centra;
+	src: url('../assets/font/CentraNo2-Bold.ttf');
+	font-weight: 700;
+}
+
+@font-face {
+	font-family: Centra;
+	src: url('../assets/font/CentraNo2-Medium.ttf');
+	font-weight: 500;
+}
+
+@font-face {
+	font-family: Centra;
+	src: url('../assets/font/CentraNo2-Book.ttf');
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: 'Vermin Vibes';
+	src: url('../assets/font/VerminVibes.woff2') format('woff2');
+	font-display: swap;
+}
+
+/************ Default Css ************/
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 75px;
+}
+
+body {
+  font-weight: 400;
+  overflow-x: hidden;
+
+  background-color: #5B22FF !important;
+  color: var(--fg) !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  position: relative;
+  font-family: 'Centra', sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+}
+
+p,
+a,
+li,
+button,
+ul {
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+  text-decoration: none;
+}
+
+a:link a:visited a:hover a:active {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+.vvd {
+  font-weight: 400;
+  padding: 20px 34px;
+  font-size: 20px;
+  transition: 0.3s ease-in-out;
+}
+
+.vvd span {
+  z-index: 1;
+}
+
+@keyframes ringPulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand-purple) 55%, transparent);
+  }
+  70%, 100% {
+    box-shadow: 0 0 0 26px color-mix(in srgb, var(--brand-purple) 0%, transparent);
+  }
+}
+
+/************ Layout Css ************/
+
+.page-content {
+  position: relative;
+  z-index: 1;
+
+  background-color: var(--bg);
+}
+
+.section-button {
+  position: relative;
+  z-index: 3;
+  display: inline-block;
+  margin-top: 24px;
+}
+
+.section-button button {
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-border);
+  position: relative;
+  background-color: var(--btn-bg);
+}
+
+.section-button button:hover {
+  color: var(--btn-hover-fg);
+  background-color: var(--btn-hover-bg);
+}

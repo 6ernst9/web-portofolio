@@ -1,20 +1,17 @@
-import './App.css';
+import './styles/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {NavBar} from "./components/NavBar";
-import {Banner} from "./components/Banner";
-import {CasaRosa} from "./components/CasaRosa";
-import {Warlords} from './components/Warlords'
-import {Projects} from "./components/Projects";
-import {Contact} from "./components/Contact";
-import {Footer} from "./components/Footer";
-import {Resume} from "./components/Resume";
-import {About} from "./components/About";
-import {Experience} from "./components/Experience";
-import {Socially} from "./components/Socially";
-import {Thesis} from "./components/Thesis";
+import {Routes, Route} from "react-router-dom";
+import {NavBar} from "./layout/NavBar";
+import {Footer} from "./layout/Footer";
+import {ScrollToTop} from "./layout/ScrollToTop";
+import {HomePage} from "./pages/home/HomePage";
+import {AboutPage} from "./pages/about/AboutPage";
+import {ExperiencePage} from "./pages/experience/ExperiencePage";
+import {ProjectsPage} from "./pages/projects/ProjectsPage";
+import {NotFoundPage} from "./pages/not-found/NotFoundPage";
 import {ScrollProvider} from "./hooks/useParallaxScroll";
 import {ThemeProvider} from "./hooks/useTheme";
-import CustomCursor from './components/CustomCursor';
+import CustomCursor from './layout/CustomCursor';
 
 function App() {
   return (
@@ -24,16 +21,14 @@ function App() {
             <CustomCursor/>
             <NavBar />
             <main className="page-content">
-            <Banner />
-            <About/>
-            <Resume/>
-            <Experience/>
-            <Socially/>
-            <Warlords/>
-            <Thesis/>
-            <CasaRosa/>
-            <Projects />
-            <Contact />
+            <ScrollToTop />
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/experience" element={<ExperiencePage />} />
+                <Route path="/projects" element={<ProjectsPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+            </Routes>
             </main>
             <Footer />
     </div>

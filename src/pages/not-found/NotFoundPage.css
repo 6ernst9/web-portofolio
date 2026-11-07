@@ -1,0 +1,9 @@
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+}
+
+.not-found-actions .section-button {
+  margin-top: 24px;
+}

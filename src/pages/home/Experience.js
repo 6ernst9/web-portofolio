@@ -44,7 +44,7 @@ export const Experience = () => {
                     {roles.map((role, index) => (
                         <li className={`experience-item${role.current ? " current" : ""}`} key={role.id} style={{"--i": index}}>
                             <h2 className="experience-years">{role.years}</h2>
-                            <div className={role.company === "Freelance" ? "experience-logo experience-logo-plain" : "experience-logo"}>
+                            <div className={role.plainLogo ? "experience-logo experience-logo-plain" : "experience-logo"}>
                                 <img src={roleIcons[role.company]} alt="" loading="lazy" decoding="async" />
                             </div>
                             <div className="experience-details">

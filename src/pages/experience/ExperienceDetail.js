@@ -25,7 +25,7 @@ export const ExperienceDetail = () => (
                     summary={role.summary}
                     stack={role.stack}
                     details={role.details}
-                    plainLogo={role.company === "Freelance"}
+                    plainLogo={role.plainLogo}
                     current={role.current}
                 />
             </Block>

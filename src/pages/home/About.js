@@ -12,8 +12,8 @@ export const About = () => {
             <div className="about-me-container">
                 <div className="about-text-block">
                 <p className="about-intro">Hi, welcome to my portfolio website. My name is Ernst Robert.</p>
-                <p>Hands-on <span className="highlight">Java Software Engineer</span>,
-                    working on developing and optimizing enterprise-level applications for industry-leading
+                <p>Hands-on <span className="highlight">Java Software Engineer</span> with 4+ years of experience
+                    developing and optimizing enterprise-level applications for industry-leading
                     companies in online gaming and betting. I enjoy building applications, solving problems,
                     and finding practical solutions to technical challenges.</p>
                 <HashLink className="section-button" to="/about">

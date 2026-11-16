@@ -71,6 +71,9 @@
 
 @media (max-width: 768px) {
   .project h1 {
-    font-size: 50px;
+    font-size: 48px;
+  }
+  .project p {
+    font-size: 18px;
   }
 }

@@ -30,7 +30,7 @@ export const projectDetails = [
             "Socially started as a university project, built around the way short-lived content works in modern messaging apps: you send a photo or a video, the other person views it, and it is gone.",
             "I built the backend as a set of Spring microservices rather than a single application, so each part could be developed and run on its own.",
         ],
-        link: {href: "https://github.com/6ernst9/socially", label: "View Source code"}
+        link: {href: "https://github.com/6ernst9/socially", label: "View source code"}
     },
     {
         id: "warlords",
@@ -55,7 +55,7 @@ export const projectDetails = [
             "Built for the community behind the biggest Clash Royale clan family in Romania, as a React project I can maintain and keep extending, with Tailwind styling and full Romanian and English support.",
             "It features live standings, online member counts and a detail page for every clan, all fed by the Clash Royale API instead of hand-edited pages.",
         ],
-        link: {href: "https://romaniawarlords.ro", label: "View Website"}
+        link: {href: "https://romaniawarlords.ro", label: "View website"}
     },
     {
         id: "vendify",
@@ -68,7 +68,7 @@ export const projectDetails = [
         image2: vendify2,
         alt2: "Vendify store dashboard",
         stack: ["React", "Redux", "Java", "Spring", "WebFlux", "PostgreSQL", "MongoDB", "Firebase"],
-        summary: "An eCommerce platform that makes building and running an online store simple, even without technical expertise.",
+        summary: "An e-commerce platform that makes building and running an online store simple, even without technical expertise.",
         details: [
             "A dashboard with customizable themes for store owners.",
             "Manage products across a single shop or several at once.",
@@ -78,9 +78,9 @@ export const projectDetails = [
         kind: "Bachelor's thesis",
         story: [
             "Vendify is my bachelor's thesis. The idea was a store builder for people who are not developers: pick a theme, add products and start selling, without touching code.",
-            "The front end is React with Redux and TypeScript, the backend runs on Java and Spring with WebFlux, and the data lives in PostgreSQL, MongoDB and Firebase.",
+            "The frontend is React with Redux and TypeScript, the backend runs on Java and Spring with WebFlux, and the data lives in PostgreSQL, MongoDB and Firebase.",
         ],
-        link: {href: "https://github.com/6ernst9/vendify", label: "View Source code"}
+        link: {href: "https://github.com/6ernst9/vendify", label: "View source code"}
     },
     {
         id: "casa-rosa",
@@ -105,6 +105,6 @@ export const projectDetails = [
             "Built for the owner of a holiday property in Salento with three apartments of 50, 80 and 120 square metres. The brief was simple: let guests see each apartment and pick their dates, while the bookings themselves stay on Booking.com.",
             "I also built the private admin panel the owner uses to follow visits and see how people find the site.",
         ],
-        link: {href: "https://casarosaholiday.com", label: "View Website"}
+        link: {href: "https://casarosaholiday.com", label: "View website"}
     }
 ];

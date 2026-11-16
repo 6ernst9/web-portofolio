@@ -24,12 +24,12 @@ export const Banner = () => {
                     <button className="vvd"><span>See my work</span></button>
                 </HashLink>
                 <HashLink to='#contact'>
-                    <button className="vvd"><span>Contact Me</span></button>
+                    <button className="vvd"><span>Contact me</span></button>
                 </HashLink>
             </div>
             <div className="banner-links">
-                <a href="https://github.com/6ernst9">Github</a>
-                <a href="https://www.linkedin.com/in/robert-ernst-75b167240/">Linkedin</a>
+                <a href="https://github.com/6ernst9">GitHub</a>
+                <a href="https://www.linkedin.com/in/robert-ernst-75b167240/">LinkedIn</a>
                 <a href="https://www.instagram.com/6ernst9/">Instagram</a>
                 <a href="mailto:rernst2002@gmail.com">Email</a>
             </div>

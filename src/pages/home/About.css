@@ -96,11 +96,17 @@
   .about-photo img {
     max-height: 32vh;
   }
+  .about-text-block .section-button {
+    align-self: center;
+  }
 }
 
 @media (max-width: 768px) {
   .about-me-container {
     width: calc(100% - 40px);
+  }
+  .about-text-block p {
+    font-size: 18px;
   }
 }
 

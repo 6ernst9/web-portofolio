@@ -42,7 +42,7 @@ export const Projects = () => {
       <div className="project-container">
         <div className="text-container">
           <h1>Projects</h1>
-          <p>Check below my other personal projects that I worked on.</p>
+          <p>Check out my other personal projects below.</p>
         </div>
         <InfiniteStrip className="image-container" label="Project screenshots">
           {projectImages.map(([src, alt], i) => (

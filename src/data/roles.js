@@ -1,5 +1,6 @@
 import betfairIcon from "../assets/img/companies/betfair.webp";
 import pokerstarsIcon from "../assets/img/companies/pokerstars.webp";
+import betrIcon from "../assets/img/companies/betr.webp";
 import sisalIcon from "../assets/img/companies/sisal.webp";
 import freelanceIcon from "../assets/img/brand/logo.svg";
 
@@ -7,38 +8,51 @@ export const roleIcons = {
     "Betfair": betfairIcon,
     "PokerStars": pokerstarsIcon,
     "SISAL": sisalIcon,
-    "Freelance": freelanceIcon
+    "Freelance": freelanceIcon,
+    "Betr": betrIcon
 };
 
 export const roles = [
     {
-        id: "betfair",
-        years: "Feb 2026 – Present",
+        id: "pitchtech",
+        years: "Dec 2026 – Present",
         current: true,
+        company: "Betr",
+        title: "Java Software Engineer",
+        meta: ["PITCH TECH", "Cluj, Romania"],
+        summary: "Java backend engineer on the casino team of the Betr superapp.",
+        stack: ["Java", "Spring", "Kafka", "PostgreSQL", "Redis", "AWS"],
+        details: [
+            "Building Java backend services for the casino on the Betr superapp."
+        ]
+    },
+    {
+        id: "betfair",
+        years: "Feb – Dec 2026",
         company: "Betfair",
-        title: "Software Engineer",
+        title: "Java Software Engineer",
         meta: ["Betfair Romania Development", "Cluj, Romania"],
-        summary: "Backend engineer working on game and rewards provider integrations.",
+        summary: "Built and maintained backend integrations for game and rewards providers.",
         stack: ["Java", "Spring", "Cougar", "AWS", "Docker", "Chef", "SOAP"],
         details: [
-            "Integrate new game and rewards providers, including Games Global and Tombola.",
-            "Wire up provider promotions such as free spins and free bingo tickets.",
+            "Integrated new game and rewards providers, including Games Global and Tombola.",
+            "Wired up provider promotions such as free spins and free bingo tickets.",
             "Migrated a core rewards service to AWS with Docker, moving the configuration to environment variables.",
-            "Maintain the jackpot configuration admin tool.",
-            "Preparing the integration of another large provider with the team."
+            "Maintained the jackpot configuration admin tool.",
+            "Prepared the integration of another large provider with the team."
         ]
     },
     {
         id: "pokerstars-junior",
         years: "Aug 2023 – Feb 2026",
         company: "PokerStars",
-        title: "Software Engineer",
+        title: "Full-Stack Software Engineer",
         meta: ["Betfair Romania Development", "Cluj, Romania"],
-        summary: "Built and maintained the authentication platform that lets partners run the PokerStars poker engine as a SaaS.",
+        summary: "Built and maintained the authentication platform behind a PokerStars product.",
         stack: ["Java", "Spring", "OAuth2", "PostgreSQL", "Kafka", "Protobuf", "Redis", "AWS"],
         details: [
-            "Built and maintained the PokerStars Network authentication platform on Spring, OAuth2 and PostgreSQL.",
-            "Coordinated logins across the Pragmatic, SISAL and Betfair platforms.",
+            "Built and maintained the authentication platform for a PokerStars product, on Spring, OAuth2 and PostgreSQL.",
+            "Coordinated logins across several connected platforms.",
             "Published login and logout events over Kafka with Protobuf, with Redis caching.",
             "Deployed on AWS, using ECR for images and Secrets Manager for credentials."
         ]
@@ -47,8 +61,8 @@ export const roles = [
         id: "sisal",
         years: "Feb – Sep 2025",
         company: "SISAL",
-        title: "Software Engineer",
-        meta: ["Betfair Romania Development", "Remote, European Economic Area"],
+        title: "Java Software Engineer",
+        meta: ["Betfair Romania Development", "Remote, Europe"],
         summary: "Backend microservices for regulatory compliance reporting in France, Spain and Portugal.",
         stack: ["Java", "Spring", "REST", "SOAP", "Kafka", "MongoDB", "SFTP"],
         details: [
@@ -77,11 +91,12 @@ export const roles = [
     {
         id: "freelance",
         years: "Jul 2022 – Jan 2023",
+        plainLogo: true,
         company: "Freelance",
         title: "Software Developer",
-        meta: ["Contract", "Remote, European Economic Area"],
+        meta: ["Contract", "Remote, Europe"],
         summary: "A solo project, from first line to delivery in three months.",
-        stack: ["Android", "Kotlin", "Java", "Compose", "SQLite"],
+        stack: ["Android", "Kotlin", "Java", "Jetpack Compose", "SQLite"],
         details: [
             "Built a custom Android app in Kotlin and Java for managing Airbnb bookings, occupancy and property data.",
             "Designed it offline-first, with a local SQLite database and a Jetpack Compose interface.",

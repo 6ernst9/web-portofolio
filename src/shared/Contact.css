@@ -132,7 +132,7 @@
   }
 }
 
-@media (max-width: 999px) {
+@media (max-width: 1025px) {
   .contact-crafted {
     display: none;
   }
@@ -140,7 +140,10 @@
 
 @media (max-width: 768px) {
   .contact-container h1 {
-    font-size: 50px;
+    font-size: 48px;
+  }
+  .contact-container p {
+    font-size: 18px;
   }
   .contact-links {
     display: none;

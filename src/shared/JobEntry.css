@@ -84,6 +84,10 @@
   line-height: normal;
 }
 
+.job-details li {
+  line-height: 1.5;
+}
+
 .job-details {
   margin: 0;
   padding: 0 0 0 22px;

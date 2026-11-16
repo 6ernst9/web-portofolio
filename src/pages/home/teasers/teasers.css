@@ -44,7 +44,7 @@
   }
 }
 
-@media (max-width: 999px) {
+@media (max-width: 1025px) {
   .socially-container.is-teaser {
     row-gap: 72px;
   }
@@ -59,7 +59,7 @@
   }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1026px) {
   .socially-container.is-teaser {
     width: min(1200px, 90vw);
     height: auto;
@@ -129,7 +129,7 @@
 
 /************ Multipage Css ************/
 
-@media (max-width: 999px) {
+@media (max-width: 1025px) {
   .socially-container.is-teaser .socially-photo,
   .socially-container.is-teaser .warlords-photo,
   .socially-container.is-teaser .casa-rosa-photo {

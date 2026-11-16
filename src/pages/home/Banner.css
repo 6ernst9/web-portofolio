@@ -256,7 +256,7 @@
 @media (max-width:1025px) {
   .banner h1,
   .banner h2 {
-    font-size: 50px;
+    font-size: 48px;
   }
   .grid-container {
     --cols: 5;

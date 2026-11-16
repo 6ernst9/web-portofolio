@@ -85,6 +85,10 @@
   line-height: 1.8;
 }
 
+.project-detail-list li {
+  line-height: 1.5;
+}
+
 .project-detail-list {
   margin: 0;
   padding: 0 0 0 22px;

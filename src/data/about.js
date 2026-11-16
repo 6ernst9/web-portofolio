@@ -20,16 +20,16 @@ export const techStack = [
     {group: "Backend", items: ["Spring", "Spring WebFlux", "Spring Data JPA", "REST", "SOAP", "OData", "OAuth2", "Cougar", "SFTP"]},
     {group: "Messaging", items: ["Kafka", "Protobuf"]},
     {group: "Data", items: ["PostgreSQL", "MongoDB", "Redis", "SQLite", "Firebase", "Supabase"]},
-    {group: "Frontend", items: ["React", "Redux", "Tailwind", "Vite"]},
-    {group: "Mobile", items: ["Android", "Kotlin", "Jetpack Compose"]},
     {group: "Cloud and DevOps", items: ["AWS", "ECR", "Secrets Manager", "Docker", "Chef"]},
-    {group: "Monitoring", items: ["Grafana", "SignalFx", "Splunk"]}
+    {group: "Monitoring", items: ["Grafana", "SignalFx", "Splunk"]},
+    {group: "Frontend", items: ["React", "Redux", "Tailwind", "Vite"]},
+    {group: "Mobile", items: ["Android", "Kotlin", "Jetpack Compose"]}
 ];
 
 export const education = [
     {logo: utcnLogo, years: "Oct 2021 – Jul 2025", school: "Technical University of Cluj-Napoca", location: "Romania", degree: "Computer Science and Engineering", level: "Bachelor's", stack: ["Assembly", "C++", "VHDL", "React", "Spring"], details: [
         "Studied how computers work from the ground up, writing assembly and C++ and designing logic circuits.",
         "Went through hardware description in VHDL and object-oriented design before moving up the stack.",
-        "Finished by building full-stack applications with React and Spring, the work I do today."
+        "Finished by building full-stack applications with React and Spring, the kind of work I went on to do professionally."
     ]}
 ];

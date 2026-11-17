@@ -17,13 +17,13 @@ export const building = [
 
 export const techStack = [
     {group: "Languages", items: ["Java", "Kotlin", "TypeScript", "JavaScript", "HTML", "CSS", "C", "C++", "Python"]},
-    {group: "Backend", items: ["Spring", "Spring WebFlux", "Spring Data JPA", "REST", "SOAP", "OData", "OAuth2", "Cougar", "SFTP"]},
+    {group: "Backend", items: ["Spring", "Spring WebFlux", "Spring Data JPA", "AOP", "REST", "SOAP", "OData", "OAuth2", "Cougar", "SFTP"]},
     {group: "Messaging", items: ["Kafka", "Protobuf"]},
-    {group: "Data", items: ["PostgreSQL", "MongoDB", "Redis", "SQLite", "Firebase", "Supabase"]},
-    {group: "Cloud and DevOps", items: ["AWS", "ECR", "Secrets Manager", "Docker", "Chef"]},
+    {group: "Data", items: ["PostgreSQL", "MongoDB", "Redis", "SQLite", "Firebase", "Supabase", "Couchbase"]},
+    {group: "Cloud and DevOps", items: ["AWS", "ECR", "Secrets Manager", "Docker", "Chef", "Maven", "Jenkins", "GitHub Actions"]},
     {group: "Monitoring", items: ["Grafana", "SignalFx", "Splunk"]},
     {group: "Frontend", items: ["React", "Redux", "Tailwind", "Vite"]},
-    {group: "Mobile", items: ["Android", "Kotlin", "Jetpack Compose"]}
+    {group: "Mobile", items: ["Android", "Kotlin", "Jetpack Compose", "React Native"]}
 ];
 
 export const education = [
